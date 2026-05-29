@@ -3,13 +3,14 @@ import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { TrustBadge } from "@/components/ui/TrustBadge";
 import { WhatsAppIcon, StarIcon } from "@/components/ui/icons";
+import { HeroParticles } from "@/components/three/HeroParticles";
 import { whatsappHref, waMessage } from "@/lib/whatsapp";
 import type { Settings } from "@/lib/content/types";
 
 /**
- * Home hero. Contains a placeholder slot for the F3 golden-particles 3D accent
- * (data-hero-3d-slot). The 3D itself is lazy-loaded into this slot in F3; for
- * now it renders an elegant static gradient so the hero is complete + fast.
+ * Home hero with the golden-particles 3D accent. The 3D field is dynamically
+ * imported (ssr:false) inside <HeroParticles>, with a static gold backdrop as
+ * the fallback for first paint, reduced-motion, and low-power/mobile devices.
  */
 export async function HeroHome({ settings }: { settings: Settings }) {
   const t = await getTranslations("home");
@@ -17,15 +18,8 @@ export async function HeroHome({ settings }: { settings: Settings }) {
 
   return (
     <section className="relative overflow-hidden">
-      {/* 3D accent slot (static fallback until F3) */}
-      <div
-        data-hero-3d-slot
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10"
-      >
-        <div className="absolute inset-x-0 top-0 h-[80vh] bg-radial-glow" />
-        <div className="absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full bg-gold-500/10 blur-3xl" />
-      </div>
+      {/* Golden-particles 3D accent (lazy, mobile/reduced-motion safe) */}
+      <HeroParticles />
 
       <div className="container-luxe flex min-h-[88vh] flex-col items-center justify-center py-24 text-center">
         <Reveal>
