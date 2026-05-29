@@ -1,0 +1,45 @@
+{
+  "common": {
+    "brand": "Kalai's Beauty Care & Academy",
+    "enquireWhatsApp": "Enquire on WhatsApp",
+    "callNow": "Call Now",
+    "bookWhatsApp": "Book on WhatsApp",
+    "freeDemo": "Free Demo Class",
+    "viewAll": "View all",
+    "learnMore": "Learn more",
+    "readMore": "Read more",
+    "skipToContent": "Skip to content"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "courses": "Courses",
+    "services": "Services",
+    "gallery": "Gallery",
+    "testimonials": "Testimonials",
+    "offers": "Offers",
+    "blog": "Blog",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "switchTo": "தமிழ்"
+  },
+  "footer": {
+    "visit": "Visit us",
+    "hours": "Hours",
+    "salonHours": "Salon",
+    "academyHours": "Academy",
+    "quickLinks": "Quick links",
+    "follow": "Follow us",
+    "instagramBadge": "Follow us on Instagram — 42K+",
+    "rights": "All rights reserved.",
+    "tagline": "Crafted with care for the women of Tamil Nadu."
+  },
+  "home": {
+    "heroEyebrow": "Established 2006 · Ambattur, Chennai",
+    "heroTitle": "Kalai's Beauty Care & Academy",
+    "heroSubtitle": "20 years of empowering women through professional beauty training and trusted salon services in Chennai.",
+    "shellNote": "Foundation ready — full homepage arrives in the next phase."
+  }
+}

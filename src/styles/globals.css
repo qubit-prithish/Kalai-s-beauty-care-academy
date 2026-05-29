@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-display: "Playfair Display", Georgia, serif;
+    --font-sans: "Inter", system-ui, sans-serif;
+    --font-tamil-display: "Noto Serif Tamil", "Latha", serif;
+    --font-tamil-sans: "Noto Sans Tamil", "Latha", sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-ink-page text-cream antialiased;
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Tamil locale: swap default families to Tamil-capable fonts */
+  [lang="ta"] body,
+  body[lang="ta"],
+  [lang="ta"] {
+    font-family: var(--font-tamil-sans);
+  }
+
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-display);
+    @apply font-semibold text-cream;
+  }
+
+  [lang="ta"] h1,
+  [lang="ta"] h2,
+  [lang="ta"] h3,
+  [lang="ta"] h4,
+  [lang="ta"] h5 {
+    font-family: var(--font-tamil-display);
+  }
+
+  /* Accessible focus ring */
+  :focus-visible {
+    @apply outline-none ring-2 ring-gold-400 ring-offset-2 ring-offset-ink-page;
+  }
+
+  ::selection {
+    background: rgba(200, 162, 74, 0.3);
+    color: #f5f2ec;
+  }
+}
+
+@layer components {
+  .container-luxe {
+    @apply mx-auto w-full max-w-content px-gutter;
+  }
+
+  .heading-display {
+    font-family: var(--font-display);
+  }
+  [lang="ta"] .heading-display {
+    font-family: var(--font-tamil-display);
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-luxe text-gold-300;
+  }
+
+  .text-gold-gradient {
+    @apply bg-gold-gradient bg-clip-text text-transparent;
+  }
+}
+
+@layer utilities {
+  /* Respect reduced motion globally */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
