@@ -21,6 +21,8 @@ import { WhatsAppIcon, InstagramIcon } from "@/components/ui/icons";
 import { HeroHome } from "@/components/sections/HeroHome";
 import { StatsBand } from "@/components/sections/StatsBand";
 import { OffersPopup } from "@/components/sections/OffersPopup";
+import { MissionPinned } from "@/components/sections/MissionPinned";
+import { Parallax } from "@/components/sections/Parallax";
 
 const USP_KEYS = [
   "techniques",
@@ -142,6 +144,22 @@ export default async function HomePage({
       {/* Stats */}
       <StatsBand settings={settings} />
 
+      {/* Pinned storytelling moment — mission "10,000 by 2030" */}
+      <MissionPinned
+        content={{
+          eyebrow: t("missionEyebrow"),
+          line1: t("missionLine1"),
+          line2: t("missionLine2"),
+          goalNumber: t("missionGoalNumber"),
+          goalLabel: t("missionGoalLabel"),
+          steps: [
+            { title: t("missionStep1"), text: t("missionStep1Text") },
+            { title: t("missionStep2"), text: t("missionStep2Text") },
+            { title: t("missionStep3"), text: t("missionStep3Text") },
+          ],
+        }}
+      />
+
       {/* Testimonials */}
       {testimonials.length > 0 ? (
         <section className="py-section">
@@ -230,7 +248,10 @@ export default async function HomePage({
       </section>
 
       {/* WhatsApp CTA band */}
-      <section className="py-section">
+      <section className="relative overflow-hidden py-section">
+        <Parallax amount={80} className="pointer-events-none absolute inset-0 -z-10">
+          <div className="absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-gold-500/10 blur-3xl" />
+        </Parallax>
         <div className="container-luxe">
           <div className="grid items-center gap-8 rounded-3xl border border-gold-500/25 bg-gold-500/[0.06] p-10 lg:grid-cols-3 lg:p-14">
             <div className="lg:col-span-2">
