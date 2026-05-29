@@ -127,5 +127,81 @@
       "enrolCta": "Enrol on WhatsApp",
       "backToCourses": "All courses"
     }
+  },
+  "services": {
+    "title": "Salon Services in Ambattur",
+    "subtitle": "Walk-ins welcome. WhatsApp ahead to keep your slot private and unhurried.",
+    "empty": "Services are being updated. Please check back soon or enquire on WhatsApp.",
+    "bookCta": "Book on WhatsApp",
+    "signature": "Signature",
+    "duration": "Duration",
+    "price": "Price",
+    "backToServices": "All services",
+    "related": "Other services"
+  },
+  "gallery": {
+    "title": "Gallery",
+    "subtitle": "Glimpses from our academy and salon. Photos and reels coming soon.",
+    "all": "All",
+    "empty": "Gallery is being updated. Please check back soon.",
+    "before": "Before",
+    "after": "After",
+    "video": "Video coming soon"
+  },
+  "testimonials": {
+    "title": "What our students & clients say",
+    "subtitle": "Real stories from women across Tamil Nadu.",
+    "summaryRating": "Google rating",
+    "summaryReviews": "reviews",
+    "empty": "Reviews coming soon.",
+    "watchVideo": "Watch video"
+  },
+  "offers": {
+    "title": "Current offers",
+    "subtitle": "Free demo, easy EMI and student kits — message us to claim.",
+    "empty": "No active offers right now. Enquire on WhatsApp for the latest.",
+    "claimCta": "Claim on WhatsApp",
+    "validUntil": "Valid until",
+    "popupClose": "Close",
+    "popupCta": "Enquire now"
+  },
+  "blog": {
+    "title": "Beauty tips & academy news",
+    "subtitle": "Guides, advice and stories from Kalai's.",
+    "empty": "Articles coming soon.",
+    "readArticle": "Read article",
+    "backToBlog": "All articles",
+    "published": "Published"
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "subtitle": "Timings, fees, certificates, placement, batches and location.",
+    "empty": "FAQs coming soon.",
+    "ctaTitle": "Still have a question?",
+    "ctaText": "Message us on WhatsApp — we're happy to help."
+  },
+  "contact": {
+    "title": "Visit us",
+    "subtitle": "Inside Ambattur, opposite FUEL Juice & Pasta Bar. Easy parking, AC, women-friendly studio.",
+    "addressTitle": "Address",
+    "hoursTitle": "Hours",
+    "getInTouch": "Get in touch",
+    "directions": "Open in Google Maps",
+    "formTitle": "Send an enquiry",
+    "formNote": "We reply on WhatsApp within working hours.",
+    "name": "Your name",
+    "phone": "Phone number",
+    "topic": "I'm interested in",
+    "topicGeneral": "General enquiry",
+    "topicCourse": "A course",
+    "topicService": "A service",
+    "message": "Message",
+    "submit": "Send enquiry",
+    "sending": "Sending...",
+    "successTitle": "Thank you!",
+    "successText": "Your enquiry has been noted. For the fastest reply, message us on WhatsApp.",
+    "errName": "Please enter your name.",
+    "errPhone": "Please enter a valid phone number.",
+    "errMessage": "Please enter a short message."
   }
 }

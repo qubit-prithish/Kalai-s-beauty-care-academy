@@ -59,10 +59,19 @@ export interface Service {
 
 export interface GalleryItem {
   id: string;
-  type: "image" | "video";
+  type: "image" | "video" | "beforeafter";
+  /** Image src, or video URL/poster. Empty => elegant placeholder. */
   src: string;
+  /** For before/after comparison items. */
+  before?: string;
+  after?: string;
   caption: Localized;
-  category: "work" | "team" | "interior" | "exterior" | "event";
+  /** Data-driven category id (not a fixed enum in layout). */
+  category: string;
+  /** Display label for the category, from data. */
+  categoryLabel: Localized;
+  featured?: boolean;
+  order: number;
 }
 
 export interface Testimonial {
@@ -72,6 +81,10 @@ export interface Testimonial {
   quote: Localized;
   rating: number;
   avatar: ImageRef | null;
+  /** Optional video testimonial URL. */
+  videoUrl?: string | null;
+  featured: boolean;
+  order: number;
 }
 
 export interface Offer {
@@ -80,8 +93,14 @@ export interface Offer {
   description: Localized;
   /** e.g. "EMI", "FREE DEMO" — shown as a small badge. */
   badge: Localized;
+  image: ImageRef;
   active: boolean;
-  expiresAt: string | null;
+  /** Whether this offer may surface as the homepage popup. */
+  showPopup: boolean;
+  /** ISO date strings or null for open-ended. */
+  startsAt: string | null;
+  endsAt: string | null;
+  order: number;
 }
 
 export interface BlogPost {
@@ -99,6 +118,7 @@ export interface Faq {
   id: string;
   question: Localized;
   answer: Localized;
+  order: number;
 }
 
 export interface Enquiry {
