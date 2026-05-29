@@ -4,6 +4,7 @@ import {
   getFeaturedCourses,
   getFeaturedServices,
   getOffers,
+  getPopupOffer,
   getSettings,
   getTestimonials,
 } from "@/lib/content";
@@ -19,6 +20,7 @@ import { OffersBanner } from "@/components/ui/OffersBanner";
 import { WhatsAppIcon, InstagramIcon } from "@/components/ui/icons";
 import { HeroHome } from "@/components/sections/HeroHome";
 import { StatsBand } from "@/components/sections/StatsBand";
+import { OffersPopup } from "@/components/sections/OffersPopup";
 
 const USP_KEYS = [
   "techniques",
@@ -41,13 +43,15 @@ export default async function HomePage({
   const t = await getTranslations("home");
   const tu = await getTranslations("usps");
   const tc = await getTranslations("common");
+  const to = await getTranslations("offers");
 
-  const [settings, courses, services, testimonials, offers] = await Promise.all([
+  const [settings, courses, services, testimonials, offers, popupOffer] = await Promise.all([
     getSettings(),
     getFeaturedCourses(),
     getFeaturedServices(),
     getTestimonials(),
     getOffers(),
+    getPopupOffer(),
   ]);
 
   const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(
@@ -247,6 +251,21 @@ export default async function HomePage({
           </div>
         </div>
       </section>
+
+      {/* Offers popup (data-driven; only renders when an eligible offer exists) */}
+      {popupOffer ? (
+        <OffersPopup
+          offer={{
+            id: popupOffer.id,
+            title: pick(popupOffer.title, l),
+            description: pick(popupOffer.description, l),
+            badge: pick(popupOffer.badge, l),
+            href: whatsappHref(waMessage.general()),
+            closeLabel: to("popupClose"),
+            ctaLabel: to("popupCta"),
+          }}
+        />
+      ) : null}
     </>
   );
 }
