@@ -11,6 +11,7 @@
     "fonts": "node scripts/download-fonts.mjs",
     "check:i18n": "node scripts/check-i18n.mjs",
     "db:migrate": "tsx scripts/migrate.ts",
+    "db:seed": "tsx scripts/seed-from-mock.ts",
     "db:verify": "tsx scripts/verify.ts",
     "admin:create": "tsx scripts/create-admin.ts"
   },
