@@ -8,7 +8,10 @@
     "viewAll": "View all",
     "learnMore": "Learn more",
     "readMore": "Read more",
-    "skipToContent": "Skip to content"
+    "skipToContent": "Skip to content",
+    "feeOnEnquiry": "Fee on enquiry",
+    "exploreCourses": "Explore courses",
+    "viewServices": "View services"
   },
   "nav": {
     "home": "Home",
@@ -40,6 +43,89 @@
     "heroEyebrow": "Established 2006 · Ambattur, Chennai",
     "heroTitle": "Kalai's Beauty Care & Academy",
     "heroSubtitle": "20 years of empowering women through professional beauty training and trusted salon services in Chennai.",
-    "shellNote": "Foundation ready — full homepage arrives in the next phase."
+    "uspTitle": "Why Kalai's",
+    "uspSubtitle": "Two decades of craft, trust and individual attention.",
+    "coursesTitle": "Courses we offer",
+    "coursesSubtitle": "Government-recognised certificates, EMI-friendly fees, internship and placement support.",
+    "servicesTitle": "Salon services",
+    "servicesSubtitle": "Trusted by Chennai for 20 years — from our signature ear lobe treatment to bridal makeup.",
+    "statsTitle": "Two decades of trust",
+    "testimonialsTitle": "What they say",
+    "testimonialsSubtitle": "Students and clients across Tamil Nadu.",
+    "offersTitle": "Current offers",
+    "offersSubtitle": "Free demo, easy EMI and student kits.",
+    "mapTitle": "Find us in Ambattur",
+    "ctaTitle": "Have a question?",
+    "ctaSubtitle": "Message us on WhatsApp and our team will reply within working hours.",
+    "instagramCta": "Follow us on Instagram — 42K+"
+  },
+  "stats": {
+    "students": "students trained",
+    "years": "years of experience",
+    "rating": "Google rating",
+    "followers": "Instagram followers"
+  },
+  "usps": {
+    "techniques": "Professional & trendy techniques",
+    "accessories": "Advanced accessories & tools",
+    "treatments": "Best skin & hair treatments",
+    "handsOn": "Individual hands-on training",
+    "reputation": "4.8★ Google reputation",
+    "legacy": "20-year proven legacy"
+  },
+  "about": {
+    "eyebrow": "About Kalai's",
+    "title": "20 years. 1000+ students. One mission.",
+    "subtitle": "Empowering women across Tamil Nadu through beauty.",
+    "storyTitle": "Our story",
+    "story": "Founded in 2006 in Ambattur, Chennai, Kalai's Beauty Care & Academy has grown from a single studio into one of the most trusted beauty schools in the city. For two decades we have trained over 1000 women — many of whom now run their own salons across Tamil Nadu.",
+    "missionTitle": "Our mission",
+    "mission": "To empower 10,000+ women by 2030 to launch their own salons through professional training, hands-on practice and lifelong placement support.",
+    "founderTitle": "Meet the founder",
+    "founderName": "Kalaiselvi",
+    "founderRole": "Founder & Lead International Makeup Artist",
+    "founderBio": "Kalaiselvi has spent two decades shaping Chennai's beauty landscape. A government-recognised certified educator and International Makeup Artist, she founded the academy with one mission: empower women through skill, confidence and craft.",
+    "credentialsTitle": "Credentials & awards",
+    "credentialsPending": "Government-recognised certifications and awards — details coming soon.",
+    "whyTitle": "Why choose us",
+    "facilitiesTitle": "Facilities",
+    "teamTitle": "Our trainers",
+    "teamSubtitle": "A small, dedicated team so every student gets individual attention.",
+    "trainerRole": "Senior Trainer",
+    "trainerPending": "Trainer profile coming soon"
+  },
+  "facilities": {
+    "ac": "Air-conditioned",
+    "wifi": "Free Wi-Fi",
+    "parking": "Parking",
+    "wheelchair": "Wheelchair-friendly",
+    "restroom": "Restroom",
+    "refreshments": "Refreshments",
+    "women": "Women-owned"
+  },
+  "courses": {
+    "title": "Beautician Courses in Chennai",
+    "subtitle": "Specialised programmes with government-recognised certificates, EMI options, internship and placement support.",
+    "empty": "Courses are being updated. Please check back soon or enquire on WhatsApp.",
+    "perks": {
+      "govCert": "Govt-recognised certificate",
+      "emi": "EMI available",
+      "placement": "Placement support",
+      "freeDemo": "Free demo class"
+    },
+    "detail": {
+      "overview": "Overview",
+      "duration": "Duration",
+      "fee": "Fee",
+      "syllabus": "Syllabus",
+      "syllabusNote": "Full syllabus shared on enquiry.",
+      "outcomes": "What you'll achieve",
+      "whoFor": "Who it's for",
+      "whoForText": "Women aged 16–45 across Tamil Nadu — absolute beginners and working professionals who want a recognised qualification and a real career in beauty.",
+      "perksTitle": "Included with every course",
+      "related": "Other courses",
+      "enrolCta": "Enrol on WhatsApp",
+      "backToCourses": "All courses"
+    }
   }
 }

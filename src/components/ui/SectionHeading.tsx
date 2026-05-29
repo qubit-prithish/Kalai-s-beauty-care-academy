@@ -7,6 +7,8 @@ type SectionHeadingProps = {
   subtitle?: string;
   align?: "left" | "center";
   className?: string;
+  /** Heading level for the title. Use h1 once per page (page title). */
+  as?: "h1" | "h2";
 };
 
 export function SectionHeading({
@@ -15,6 +17,7 @@ export function SectionHeading({
   subtitle,
   align = "center",
   className,
+  as: Tag = "h2",
 }: SectionHeadingProps) {
   return (
     <Reveal
@@ -24,9 +27,9 @@ export function SectionHeading({
       )}
     >
       {eyebrow ? <p className="eyebrow">{eyebrow}</p> : null}
-      <h2 className="heading-display mt-3 text-3xl leading-tight sm:text-4xl lg:text-5xl">
+      <Tag className="heading-display mt-3 text-3xl leading-tight sm:text-4xl lg:text-5xl">
         {title}
-      </h2>
+      </Tag>
       {subtitle ? (
         <p className="mt-4 text-base leading-relaxed text-cream-muted">{subtitle}</p>
       ) : null}
