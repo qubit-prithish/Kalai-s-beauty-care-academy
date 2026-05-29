@@ -54,6 +54,7 @@ export default async function LocaleLayout({
 
   const l = locale as Locale;
   const settings = await getSettings();
+  const t = await getTranslations({ locale: l, namespace: "common" });
 
   return (
     <html lang={l} className={fontVariables} suppressHydrationWarning>
@@ -73,7 +74,7 @@ export default async function LocaleLayout({
             href="#main"
             className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-gold-400 focus:px-4 focus:py-2 focus:text-ink-page"
           >
-            Skip to content
+            {t("skipToContent")}
           </a>
           <Header />
           <main id="main" className="min-h-[60vh]">
