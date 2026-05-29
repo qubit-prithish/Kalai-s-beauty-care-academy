@@ -1,4 +1,29 @@
 {
+  "seo": {
+    "homeTitle": "Beauty Academy & Salon in Ambattur, Chennai",
+    "homeDescription": "Premier beauty academy and salon in Ambattur, Chennai. 20+ years, 1000+ students trained, 4.8★ rated. Beautician courses, bridal makeup, ear lobe treatment and more — government-recognised certificates, EMI available.",
+    "aboutTitle": "About Us — 20 Years of Beauty Training",
+    "aboutDescription": "Founded in 2006 by Kalaiselvi, an International Makeup Artist. 1000+ women trained across Tamil Nadu. Our story, mission and trainers.",
+    "coursesTitle": "Beautician Courses in Chennai",
+    "coursesDescription": "Beautician courses in Ambattur, Chennai — basic to diploma in cosmetology, bridal makeup, nail tech and more. Government-recognised certificates, EMI, placement support.",
+    "servicesTitle": "Salon Services in Ambattur, Chennai",
+    "servicesDescription": "Ear lobe treatment, ear piercing, bridal makeup, facial, hair styling, nail art and mehendi by trusted senior artists in Ambattur, Chennai.",
+    "galleryTitle": "Gallery — Our Work & Academy",
+    "galleryDescription": "Bridal looks, student work, nail art, mehendi and more from Kalai's Beauty Care & Academy in Ambattur, Chennai.",
+    "testimonialsTitle": "Reviews — 4.8★ from 63 Google reviews",
+    "testimonialsDescription": "Real stories from students and clients of Kalai's Beauty Care & Academy across Tamil Nadu.",
+    "offersTitle": "Offers — Free Demo, EMI & Student Kit",
+    "offersDescription": "Current offers at Kalai's Beauty Care & Academy: free demo class, easy EMI on all courses, and a free student starter kit.",
+    "blogTitle": "Beauty Tips & Academy News",
+    "blogDescription": "Guides, advice and stories from Kalai's Beauty Care & Academy — choosing a course, ear lobe repair and more.",
+    "faqTitle": "FAQ — Timings, Fees, Certificates & Placement",
+    "faqDescription": "Answers about course timings, fees, EMI, government-recognised certificates, placement, batch sizes and our Ambattur location.",
+    "contactTitle": "Contact & Visit — Ambattur, Chennai",
+    "contactDescription": "Visit Kalai's Beauty Care & Academy at No:77, Ayyapakkam Main Road, TNHB, KK Nagar, Ambattur, Chennai – 600053. WhatsApp 95662 29900."
+  },
+  "breadcrumb": {
+    "home": "Home"
+  },
   "common": {
     "brand": "Kalai's Beauty Care & Academy",
     "enquireWhatsApp": "Enquire on WhatsApp",

@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
-    "fonts": "node scripts/download-fonts.mjs"
+    "fonts": "node scripts/download-fonts.mjs",
+    "check:i18n": "node scripts/check-i18n.mjs"
   },
   "dependencies": {
     "@react-three/drei": "10.7.7",
