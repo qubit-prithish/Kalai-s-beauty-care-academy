@@ -1,4 +1,29 @@
 {
+  "seo": {
+    "homeTitle": "Beauty Academy & Salon in Ambattur, Chennai",
+    "homeDescription": "Premier beauty academy and salon in Ambattur, Chennai. 20+ years, 1000+ students trained, 4.8★ rated. Beautician courses, bridal makeup, ear lobe treatment and more — government-recognised certificates, EMI available.",
+    "aboutTitle": "About Us — 20 Years of Beauty Training",
+    "aboutDescription": "Founded in 2006 by Kalaiselvi, an International Makeup Artist. 1000+ women trained across Tamil Nadu. Our story, mission and trainers.",
+    "coursesTitle": "Beautician Courses in Chennai",
+    "coursesDescription": "Beautician courses in Ambattur, Chennai — basic to diploma in cosmetology, bridal makeup, nail tech and more. Government-recognised certificates, EMI, placement support.",
+    "servicesTitle": "Salon Services in Ambattur, Chennai",
+    "servicesDescription": "Ear lobe treatment, ear piercing, bridal makeup, facial, hair styling, nail art and mehendi by trusted senior artists in Ambattur, Chennai.",
+    "galleryTitle": "Gallery — Our Work & Academy",
+    "galleryDescription": "Bridal looks, student work, nail art, mehendi and more from Kalai's Beauty Care & Academy in Ambattur, Chennai.",
+    "testimonialsTitle": "Reviews — 4.8★ from 63 Google reviews",
+    "testimonialsDescription": "Real stories from students and clients of Kalai's Beauty Care & Academy across Tamil Nadu.",
+    "offersTitle": "Offers — Free Demo, EMI & Student Kit",
+    "offersDescription": "Current offers at Kalai's Beauty Care & Academy: free demo class, easy EMI on all courses, and a free student starter kit.",
+    "blogTitle": "Beauty Tips & Academy News",
+    "blogDescription": "Guides, advice and stories from Kalai's Beauty Care & Academy — choosing a course, ear lobe repair and more.",
+    "faqTitle": "FAQ — Timings, Fees, Certificates & Placement",
+    "faqDescription": "Answers about course timings, fees, EMI, government-recognised certificates, placement, batch sizes and our Ambattur location.",
+    "contactTitle": "Contact & Visit — Ambattur, Chennai",
+    "contactDescription": "Visit Kalai's Beauty Care & Academy at No:77, Ayyapakkam Main Road, TNHB, KK Nagar, Ambattur, Chennai – 600053. WhatsApp 95662 29900."
+  },
+  "breadcrumb": {
+    "home": "Home"
+  },
   "common": {
     "brand": "Kalai's Beauty Care & Academy",
     "enquireWhatsApp": "Enquire on WhatsApp",
@@ -8,7 +33,10 @@
     "viewAll": "View all",
     "learnMore": "Learn more",
     "readMore": "Read more",
-    "skipToContent": "Skip to content"
+    "skipToContent": "Skip to content",
+    "feeOnEnquiry": "Fee on enquiry",
+    "exploreCourses": "Explore courses",
+    "viewServices": "View services"
   },
   "nav": {
     "home": "Home",
@@ -40,6 +68,176 @@
     "heroEyebrow": "Established 2006 · Ambattur, Chennai",
     "heroTitle": "Kalai's Beauty Care & Academy",
     "heroSubtitle": "20 years of empowering women through professional beauty training and trusted salon services in Chennai.",
-    "shellNote": "Foundation ready — full homepage arrives in the next phase."
+    "uspTitle": "Why Kalai's",
+    "uspSubtitle": "Two decades of craft, trust and individual attention.",
+    "coursesTitle": "Courses we offer",
+    "coursesSubtitle": "Government-recognised certificates, EMI-friendly fees, internship and placement support.",
+    "servicesTitle": "Salon services",
+    "servicesSubtitle": "Trusted by Chennai for 20 years — from our signature ear lobe treatment to bridal makeup.",
+    "statsTitle": "Two decades of trust",
+    "testimonialsTitle": "What they say",
+    "testimonialsSubtitle": "Students and clients across Tamil Nadu.",
+    "offersTitle": "Current offers",
+    "offersSubtitle": "Free demo, easy EMI and student kits.",
+    "mapTitle": "Find us in Ambattur",
+    "ctaTitle": "Have a question?",
+    "ctaSubtitle": "Message us on WhatsApp and our team will reply within working hours.",
+    "instagramCta": "Follow us on Instagram — 42K+",
+    "missionEyebrow": "Our mission",
+    "missionLine1": "Empowering women,",
+    "missionLine2": "one skill at a time.",
+    "missionGoalNumber": "10,000",
+    "missionGoalLabel": "women trained by 2030",
+    "missionStep1": "Since 2006",
+    "missionStep1Text": "1000+ women trained and placed across Tamil Nadu.",
+    "missionStep2": "Today",
+    "missionStep2Text": "3 trainers, batches of 10, individual hands-on attention.",
+    "missionStep3": "By 2030",
+    "missionStep3Text": "10,000+ women running their own salons and careers."
+  },
+  "stats": {
+    "students": "students trained",
+    "years": "years of experience",
+    "rating": "Google rating",
+    "followers": "Instagram followers"
+  },
+  "usps": {
+    "techniques": "Professional & trendy techniques",
+    "accessories": "Advanced accessories & tools",
+    "treatments": "Best skin & hair treatments",
+    "handsOn": "Individual hands-on training",
+    "reputation": "4.8★ Google reputation",
+    "legacy": "20-year proven legacy"
+  },
+  "about": {
+    "eyebrow": "About Kalai's",
+    "title": "20 years. 1000+ students. One mission.",
+    "subtitle": "Empowering women across Tamil Nadu through beauty.",
+    "storyTitle": "Our story",
+    "story": "Founded in 2006 in Ambattur, Chennai, Kalai's Beauty Care & Academy has grown from a single studio into one of the most trusted beauty schools in the city. For two decades we have trained over 1000 women — many of whom now run their own salons across Tamil Nadu.",
+    "missionTitle": "Our mission",
+    "mission": "To empower 10,000+ women by 2030 to launch their own salons through professional training, hands-on practice and lifelong placement support.",
+    "founderTitle": "Meet the founder",
+    "founderName": "Kalaiselvi",
+    "founderRole": "Founder & Lead International Makeup Artist",
+    "founderBio": "Kalaiselvi has spent two decades shaping Chennai's beauty landscape. A government-recognised certified educator and International Makeup Artist, she founded the academy with one mission: empower women through skill, confidence and craft.",
+    "credentialsTitle": "Credentials & awards",
+    "credentialsPending": "Government-recognised certifications and awards — details coming soon.",
+    "whyTitle": "Why choose us",
+    "facilitiesTitle": "Facilities",
+    "teamTitle": "Our trainers",
+    "teamSubtitle": "A small, dedicated team so every student gets individual attention.",
+    "trainerRole": "Senior Trainer",
+    "trainerPending": "Trainer profile coming soon"
+  },
+  "facilities": {
+    "ac": "Air-conditioned",
+    "wifi": "Free Wi-Fi",
+    "parking": "Parking",
+    "wheelchair": "Wheelchair-friendly",
+    "restroom": "Restroom",
+    "refreshments": "Refreshments",
+    "women": "Women-owned"
+  },
+  "courses": {
+    "title": "Beautician Courses in Chennai",
+    "subtitle": "Specialised programmes with government-recognised certificates, EMI options, internship and placement support.",
+    "empty": "Courses are being updated. Please check back soon or enquire on WhatsApp.",
+    "perks": {
+      "govCert": "Govt-recognised certificate",
+      "emi": "EMI available",
+      "placement": "Placement support",
+      "freeDemo": "Free demo class"
+    },
+    "detail": {
+      "overview": "Overview",
+      "duration": "Duration",
+      "fee": "Fee",
+      "syllabus": "Syllabus",
+      "syllabusNote": "Full syllabus shared on enquiry.",
+      "outcomes": "What you'll achieve",
+      "whoFor": "Who it's for",
+      "whoForText": "Women aged 16–45 across Tamil Nadu — absolute beginners and working professionals who want a recognised qualification and a real career in beauty.",
+      "perksTitle": "Included with every course",
+      "related": "Other courses",
+      "enrolCta": "Enrol on WhatsApp",
+      "backToCourses": "All courses"
+    }
+  },
+  "services": {
+    "title": "Salon Services in Ambattur",
+    "subtitle": "Walk-ins welcome. WhatsApp ahead to keep your slot private and unhurried.",
+    "empty": "Services are being updated. Please check back soon or enquire on WhatsApp.",
+    "bookCta": "Book on WhatsApp",
+    "signature": "Signature",
+    "duration": "Duration",
+    "price": "Price",
+    "backToServices": "All services",
+    "related": "Other services"
+  },
+  "gallery": {
+    "title": "Gallery",
+    "subtitle": "Glimpses from our academy and salon. Photos and reels coming soon.",
+    "all": "All",
+    "empty": "Gallery is being updated. Please check back soon.",
+    "before": "Before",
+    "after": "After",
+    "video": "Video coming soon"
+  },
+  "testimonials": {
+    "title": "What our students & clients say",
+    "subtitle": "Real stories from women across Tamil Nadu.",
+    "summaryRating": "Google rating",
+    "summaryReviews": "reviews",
+    "empty": "Reviews coming soon.",
+    "watchVideo": "Watch video"
+  },
+  "offers": {
+    "title": "Current offers",
+    "subtitle": "Free demo, easy EMI and student kits — message us to claim.",
+    "empty": "No active offers right now. Enquire on WhatsApp for the latest.",
+    "claimCta": "Claim on WhatsApp",
+    "validUntil": "Valid until",
+    "popupClose": "Close",
+    "popupCta": "Enquire now"
+  },
+  "blog": {
+    "title": "Beauty tips & academy news",
+    "subtitle": "Guides, advice and stories from Kalai's.",
+    "empty": "Articles coming soon.",
+    "readArticle": "Read article",
+    "backToBlog": "All articles",
+    "published": "Published"
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "subtitle": "Timings, fees, certificates, placement, batches and location.",
+    "empty": "FAQs coming soon.",
+    "ctaTitle": "Still have a question?",
+    "ctaText": "Message us on WhatsApp — we're happy to help."
+  },
+  "contact": {
+    "title": "Visit us",
+    "subtitle": "Inside Ambattur, opposite FUEL Juice & Pasta Bar. Easy parking, AC, women-friendly studio.",
+    "addressTitle": "Address",
+    "hoursTitle": "Hours",
+    "getInTouch": "Get in touch",
+    "directions": "Open in Google Maps",
+    "formTitle": "Send an enquiry",
+    "formNote": "We reply on WhatsApp within working hours.",
+    "name": "Your name",
+    "phone": "Phone number",
+    "topic": "I'm interested in",
+    "topicGeneral": "General enquiry",
+    "topicCourse": "A course",
+    "topicService": "A service",
+    "message": "Message",
+    "submit": "Send enquiry",
+    "sending": "Sending...",
+    "successTitle": "Thank you!",
+    "successText": "Your enquiry has been noted. For the fastest reply, message us on WhatsApp.",
+    "errName": "Please enter your name.",
+    "errPhone": "Please enter a valid phone number.",
+    "errMessage": "Please enter a short message."
   }
 }

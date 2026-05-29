@@ -11,6 +11,9 @@ export const testimonials: Testimonial[] = [
     },
     rating: 5,
     avatar: null,
+    videoUrl: null,
+    featured: true,
+    order: 1,
   },
   {
     id: "t02",
@@ -22,6 +25,9 @@ export const testimonials: Testimonial[] = [
     },
     rating: 5,
     avatar: null,
+    videoUrl: null,
+    featured: true,
+    order: 2,
   },
   {
     id: "t03",
@@ -33,6 +39,9 @@ export const testimonials: Testimonial[] = [
     },
     rating: 5,
     avatar: null,
+    videoUrl: null,
+    featured: false,
+    order: 3,
   },
   {
     id: "t04",
@@ -44,5 +53,22 @@ export const testimonials: Testimonial[] = [
     },
     rating: 5,
     avatar: null,
+    videoUrl: null,
+    featured: false,
+    order: 4,
+  },
+  {
+    id: "t05",
+    name: "Fathima K.",
+    role: { en: "Bridal makeup client, 2024", ta: "மணப்பெண் மேக்கப் வாடிக்கையாளர், 2024" },
+    quote: {
+      en: "Booking on WhatsApp was so easy. The team understood exactly the look I wanted from my reference photo.",
+      ta: "வாட்ஸ்அப்பில் புக் செய்வது மிக எளிதாக இருந்தது. என் ரெஃபரன்ஸ் ஃபோட்டோவிலிருந்து நான் விரும்பிய தோற்றத்தை குழு சரியாகப் புரிந்துகொண்டது.",
+    },
+    rating: 5,
+    avatar: null,
+    videoUrl: null,
+    featured: false,
+    order: 5,
   },
 ];

@@ -63,20 +63,50 @@ export async function getServiceSlugs(): Promise<string[]> {
 
 // ── Testimonials / Offers / FAQs ──────────────────────────────────────────────
 export async function getTestimonials(): Promise<Testimonial[]> {
-  return mockTestimonials;
+  // Featured first, then by order.
+  return [...mockTestimonials].sort(
+    (a, b) => Number(b.featured) - Number(a.featured) || a.order - b.order,
+  );
+}
+
+function offerIsLive(o: Offer, now = Date.now()): boolean {
+  if (!o.active) return false;
+  if (o.startsAt && now < +new Date(o.startsAt)) return false;
+  if (o.endsAt && now > +new Date(o.endsAt)) return false;
+  return true;
 }
 
 export async function getOffers(): Promise<Offer[]> {
-  return mockOffers.filter((o) => o.active);
+  return [...mockOffers].filter((o) => offerIsLive(o)).sort(sortByOrder);
+}
+
+/** The single offer (if any) eligible to surface as the homepage popup. */
+export async function getPopupOffer(): Promise<Offer | null> {
+  return (
+    [...mockOffers]
+      .filter((o) => offerIsLive(o) && o.showPopup)
+      .sort(sortByOrder)[0] ?? null
+  );
 }
 
 export async function getFaqs(): Promise<Faq[]> {
-  return mockFaqs;
+  return [...mockFaqs].sort(sortByOrder);
 }
 
 // ── Gallery ──────────────────────────────────────────────────────────────────
 export async function getGallery(): Promise<GalleryItem[]> {
-  return mockGallery;
+  return [...mockGallery].sort(sortByOrder);
+}
+
+/** Distinct categories present in the gallery data (drives the filter UI). */
+export async function getGalleryCategories(): Promise<
+  { id: string; label: GalleryItem["categoryLabel"] }[]
+> {
+  const seen = new Map<string, GalleryItem["categoryLabel"]>();
+  for (const item of mockGallery) {
+    if (!seen.has(item.category)) seen.set(item.category, item.categoryLabel);
+  }
+  return [...seen.entries()].map(([id, label]) => ({ id, label }));
 }
 
 // ── Blog ─────────────────────────────────────────────────────────────────────
@@ -88,6 +118,10 @@ export async function getBlogPosts(): Promise<BlogPost[]> {
 
 export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
   return mockBlog.find((p) => p.slug === slug) ?? null;
+}
+
+export async function getBlogSlugs(): Promise<string[]> {
+  return mockBlog.map((p) => p.slug);
 }
 
 // ── Settings / NAP ────────────────────────────────────────────────────────────
