@@ -6,6 +6,9 @@ import { routing, type Locale } from "@/i18n/routing";
 import { getServiceBySlug, getServices } from "@/lib/content";
 import { pick } from "@/lib/locale";
 import { whatsappHref, waMessage, telHref } from "@/lib/whatsapp";
+import { buildMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd } from "@/lib/jsonld";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { Placeholder } from "@/components/ui/Placeholder";
@@ -29,7 +32,14 @@ export async function generateMetadata({
   const service = await getServiceBySlug(slug);
   if (!service) return {};
   const l = locale as Locale;
-  return { title: pick(service.title, l), description: pick(service.tagline, l) };
+  return buildMetadata({
+    locale: l,
+    path: `/services/${slug}`,
+    title: pick(service.title, l),
+    description: pick(service.tagline, l),
+    imageAlt: pick(service.image.alt, l),
+    type: "article",
+  });
 }
 
 export default async function ServiceDetailPage({
@@ -46,6 +56,8 @@ export default async function ServiceDetailPage({
 
   const t = await getTranslations("services");
   const tc = await getTranslations("common");
+  const tb = await getTranslations("breadcrumb");
+  const tnav = await getTranslations("nav");
 
   const all = await getServices();
   const related = all.filter((s) => s.slug !== slug).slice(0, 3);
@@ -53,6 +65,16 @@ export default async function ServiceDetailPage({
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd(
+          [
+            { name: tb("home"), path: "/" },
+            { name: tnav("services"), path: "/services" },
+            { name: pick(service.title, l), path: `/services/${slug}` },
+          ],
+          l,
+        )}
+      />
       <section className="border-b border-ink-border">
         <div className="container-luxe py-12 lg:py-16">
           <Link href="/services" prefetch={false} className="text-sm text-cream-dim transition hover:text-gold-200">

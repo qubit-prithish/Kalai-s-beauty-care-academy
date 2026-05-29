@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import { getBlogPosts } from "@/lib/content";
 import { pick } from "@/lib/locale";
+import { buildMetadata } from "@/lib/seo";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Placeholder } from "@/components/ui/Placeholder";
@@ -14,8 +15,14 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "blog" });
-  return { title: t("title"), description: t("subtitle") };
+  const l = locale as Locale;
+  const t = await getTranslations({ locale, namespace: "seo" });
+  return buildMetadata({
+    locale: l,
+    path: "/blog",
+    title: t("blogTitle"),
+    description: t("blogDescription"),
+  });
 }
 
 export default async function BlogPage({

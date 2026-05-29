@@ -3,9 +3,12 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
-import { getCourseBySlug, getCourses } from "@/lib/content";
+import { getCourseBySlug, getCourses, getSettings } from "@/lib/content";
 import { pick } from "@/lib/locale";
 import { whatsappHref, waMessage } from "@/lib/whatsapp";
+import { buildMetadata } from "@/lib/seo";
+import { courseJsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { Placeholder } from "@/components/ui/Placeholder";
@@ -30,10 +33,14 @@ export async function generateMetadata({
   const course = await getCourseBySlug(slug);
   if (!course) return {};
   const l = locale as Locale;
-  return {
+  return buildMetadata({
+    locale: l,
+    path: `/courses/${slug}`,
     title: pick(course.title, l),
     description: pick(course.tagline, l),
-  };
+    imageAlt: pick(course.image.alt, l),
+    type: "article",
+  });
 }
 
 export default async function CourseDetailPage({
@@ -51,7 +58,10 @@ export default async function CourseDetailPage({
   const t = await getTranslations("courses.detail");
   const tp = await getTranslations("courses.perks");
   const tc = await getTranslations("common");
+  const tb = await getTranslations("breadcrumb");
+  const tnav = await getTranslations("nav");
 
+  const settings = await getSettings();
   const all = await getCourses();
   const related = all.filter((c) => c.slug !== slug).slice(0, 3);
 
@@ -61,6 +71,17 @@ export default async function CourseDetailPage({
 
   return (
     <>
+      <JsonLd data={courseJsonLd(course, settings, l)} />
+      <JsonLd
+        data={breadcrumbJsonLd(
+          [
+            { name: tb("home"), path: "/" },
+            { name: tnav("courses"), path: "/courses" },
+            { name: pick(course.title, l), path: `/courses/${slug}` },
+          ],
+          l,
+        )}
+      />
       {/* Hero */}
       <section className="border-b border-ink-border">
         <div className="container-luxe py-12 lg:py-16">

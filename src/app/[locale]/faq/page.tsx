@@ -4,6 +4,7 @@ import type { Locale } from "@/i18n/routing";
 import { getFaqs } from "@/lib/content";
 import { pick } from "@/lib/locale";
 import { whatsappHref, waMessage } from "@/lib/whatsapp";
+import { buildMetadata } from "@/lib/seo";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { FaqAccordion } from "@/components/ui/FaqAccordion";
 import { Button } from "@/components/ui/Button";
@@ -15,8 +16,14 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "faq" });
-  return { title: t("title"), description: t("subtitle") };
+  const l = locale as Locale;
+  const t = await getTranslations({ locale, namespace: "seo" });
+  return buildMetadata({
+    locale: l,
+    path: "/faq",
+    title: t("faqTitle"),
+    description: t("faqDescription"),
+  });
 }
 
 export default async function FaqPage({

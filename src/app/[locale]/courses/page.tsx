@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { getCourses } from "@/lib/content";
 import { whatsappHref, waMessage } from "@/lib/whatsapp";
+import { buildMetadata } from "@/lib/seo";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -16,8 +17,14 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "courses" });
-  return { title: t("title"), description: t("subtitle") };
+  const l = locale as Locale;
+  const t = await getTranslations({ locale, namespace: "seo" });
+  return buildMetadata({
+    locale: l,
+    path: "/courses",
+    title: t("coursesTitle"),
+    description: t("coursesDescription"),
+  });
 }
 
 export default async function CoursesPage({

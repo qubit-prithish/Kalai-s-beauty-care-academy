@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { getSettings, getTestimonials } from "@/lib/content";
 import { pick } from "@/lib/locale";
+import { buildMetadata } from "@/lib/seo";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { TestimonialCarousel } from "@/components/ui/TestimonialCarousel";
@@ -14,8 +15,14 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "testimonials" });
-  return { title: t("title"), description: t("subtitle") };
+  const l = locale as Locale;
+  const t = await getTranslations({ locale, namespace: "seo" });
+  return buildMetadata({
+    locale: l,
+    path: "/testimonials",
+    title: t("testimonialsTitle"),
+    description: t("testimonialsDescription"),
+  });
 }
 
 export default async function TestimonialsPage({

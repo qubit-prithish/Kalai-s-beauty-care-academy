@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { getGallery, getGalleryCategories } from "@/lib/content";
 import { pick } from "@/lib/locale";
+import { buildMetadata } from "@/lib/seo";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GalleryGrid } from "@/components/sections/GalleryGrid";
 
@@ -12,8 +13,14 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "gallery" });
-  return { title: t("title"), description: t("subtitle") };
+  const l = locale as Locale;
+  const t = await getTranslations({ locale, namespace: "seo" });
+  return buildMetadata({
+    locale: l,
+    path: "/gallery",
+    title: t("galleryTitle"),
+    description: t("galleryDescription"),
+  });
 }
 
 export default async function GalleryPage({

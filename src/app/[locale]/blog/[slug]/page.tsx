@@ -5,6 +5,9 @@ import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { getBlogPostBySlug, getBlogPosts } from "@/lib/content";
 import { pick } from "@/lib/locale";
+import { buildMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd } from "@/lib/jsonld";
+import { JsonLd } from "@/components/seo/JsonLd";
 import { Placeholder } from "@/components/ui/Placeholder";
 
 export async function generateStaticParams() {
@@ -23,7 +26,14 @@ export async function generateMetadata({
   const post = await getBlogPostBySlug(slug);
   if (!post) return {};
   const l = locale as Locale;
-  return { title: pick(post.title, l), description: pick(post.excerpt, l) };
+  return buildMetadata({
+    locale: l,
+    path: `/blog/${slug}`,
+    title: pick(post.title, l),
+    description: pick(post.excerpt, l),
+    imageAlt: pick(post.cover.alt, l),
+    type: "article",
+  });
 }
 
 export default async function BlogPostPage({
@@ -39,9 +49,20 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   const t = await getTranslations("blog");
+  const tb = await getTranslations("breadcrumb");
 
   return (
     <article className="py-section">
+      <JsonLd
+        data={breadcrumbJsonLd(
+          [
+            { name: tb("home"), path: "/" },
+            { name: t("title"), path: "/blog" },
+            { name: pick(post.title, l), path: `/blog/${slug}` },
+          ],
+          l,
+        )}
+      />
       <div className="container-luxe max-w-3xl">
         <Link href="/blog" prefetch={false} className="text-sm text-cream-dim transition hover:text-gold-200">
           ← {t("backToBlog")}

@@ -4,6 +4,7 @@ import type { Locale } from "@/i18n/routing";
 import { getSettings } from "@/lib/content";
 import { pick } from "@/lib/locale";
 import { whatsappHref, waMessage, telHref } from "@/lib/whatsapp";
+import { buildMetadata } from "@/lib/seo";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { WhatsAppIcon, MapPinIcon } from "@/components/ui/icons";
@@ -15,8 +16,14 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "contact" });
-  return { title: t("title"), description: t("subtitle") };
+  const l = locale as Locale;
+  const t = await getTranslations({ locale, namespace: "seo" });
+  return buildMetadata({
+    locale: l,
+    path: "/contact",
+    title: t("contactTitle"),
+    description: t("contactDescription"),
+  });
 }
 
 export default async function ContactPage({
