@@ -5,6 +5,8 @@ import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { getServiceRoleClient, isAdminUser } from "@/lib/supabase/admin";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
+import { requireAdmin } from "@/lib/admin-auth";
+import type { EnquiryStatus } from "@/lib/content/types";
 
 export type SignInState = { error: string | null };
 
@@ -87,5 +89,23 @@ export async function deleteRow(table: string, id: string) {
   const { error } = await db.from(table).delete().eq("id", id);
   if (error) return { error: error.message };
   revalidatePublic();
+  return { ok: true };
+}
+
+export async function updateEnquiryStatus(id: string, status: EnquiryStatus) {
+  await requireAdmin();
+  const db = getServiceRoleClient();
+  const { error } = await db.from("enquiries").update({ status }).eq("id", id);
+  if (error) return { error: error.message };
+  revalidatePath("/admin/enquiries");
+  return { ok: true };
+}
+
+export async function deleteEnquiry(id: string) {
+  await requireAdmin();
+  const db = getServiceRoleClient();
+  const { error } = await db.from("enquiries").delete().eq("id", id);
+  if (error) return { error: error.message };
+  revalidatePath("/admin/enquiries");
   return { ok: true };
 }

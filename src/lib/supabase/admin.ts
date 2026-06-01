@@ -8,10 +8,10 @@ import "server-only";
 // as verifying admin membership against a fully locked-down `admins` table.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import { createClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { getSupabaseUrl } from "./env";
 
-let cached: ReturnType<typeof createClient> | null = null;
+let cached: SupabaseClient | null = null;
 
 export function getServiceRoleClient() {
   if (cached) return cached;
