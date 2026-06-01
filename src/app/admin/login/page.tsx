@@ -1,29 +1,64 @@
-"use client";
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+import { isAdminUser } from "@/lib/supabase/admin";
+import { isSupabaseConfigured } from "@/lib/supabase/env";
+import { LoginForm } from "./LoginForm";
 
-import { useActionState } from "react";
-import { login } from "../actions";
+// Auth-dependent: never prerender.
+export const dynamic = "force-dynamic";
 
-export default function LoginPage() {
-  const [state, action, pending] = useActionState(login, null as null | { error?: string });
+export default async function AdminLoginPage() {
+  const configured = isSupabaseConfigured();
+
+  // Already signed in as an admin? Skip the form.
+  if (configured) {
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (user && (await isAdminUser(user.id))) {
+      redirect("/admin");
+    }
+  }
+
   return (
-    <main className="grid min-h-screen place-items-center p-6">
-      <form action={action} className="w-full max-w-sm rounded-2xl border border-ink-border bg-ink-surface p-8">
-        <h1 className="text-2xl font-bold text-gold-200">Kalai&apos;s Admin</h1>
-        <p className="mt-1 text-sm text-cream-muted">Sign in to manage content.</p>
-        <label className="mt-6 block text-sm">Email
-          <input name="email" type="email" required autoComplete="email"
-            className="mt-1 w-full rounded-lg border border-ink-border bg-ink-page px-3 py-2 text-cream" />
-        </label>
-        <label className="mt-4 block text-sm">Password
-          <input name="password" type="password" required autoComplete="current-password"
-            className="mt-1 w-full rounded-lg border border-ink-border bg-ink-page px-3 py-2 text-cream" />
-        </label>
-        {state?.error ? <p className="mt-3 text-sm text-rose-300">{state.error}</p> : null}
-        <button type="submit" disabled={pending}
-          className="mt-6 w-full rounded-full bg-gold-gradient px-5 py-2.5 font-semibold text-ink-page disabled:opacity-60">
-          {pending ? "Signing in…" : "Sign in"}
-        </button>
-      </form>
+    <main className="flex min-h-screen items-center justify-center px-6 py-16">
+      <div className="w-full max-w-md">
+        <div className="mb-8 text-center">
+          <p className="text-xs uppercase tracking-luxe text-gold-300">
+            Kalai&apos;s Beauty Care &amp; Academy
+          </p>
+          <h1 className="mt-3 font-display text-3xl text-cream">Admin sign in</h1>
+          <p className="mt-2 text-sm text-cream-muted">
+            Authorized staff only. Sign in to manage site content.
+          </p>
+        </div>
+
+        <div className="rounded-3xl border border-ink-border bg-ink-surface p-8 shadow-soft">
+          {configured ? (
+            <LoginForm />
+          ) : (
+            <div className="space-y-4">
+              <p className="rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
+                Supabase is not configured yet. Add{" "}
+                <code className="font-mono text-amber-100">
+                  NEXT_PUBLIC_SUPABASE_URL
+                </code>{" "}
+                and{" "}
+                <code className="font-mono text-amber-100">
+                  NEXT_PUBLIC_SUPABASE_ANON_KEY
+                </code>{" "}
+                (plus{" "}
+                <code className="font-mono text-amber-100">
+                  SUPABASE_SERVICE_ROLE_KEY
+                </code>
+                ) to your environment, then redeploy.
+              </p>
+              <LoginForm disabled />
+            </div>
+          )}
+        </div>
+      </div>
     </main>
   );
 }

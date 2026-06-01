@@ -1,18 +1,57 @@
 import "server-only";
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Service-role Supabase client (server-only, privileged).
+//
+// Uses SUPABASE_SERVICE_ROLE_KEY which BYPASSES Row Level Security. NEVER import
+// this from a Client Component. It is used for trusted server-side checks such
+// as verifying admin membership against a fully locked-down `admins` table.
+// ─────────────────────────────────────────────────────────────────────────────
+
 import { createClient } from "@supabase/supabase-js";
+import { getSupabaseUrl } from "./env";
+
+let cached: ReturnType<typeof createClient> | null = null;
+
+export function getServiceRoleClient() {
+  if (cached) return cached;
+
+  const url = getSupabaseUrl();
+  const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !serviceKey) {
+    throw new Error(
+      "Supabase service role is not configured. Set NEXT_PUBLIC_SUPABASE_URL and " +
+        "SUPABASE_SERVICE_ROLE_KEY in your environment (e.g. Vercel project settings).",
+    );
+  }
+
+  cached = createClient(url, serviceKey, {
+    auth: { autoRefreshToken: false, persistSession: false },
+  });
+  return cached;
+}
+
+/** Legacy alias for generic CRUD actions. */
+export const createAdminClient = getServiceRoleClient;
 
 /**
- * Service-role Supabase client. BYPASSES RLS — server-only, never import into
- * client code. Use only in trusted server actions (e.g. admin operations,
- * seeding). Requires SUPABASE_SERVICE_ROLE_KEY.
+ * Returns true if the given auth user is an admin.
+ *
+ * Membership is read with the service-role key so the `admins` table can keep
+ * RLS fully locked (no client access at all). Fails closed: any error or
+ * missing config returns false.
  */
-export function createAdminClient() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    {
-      auth: { autoRefreshToken: false, persistSession: false },
-      realtime: { params: { eventsPerSecond: 0 } },
-    },
-  );
+export async function isAdminUser(userId: string): Promise<boolean> {
+  try {
+    const admin = getServiceRoleClient();
+    const { data, error } = await admin
+      .from("admins")
+      .select("user_id")
+      .eq("user_id", userId)
+      .maybeSingle();
+    if (error) return false;
+    return Boolean(data);
+  } catch {
+    return false;
+  }
 }

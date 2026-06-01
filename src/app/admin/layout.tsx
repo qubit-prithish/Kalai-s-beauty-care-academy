@@ -1,12 +1,23 @@
 import type { Metadata } from "next";
+import { fontVariables } from "../fonts";
 import "@/styles/globals.css";
 
-export const metadata: Metadata = { title: "Admin · Kalai's", robots: { index: false } };
+export const metadata: Metadata = {
+  title: "Admin — Kalai's Beauty Care & Academy",
+  description: "Admin dashboard.",
+  robots: { index: false, follow: false },
+};
 
-export default function AdminRootLayout({ children }: { children: React.ReactNode }) {
+// The admin area is outside the [locale] segment, so it provides its own
+// <html>/<body> (the root layout is a pass-through). English-only, noindex.
+export default function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en">
-      <body className="bg-ink-page text-cream antialiased" style={{ fontFamily: "system-ui, sans-serif" }}>
+    <html lang="en" className={fontVariables} suppressHydrationWarning>
+      <body className="min-h-screen bg-ink-page font-sans text-cream antialiased">
         {children}
       </body>
     </html>

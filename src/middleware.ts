@@ -1,16 +1,19 @@
 import createMiddleware from "next-intl/middleware";
-import { type NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { routing } from "./i18n/routing";
-import { updateSession } from "./lib/supabase/middleware";
+import { updateAdminSession } from "./lib/supabase/middleware";
 
-const intl = createMiddleware(routing);
+const intlMiddleware = createMiddleware(routing);
 
-export default async function middleware(request: NextRequest) {
-  // /admin routes: only refresh the Supabase session (no locale routing).
+export default async function middleware(request: NextRequest): Promise<NextResponse> {
+  // /admin is a non-localized area backed by Supabase Auth. Keep it OUT of the
+  // next-intl pipeline (otherwise it gets treated as a locale segment and 404s)
+  // and run the Supabase session refresh + route guard instead.
   if (request.nextUrl.pathname.startsWith("/admin")) {
-    return updateSession(request);
+    return updateAdminSession(request);
   }
-  return intl(request);
+
+  return intlMiddleware(request);
 }
 
 export const config = {
