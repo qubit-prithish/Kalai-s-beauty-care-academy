@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { fontVariables } from "../fonts";
+import "@/styles/globals.css";
 
 export const metadata: Metadata = {
   title: "Admin — Kalai's Beauty Care & Academy",

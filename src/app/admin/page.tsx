@@ -10,7 +10,9 @@ import {
   getServices,
   getTestimonials,
 } from "@/lib/content";
-import { signOut } from "./actions";
+import { Shell } from "@/components/admin/Shell";
+import Link from "next/link";
+import { ENTITIES } from "./config";
 
 // Auth-dependent: never prerender.
 export const dynamic = "force-dynamic";
@@ -31,8 +33,7 @@ export default async function AdminDashboardPage() {
     redirect("/admin/login?error=not-admin");
   }
 
-  // Live counts from the content layer (today: typed mock modules; the same
-  // interface will return Supabase rows once the data layer is swapped over).
+  // Live counts from the content layer.
   const [courses, services, testimonials, offers, blog, gallery, faqs] =
     await Promise.all([
       getCourses(),
@@ -55,80 +56,82 @@ export default async function AdminDashboardPage() {
   ];
 
   return (
-    <div className="mx-auto max-w-content px-gutter py-10">
-      <header className="flex flex-col gap-4 border-b border-ink-border pb-6 sm:flex-row sm:items-center sm:justify-between">
-        <div>
+    <Shell>
+      <div className="mx-auto max-w-content py-4">
+        <header className="flex flex-col gap-2 border-b border-ink-border pb-6">
           <p className="text-xs uppercase tracking-luxe text-gold-300">
             Admin dashboard
           </p>
-          <h1 className="mt-2 font-display text-3xl text-cream">
+          <h1 className="font-display text-3xl text-cream">
             Kalai&apos;s Beauty Care &amp; Academy
           </h1>
           <p className="mt-1 text-sm text-cream-muted">
             Signed in as{" "}
             <span className="font-medium text-cream">{user.email}</span>
           </p>
-        </div>
+        </header>
 
-        <form action={signOut}>
-          <button
-            type="submit"
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-gold-500/60 px-5 py-2.5 text-sm font-semibold text-gold-200 transition-colors hover:border-gold-400 hover:bg-gold-500/10"
-          >
-            Sign out
-          </button>
-        </form>
-      </header>
+        <section className="mt-8">
+          <h2 className="font-display text-xl text-cream">Content overview</h2>
+          <p className="mt-1 text-sm text-cream-muted">
+            A live snapshot of the site content.
+          </p>
 
-      <section className="mt-8">
-        <h2 className="font-display text-xl text-cream">Content overview</h2>
-        <p className="mt-1 text-sm text-cream-muted">
-          A live snapshot of the site content. Management screens for each
-          collection plug in here.
-        </p>
-
-        <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {stats.map((s) => (
-            <div
-              key={s.label}
-              className="rounded-3xl border border-ink-border bg-ink-surface p-5 shadow-soft"
-            >
-              <div className="font-display text-3xl text-gold-200">
-                {s.count}
+          <div className="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+            {stats.map((s) => (
+              <div
+                key={s.label}
+                className="rounded-3xl border border-ink-border bg-ink-surface p-5 shadow-soft"
+              >
+                <div className="font-display text-3xl text-gold-200">
+                  {s.count}
+                </div>
+                <div className="mt-1 text-sm font-medium text-cream">
+                  {s.label}
+                </div>
+                <div className="text-xs text-cream-dim">{s.hint}</div>
               </div>
-              <div className="mt-1 text-sm font-medium text-cream">
-                {s.label}
-              </div>
-              <div className="text-xs text-cream-dim">{s.hint}</div>
-            </div>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
+        </section>
 
-      <section className="mt-10">
-        <h2 className="font-display text-xl text-cream">Manage</h2>
-        <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {[
-            { title: "Courses & Services", desc: "Edit programmes, prices and syllabi." },
-            { title: "Gallery", desc: "Upload and organize photos and videos." },
-            { title: "Offers & Banners", desc: "Schedule promotions and the homepage popup." },
-            { title: "Testimonials & Blog", desc: "Publish reviews and articles." },
-            { title: "Enquiries", desc: "View and export enquiries from the contact form." },
-            { title: "Settings & NAP", desc: "Hours, contact details and social links." },
-          ].map((c) => (
-            <div
-              key={c.title}
-              className="rounded-3xl border border-ink-border bg-ink-surface p-6 shadow-soft"
+        <section className="mt-10">
+          <h2 className="font-display text-xl text-cream">Quick Manage</h2>
+          <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { id: "courses", title: "Courses", desc: ENTITIES.courses.label },
+              { id: "services", title: "Services", desc: ENTITIES.services.label },
+              { id: "gallery", title: "Gallery", desc: ENTITIES.gallery.label },
+              { id: "offers", title: "Offers", desc: ENTITIES.offers.label },
+              { id: "testimonials", title: "Testimonials", desc: ENTITIES.testimonials.label },
+              { id: "blog_posts", title: "Blog", desc: ENTITIES.blog_posts.label },
+              { id: "faqs", title: "FAQs", desc: ENTITIES.faqs.label },
+            ].map((c) => (
+              <Link
+                key={c.id}
+                href={`/admin/${c.id}`}
+                className="rounded-3xl border border-ink-border bg-ink-surface p-6 shadow-soft transition-colors hover:border-gold-500/40"
+              >
+                <div className="font-display text-lg text-cream">{c.title}</div>
+                <p className="mt-1 text-sm text-cream-muted">{c.desc}</p>
+                <span className="mt-4 inline-block text-xs font-semibold text-gold-200">
+                  Manage →
+                </span>
+              </Link>
+            ))}
+            <Link
+              href="/admin/enquiries"
+              className="rounded-3xl border border-ink-border bg-ink-surface p-6 shadow-soft transition-colors hover:border-gold-500/40"
             >
-              <div className="font-display text-lg text-cream">{c.title}</div>
-              <p className="mt-1 text-sm text-cream-muted">{c.desc}</p>
-              <span className="mt-4 inline-block rounded-full border border-ink-border px-3 py-1 text-xs text-cream-dim">
-                Coming soon
+              <div className="font-display text-lg text-cream">Enquiries</div>
+              <p className="mt-1 text-sm text-cream-muted">View and export form submissions.</p>
+              <span className="mt-4 inline-block text-xs font-semibold text-gold-200">
+                View →
               </span>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
+            </Link>
+          </div>
+        </section>
+      </div>
+    </Shell>
   );
 }

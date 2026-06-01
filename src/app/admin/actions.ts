@@ -1,12 +1,9 @@
 "use server";
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Admin auth server actions: sign in and sign out.
-// ─────────────────────────────────────────────────────────────────────────────
-
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
-import { isAdminUser } from "@/lib/supabase/admin";
+import { getServiceRoleClient, isAdminUser } from "@/lib/supabase/admin";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 
 export type SignInState = { error: string | null };
@@ -51,10 +48,44 @@ export async function signIn(
   redirect("/admin");
 }
 
+/** Legacy alias for HEAD references. */
+export const login = signIn;
+
 export async function signOut(): Promise<void> {
   if (isSupabaseConfigured()) {
     const supabase = await createClient();
     await supabase.auth.signOut();
   }
   redirect("/admin/login");
+}
+
+/** Legacy alias for HEAD references. */
+export const logout = signOut;
+
+// ── Generic CRUD (service role; called only from admin pages behind requireAdmin) ──
+const PUBLIC_PATHS = ["/", "/courses", "/services", "/offers", "/gallery", "/testimonials", "/blog", "/contact"];
+
+function revalidatePublic() {
+  for (const p of PUBLIC_PATHS) revalidatePath(p, "layout");
+}
+
+export async function saveRow(table: string, id: string | null, values: Record<string, unknown>) {
+  const db = getServiceRoleClient();
+  if (id) {
+    const { error } = await db.from(table).update(values).eq("id", id);
+    if (error) return { error: error.message };
+  } else {
+    const { error } = await db.from(table).insert(values);
+    if (error) return { error: error.message };
+  }
+  revalidatePublic();
+  return { ok: true };
+}
+
+export async function deleteRow(table: string, id: string) {
+  const db = getServiceRoleClient();
+  const { error } = await db.from(table).delete().eq("id", id);
+  if (error) return { error: error.message };
+  revalidatePublic();
+  return { ok: true };
 }

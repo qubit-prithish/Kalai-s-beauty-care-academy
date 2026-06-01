@@ -9,7 +9,11 @@
     "lint": "next lint",
     "type-check": "tsc --noEmit",
     "fonts": "node scripts/download-fonts.mjs",
-    "check:i18n": "node scripts/check-i18n.mjs"
+    "check:i18n": "node scripts/check-i18n.mjs",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "db:seed": "tsx scripts/seed-from-mock.ts",
+    "db:verify": "tsx scripts/verify.ts",
+    "admin:create": "tsx scripts/create-admin.ts"
   },
   "dependencies": {
     "@react-three/drei": "10.7.7",
@@ -31,14 +35,18 @@
   "devDependencies": {
     "@playwright/test": "^1.60.0",
     "@types/node": "22.10.5",
+    "@types/pg": "^8.20.0",
     "@types/react": "19.0.7",
     "@types/react-dom": "19.0.3",
     "@types/three": "0.184.0",
     "autoprefixer": "10.4.20",
+    "dotenv": "^16.6.1",
     "eslint": "9.18.0",
     "eslint-config-next": "15.5.18",
+    "pg": "^8.21.0",
     "postcss": "8.5.1",
     "tailwindcss": "3.4.17",
+    "tsx": "^4.22.3",
     "typescript": "5.7.3"
   }
 }

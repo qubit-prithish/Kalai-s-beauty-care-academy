@@ -143,6 +143,8 @@
     "title": "Beautician Courses in Chennai",
     "subtitle": "Specialised programmes with government-recognised certificates, EMI options, internship and placement support.",
     "empty": "Courses are being updated. Please check back soon or enquire on WhatsApp.",
+    "whoForTitle": "Who Is This For",
+    "outcomesTitle": "What You'll Learn",
     "perks": {
       "govCert": "Govt-recognised certificate",
       "emi": "EMI available",
@@ -215,6 +217,15 @@
     "empty": "FAQs coming soon.",
     "ctaTitle": "Still have a question?",
     "ctaText": "Message us on WhatsApp — we're happy to help."
+  },
+  "admin": {
+    "faqs": "FAQs",
+    "faq": {
+      "question": "Question",
+      "answer": "Answer",
+      "sortOrder": "Sort Order",
+      "isActive": "Active"
+    }
   },
   "contact": {
     "title": "Visit us",

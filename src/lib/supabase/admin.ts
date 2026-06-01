@@ -31,6 +31,9 @@ export function getServiceRoleClient() {
   return cached;
 }
 
+/** Legacy alias for generic CRUD actions. */
+export const createAdminClient = getServiceRoleClient;
+
 /**
  * Returns true if the given auth user is an admin.
  *

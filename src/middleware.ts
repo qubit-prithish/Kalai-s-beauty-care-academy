@@ -17,9 +17,7 @@ export default async function middleware(request: NextRequest): Promise<NextResp
 }
 
 export const config = {
-  // Match all pathnames except for
-  // - API routes
-  // - Next.js internals (_next)
-  // - static files (with a dot, e.g. .ico, .png, .woff2)
-  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
+  // Match all pathnames except API routes, Next internals, and static files,
+  // PLUS the /admin tree (so Supabase session cookies refresh there).
+  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)", "/admin/:path*"],
 };

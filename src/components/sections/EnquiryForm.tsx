@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
+import { submitEnquiry } from "@/app/actions/enquiry";
 
 export type EnquiryFormLabels = {
   name: string;
@@ -24,7 +25,7 @@ type Errors = Partial<Record<"name" | "phone" | "message", string>>;
 
 export function EnquiryForm({ labels }: { labels: EnquiryFormLabels }) {
   const [errors, setErrors] = useState<Errors>({});
-  const [status, setStatus] = useState<"idle" | "sending" | "success">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
   function validate(data: { name: string; phone: string; message: string }): Errors {
     const e: Errors = {};
@@ -52,13 +53,20 @@ export function EnquiryForm({ labels }: { labels: EnquiryFormLabels }) {
 
     setStatus("sending");
 
-    // TODO(backend): POST `payload` to the enquiries endpoint / Supabase here.
-    // For now this is UI-only and does NOT persist. Simulate a brief delay so
-    // the success state is visible; the backend track will replace this block.
-    await new Promise((r) => setTimeout(r, 600));
+    // Persist via the server action (Supabase INSERT, RLS-guarded). Includes a
+    // honeypot ("company") to deter spam bots.
+    const res = await submitEnquiry({
+      ...payload,
+      company: String(fd.get("company") ?? ""),
+      pageSource: typeof window !== "undefined" ? window.location.pathname : "contact",
+    });
 
-    setStatus("success");
-    form.reset();
+    if (res.ok) {
+      setStatus("success");
+      form.reset();
+    } else {
+      setStatus("error");
+    }
   }
 
   if (status === "success") {
@@ -82,6 +90,11 @@ export function EnquiryForm({ labels }: { labels: EnquiryFormLabels }) {
 
   return (
     <form onSubmit={onSubmit} noValidate className="space-y-5">
+      {/* Honeypot — hidden from humans, bots tend to fill it. */}
+      <div className="hidden" aria-hidden="true">
+        <label htmlFor="company">Company</label>
+        <input id="company" name="company" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
       <div>
         <label htmlFor="name" className="text-sm font-medium text-cream">
           {labels.name}

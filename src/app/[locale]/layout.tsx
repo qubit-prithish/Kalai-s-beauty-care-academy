@@ -9,6 +9,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingCTAs } from "@/components/layout/FloatingCTAs";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
+import { PageViews } from "@/components/layout/PageViews";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { localBusinessJsonLd } from "@/lib/jsonld";
 import { buildMetadata } from "@/lib/seo";
@@ -70,6 +71,7 @@ export default async function LocaleLayout({
         ) : null}
         <NextIntlClientProvider>
           <SmoothScroll />
+          <PageViews />
           <a
             href="#main"
             className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-gold-400 focus:px-4 focus:py-2 focus:text-ink-page"

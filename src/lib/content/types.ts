@@ -35,6 +35,7 @@ export interface Course {
   price: number | null;
   priceNote: Localized;
   syllabus: LocalizedList;
+  whoFor: Localized;
   outcomes: LocalizedList;
   image: ImageRef;
   featured: boolean;
@@ -119,6 +120,7 @@ export interface Faq {
   question: Localized;
   answer: Localized;
   order: number;
+  published: boolean;
 }
 
 export interface Enquiry {
