@@ -15,7 +15,8 @@ import { localBusinessJsonLd } from "@/lib/jsonld";
 import { buildMetadata } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
-import { fontVariables } from "../fonts";
+import { fontVariables } from "../../fonts";
+import "@/styles/globals.css";
 
 const analyticsEnabled = process.env.NEXT_PUBLIC_ENABLE_ANALYTICS === "true";
 const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;

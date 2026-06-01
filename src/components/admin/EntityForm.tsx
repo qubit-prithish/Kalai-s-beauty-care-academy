@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import type { Field } from "@/app/admin/config";
-import { saveRow } from "@/app/admin/actions";
+import type { Field } from "@/app/(admin)/admin/config";
+import { saveRow } from "@/app/(admin)/admin/actions";
 
 const inputCls =
   "mt-1 w-full rounded-lg border border-ink-border bg-ink-page px-3 py-2 text-sm text-cream";
