@@ -38,7 +38,14 @@ export function EntityForm({
 }: { table: string; fields: Field[]; row: Record<string, unknown> | null }) {
   const router = useRouter();
   const init: Record<string, unknown> = {};
-  for (const f of fields) init[f.name] = row?.[f.name] ?? (f.type === "bool" ? false : "");
+  for (const f of fields) {
+    const raw = row?.[f.name];
+    if (f.is_array && Array.isArray(raw)) {
+      init[f.name] = raw.join("\n");
+    } else {
+      init[f.name] = raw ?? (f.type === "bool" ? false : "");
+    }
+  }
   const [values, setValues] = useState(init);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -61,6 +68,8 @@ export function EntityForm({
       } else if (f.name === "value_json") {
         try { out[f.name] = JSON.parse(String(v || "{}")); }
         catch { setError("value_json is not valid JSON"); setSaving(false); return; }
+      } else if (f.is_array) {
+        out[f.name] = String(v || "").split("\n").map(s => s.trim()).filter(Boolean);
       } else if (v !== "" && v !== null && v !== undefined) {
         out[f.name] = v;
       }

@@ -11,6 +11,10 @@ export const courses: Course[] = [
       en: "Your first step into the beauty industry.",
       ta: "அழகுக் கலைத் துறையில் உங்கள் முதல் அடி.",
     },
+    whoFor: {
+      en: "Absolute beginners, school leavers, and women looking for a quick, reliable career shift into the beauty industry.",
+      ta: "ஆரம்பநிலை மாணவிகள், பள்ளிப் படிப்பை முடித்தவர்கள் மற்றும் அழகுத்துறையில் விரைவான மாற்றத்தை விரும்பும் பெண்கள்.",
+    },
     description: {
       en: "Our Basic Beautician course is the proven launchpad for women entering the beauty industry quickly and confidently. Across three intensive months you master threading, waxing, bleach, basic facials, manicure, pedicure, head massage and salon hygiene. Every day blends short theory with long hands-on practice on live models, so by graduation you can comfortably handle walk-in clients. Batches stay capped at ten students, you keep your starter kit, and the course closes with a government-recognised certificate plus internship and placement guidance — the fastest, safest way to start earning from beauty work in Chennai.",
       ta: "எங்கள் அடிப்படை அழகுக்கலை பாடம், விரைவாகவும் நம்பிக்கையுடனும் இத்துறையில் நுழைய விரும்பும் பெண்களுக்கான நிரூபிக்கப்பட்ட தொடக்கப் பாதை. மூன்று மாதங்களில் த்ரெடிங், வாக்ஸிங், ப்ளீச், அடிப்படை ஃபேஷியல், மானிக்யூர், பெடிக்யூர், தலை மசாஜ் மற்றும் சுகாதார நடைமுறைகளில் தேர்ச்சி பெறுவீர்கள். ஒவ்வொரு நாளும் சிறிய கோட்பாட்டுடன் நேரடி மாடல்களில் நீண்ட பயிற்சி இணையும். பத்து மாணவிகள் கொண்ட பேட்ச், ஆரம்ப கிட், அரசு அங்கீகார சான்றிதழ், இன்டர்ன்ஷிப் மற்றும் வேலைவாய்ப்பு வழிகாட்டுதலுடன் — அழகுக்கலையில் வருமானம் ஈட்ட விரைவான, பாதுகாப்பான வழி.",
@@ -53,6 +57,10 @@ export const courses: Course[] = [
     tagline: {
       en: "From beautician to in-demand specialist.",
       ta: "அழகுக்கலை நிபுணராக மேம்படுங்கள்.",
+    },
+    whoFor: {
+      en: "Women with basic beauty knowledge who want to master advanced treatments and manage their own professional salon.",
+      ta: "அடிப்படை அழகுக்கலை தெரிந்தவர்கள், மேம்பட்ட சிகிச்சைகளைக் கற்றுக்கொண்டு சொந்தமாக அழகு நிலையம் நடத்த விரும்புபவர்கள்.",
     },
     description: {
       en: "Designed for women who want a serious career, the Advanced Beautician course expands every basic skill into specialist-level expertise across six months. You master advanced facials, derma cleanups, anti-tan and pigmentation treatments, party and engagement makeup, professional hair styling, nail art, and modern salon management including pricing, retention and inventory. Trainers stay one-to-one wherever it counts, exams run on live models, and graduates leave with a government-recognised advanced certificate, a portfolio of real client work, internship hours and placement support — the right course if you intend to manage or open your own salon within a year.",
@@ -97,9 +105,13 @@ export const courses: Course[] = [
       en: "Our flagship year-long career programme.",
       ta: "எங்களின் முதன்மை ஓராண்டு தொழில் திட்டம்.",
     },
+    whoFor: {
+      en: "Aspiring professionals seeking a comprehensive, all-in-one qualification to work in top-tier salons or launch a full-scale beauty business.",
+      ta: "அழகுத்துறையில் முழுமையான தகுதி பெற்று, முன்னணி நிறுவனங்களில் பணியாற்ற அல்லது பெரிய அளவில் தொழில் தொடங்க விரும்புபவர்கள்.",
+    },
     description: {
       en: "The Diploma in Cosmetology is our flagship twelve-month programme for women who want a full, recognised qualification. The curriculum blends skin science, hair science, advanced makeup, nail technology, salon business, photoshoot styling and bridal work — taught in rotating modules with monthly live-model assessments. Class sizes stay small, you build a real client portfolio across the year, and you graduate with a government-recognised diploma plus structured internship and placement support. EMI options are available, kits are included, and former students of this course have gone on to open salons across Tamil Nadu and join leading brands.",
-      ta: "காஸ்மெட்டாலஜி டிப்ளமோ எங்களின் முதன்மை 12 மாத திட்டம் — முழுமையான, அங்கீகரிக்கப்பட்ட தகுதியை விரும்பும் பெண்களுக்காக. சரும அறிவியல், முடி அறிவியல், மேம்பட்ட மேக்கப், நெயில் டெக்னாலஜி, அழகு நிலைய வணிகம், ஃபோட்டோ ஷூட் ஸ்டைலிங் மற்றும் மணப்பெண் வேலைகள் — மாதாந்திர நேரடி மாடல் மதிப்பீடுகளுடன் சுழற்சி முறையில் கற்பிக்கப்படுகின்றன. சிறிய பேட்ச், ஓராண்டு போர்ட்ஃபோலியோ, அரசு அங்கீகார டிப்ளமோ, இன்டர்ன்ஷிப் & வேலைவாய்ப்பு உதவி, EMI வசதி மற்றும் கிட். இந்த பாடத்தின் முன்னாள் மாணவிகள் தமிழ்நாடு முழுவதும் அழகு நிலையங்களைத் தொடங்கியுள்ளனர்.",
+      ta: "காஸ்மெட்டாலஜி டிப்ளமோ எங்களின் முதன்மை 12 மாத திட்டம் — முழுமையான, அங்கீகரிக்கப்பட்ட தகுதியை விரும்பும் பெண்களுக்காக. சரும அறிவியல், முடி அறிவியல், மேம்பட்ட மேக்கப், நெயில் டெக்னாலஜி, அழகு நிலைய வணிகம், ஃபோட்டோ ஷூட் ஸ்டைலிங் மற்றும் மணப்பெண் வேலைகள் — மாதாந்திர நேரடி மாடல் மதிப்பீடுகளுடன் சுழற்சி முறையில் கற்பிக்கப்படுகின்றன. சிறிய பேட்ச், ஓராண்டு போர்ட்ஃபோலியோ, அரசு அங்கீககார டிப்ளமோ, இன்டர்ன்ஷிப் & வேலைவாய்ப்பு உதவி, EMI வசதி மற்றும் கிட். இந்த பாடத்தின் முன்னாள் மாணவிகள் தமிழ்நாடு முழுவதும் அழகு நிலையங்களைத் தொடங்கியுள்ளனர்.",
     },
     duration: { en: "1 year", ta: "1 ஆண்டு" },
     price: null,
@@ -137,6 +149,10 @@ export const courses: Course[] = [
     slug: "hair-styling",
     title: { en: "Hair Styling", ta: "ஹேர் ஸ்டைலிங்" },
     tagline: { en: "Cuts, colour, blowouts and bridal hair.", ta: "கட், கலர், ப்ளோ-அவுட் & மணப்பெண் ஹேர்." },
+    whoFor: {
+      en: "Creative individuals and existing beauticians who want to specialise in modern hair cuts, coloring, and high-end bridal hairstyles.",
+      ta: "நவீன ஹேர் கட், கலரிங் மற்றும் மணப்பெண் அலங்காரத்தில் நிபுணத்துவம் பெற விரும்பும் படைப்பாற்றல் மிக்க நபர்கள்.",
+    },
     description: {
       en: "If hair is your passion, this dedicated Hair Styling course turns you into a confident hair specialist for salon, bridal and editorial work. You learn face-shape analysis, layered and blunt cutting, balayage and global colouring, smoothening fundamentals, blow-dry science, curling and bridal hair architecture including jadai, low buns and floral set-ups. Every technique is practised on real heads with one-to-one trainer correction, and the syllabus is updated each batch to match what brides and clients are asking for in Chennai. You graduate with a portfolio shoot and our government-recognised certificate.",
       ta: "முடி உங்கள் ஆர்வமாக இருந்தால், இந்த ஹேர் ஸ்டைலிங் பாடம் உங்களை நம்பிக்கையான ஹேர் நிபுணராக மாற்றும். முக வடிவ பகுப்பாய்வு, லேயர் & ப்ளண்ட் கட்டிங், பாலியேஜ் & கிளோபல் கலர், ஸ்மூத்னிங், ப்ளோ-டிரை, கர்லிங் மற்றும் மணப்பெண் ஹேர் (ஜடை, லோ-பன், மலர் அலங்காரம்) ஆகியவற்றில் தேர்ச்சி பெறுவீர்கள். ஒவ்வொரு நுட்பமும் உண்மையான தலையில் 1:1 பயிற்சியுடன் கற்பிக்கப்படுகிறது. போர்ட்ஃபோலியோ ஷூட்டுடன் அரசு அங்கீகார சான்றிதழ் வழங்கப்படுகிறது.",
@@ -175,6 +191,10 @@ export const courses: Course[] = [
     slug: "makeup-artistry",
     title: { en: "Makeup Artistry", ta: "மேக்கப் ஆர்ட்டிஸ்ட்ரி" },
     tagline: { en: "From everyday glow to editorial drama.", ta: "தினசரி அழகு முதல் எடிட்டோரியல் வரை." },
+    whoFor: {
+      en: "Aspiring makeup artists who want to work in studios, photoshoots, and the fashion industry with professional-level techniques.",
+      ta: "ஸ்டுடியோக்கள், ஃபோட்டோஷூட்கள் மற்றும் ஃபேஷன் துறையில் தொழில்முறை நுட்பங்களுடன் பணியாற்ற விரும்பும் மேக்கப் கலைஞர்கள்.",
+    },
     description: {
       en: "Makeup Artistry is built for the woman who wants to live behind the brush. Across this course you learn skin prep and colour theory, base building for Indian skin tones, contouring and highlighting, eye looks (smokey, cut-crease, soft glam), lip techniques, false-lash application and HD finishing. We practise on real faces every day, you build a digital portfolio shot in our studio area, and exit-level batches handle full party and engagement clients live. Graduation includes a government-recognised certificate, internship hours, and our placement network across Chennai studios and bridal teams.",
       ta: "தூரிகையின் பின்னால் வாழ விரும்பும் பெண்களுக்காக வடிவமைக்கப்பட்டது. சருமம் தயாரிப்பு, நிற கோட்பாடு, இந்திய சருமத்திற்கான பேஸ் பில்டிங், கான்டூரிங் & ஹைலைட்டிங், கண் லுக்குகள் (ஸ்மோக்கி, கட்-கிரீஸ், சாஃப்ட் கிளாம்), உதடு நுட்பங்கள், ஃபால்ஸ் லேஷ் மற்றும் HD ஃபினிஷிங் கற்றுக்கொள்வீர்கள். ஒவ்வொரு நாளும் உண்மையான முகங்களில் பயிற்சி, டிஜிட்டல் போர்ட்ஃபோலியோ, மற்றும் இறுதி பேட்ச்களில் முழு பார்ட்டி & நிச்சய வாடிக்கையாளர்களை கையாள்வீர்கள். அரசு அங்கீகார சான்றிதழ் & சென்னை வேலைவாய்ப்பு வலையமைப்பு.",
@@ -213,6 +233,10 @@ export const courses: Course[] = [
     slug: "nail-technician",
     title: { en: "Nail Technician", ta: "நெயில் டெக்னீஷியன்" },
     tagline: { en: "Gel, acrylic, art — a full nail-tech career.", ta: "ஜெல், அக்ரிலிக், ஆர்ட் — நெயில் டெக் தொழில்." },
+    whoFor: {
+      en: "Individuals looking to enter the high-growth nail industry, from basic manicures to advanced gel and acrylic nail art.",
+      ta: "வேகமாக வளர்ந்து வரும் நெயில் ஆர்ட் துறையில் நுழைய விரும்புபவர்கள், அடிப்படை முதல் மேம்பட்ட நுட்பங்கள் வரை கற்க.",
+    },
     description: {
       en: "Nails are one of Chennai's fastest-growing salon revenue streams, and this Nail Technician course makes you specialist-ready quickly. You master nail anatomy, hygiene and sterilisation, classic and spa manicure-pedicure, gel polish application, builder-gel overlays, acrylic and tip extensions, and trending nail art including French, ombre, marble, foil, encapsulated and 3D designs. Every technique is practised on real clients under supervision, and the course wraps with a portfolio shoot, a government-recognised certificate and a starter nail kit so you can begin earning the day you graduate.",
       ta: "நெயில் சேவைகள் சென்னையில் வேகமாக வளரும் வருமான வழி. இந்த நெயில் டெக்னீஷியன் பாடம் உங்களை நிபுணராக மாற்றுகிறது. நெயில் அமைப்பு, சுகாதாரம், கிளாசிக் & ஸ்பா மானிக்யூர்-பெடிக்யூர், ஜெல் பாலிஷ், பில்டர் ஜெல், அக்ரிலிக் & டிப் எக்ஸ்டென்ஷன் மற்றும் ட்ரெண்டிங் நெயில் ஆர்ட் (பிரெஞ்ச், ஓம்பிரே, மார்பிள், ஃபாயில், 3D) பயிற்சி பெறுவீர்கள். உண்மையான வாடிக்கையாளர்களில் பயிற்சி, போர்ட்ஃபோலியோ ஷூட், அரசு அங்கீகார சான்றிதழ் & ஆரம்ப கிட்.",
@@ -251,6 +275,10 @@ export const courses: Course[] = [
     slug: "bridal-makeup",
     title: { en: "Bridal Makeup", ta: "மணப்பெண் மேக்கப்" },
     tagline: { en: "Become an in-demand bridal artist.", ta: "தேவையான மணப்பெண் கலைஞராக மாறுங்கள்." },
+    whoFor: {
+      en: "Makeup artists and enthusiasts who want to specialise in the lucrative bridal segment and handle complete wedding-day transformations.",
+      ta: "மேக்கப் கலைஞர்கள் மற்றும் மணப்பெண் அலங்காரத்தில் அதிக வருமானம் ஈட்டவும், திருமண நாள் மேக்கப்பை முழுமையாகக் கையாளவும் விரும்புபவர்கள்.",
+    },
     description: {
       en: "Bridal is the highest-paying segment in Indian beauty, and this course is built specifically to make you a confident bridal artist. You master long-wear base building, traditional Tamil bridal looks, modern HD and airbrush bridal makeup, draping fundamentals, jadai-with-flowers, jewellery setting and the all-important on-the-day timeline. The course pairs you with real bridal clients during exit batches, captures every look in a styled photoshoot for your portfolio, and ends with a government-recognised certificate plus introductions to bridal teams across Chennai for placements and freelance leads.",
       ta: "இந்திய அழகுக் கலையில் அதிக வருமானம் தரும் பிரிவு மணப்பெண் வேலை. நீண்ட நேரம் தாங்கும் பேஸ், பாரம்பரிய தமிழ் மணப்பெண் லுக், நவீன HD & ஏர்ப்ரஷ் மணப்பெண் மேக்கப், சேலை அலங்காரம், மலர் ஜடை, நகை அமைப்பு மற்றும் நாள்-நேர திட்டம் ஆகியவற்றில் தேர்ச்சி பெறுவீர்கள். இறுதி பேட்ச்களில் உண்மையான மணப்பெண் வாடிக்கையாளர்களுடன் பணியாற்றி, ஸ்டைல்டு ஃபோட்டோஷூட் போர்ட்ஃபோலியோ உருவாக்கி, அரசு அங்கீகார சான்றிதழ் & சென்னை மணப்பெண் குழுக்களுக்கான அறிமுகம் பெறுவீர்கள்.",
@@ -289,6 +317,10 @@ export const courses: Course[] = [
     slug: "mehendi-henna",
     title: { en: "Mehendi / Henna", ta: "மருதாணி / மெஹந்தி" },
     tagline: { en: "Earn from every wedding season.", ta: "ஒவ்வொரு திருமண சீசனிலும் வருமானம்." },
+    whoFor: {
+      en: "Creative women looking for a flexible, high-income skill that can be practised from home or as a freelance bridal service.",
+      ta: "வீட்டில் இருந்தபடியே அல்லது ஃப்ரீலான்ஸ் முறையில் வருமானம் ஈட்ட விரும்பும் படைப்பாற்றல் மிக்க பெண்கள்.",
+    },
     description: {
       en: "Mehendi is one of the easiest, highest-margin skills a woman can pick up — a single bride can earn what a week of salon work earns. This course takes you from holding the cone correctly to designing full bridal hands and feet. You learn paste preparation, line control, fillers, peacock and floral motifs, Arabic style, modern minimal style, full Indian bridal hands and feet, jewellery-style mehendi, and pricing strategy for festivals and weddings. The course includes practice sheets, hand models in later weeks, and our government-recognised certificate.",
       ta: "மருதாணி கலை — ஒரு பெண் கற்கக்கூடிய எளிய, அதிக லாபம் தரும் திறன்களில் ஒன்று. கூம்பு பிடிப்பதில் இருந்து முழு மணப்பெண் கை-கால் வடிவமைக்கும் வரை. பேஸ்ட் தயாரிப்பு, லைன் கட்டுப்பாடு, ஃபில்லர்கள், மயில் & மலர் வடிவங்கள், அரேபிய ஸ்டைல், நவீன மினிமல் ஸ்டைல், முழு இந்திய மணப்பெண் கை & கால், நகை-ஸ்டைல் மருதாணி மற்றும் விலையிடல் உத்திகள். பயிற்சி தாள்கள், கை மாடல்கள் & அரசு அங்கீகார சான்றிதழ்.",
@@ -327,6 +359,10 @@ export const courses: Course[] = [
     slug: "skin-care",
     title: { en: "Skin Care", ta: "சரும பராமரிப்பு" },
     tagline: { en: "Become a real skin-care expert.", ta: "உண்மையான சரும நிபுணராக மாறுங்கள்." },
+    whoFor: {
+      en: "Beauticians and skin enthusiasts who want to understand skin science deeply and provide result-oriented facial treatments.",
+      ta: "சரும அறிவியலை ஆழமாகப் புரிந்து கொண்டு, தீர்வு சார்ந்த ஃபேஷியல் சிகிச்சைகளை வழங்க விரும்பும் அழகுக்கலைஞர்கள்.",
+    },
     description: {
       en: "Modern clients want results, not just relaxation, and this Skin Care course teaches you to deliver them. You study skin anatomy, common Indian-skin concerns (tan, pigmentation, acne, dehydration, ageing), how to read a face and consult clearly, and how to design facials and treatments around real outcomes. Practical modules cover deep cleansing, exfoliation, serum and mask layering, oxygen and gold facials, derma cleanups, anti-tan and brightening protocols, and home-care prescriptions clients will actually follow. You graduate with a portfolio of real before-and-after work and our government-recognised certificate.",
       ta: "நவீன வாடிக்கையாளர்கள் முடிவுகளை எதிர்பார்க்கிறார்கள் — இந்த சரும பராமரிப்பு பாடம் அதைத் தர கற்றுக்கொடுக்கிறது. சரும அமைப்பு, இந்திய சருமப் பிரச்சினைகள் (டான், பிக்மென்டேஷன், முகப்பரு, வறட்சி, வயது), முகத்தைப் படித்து ஆலோசனை வழங்குவது, உண்மையான முடிவுகளை மையமாகக் கொண்ட ஃபேஷியல் & சிகிச்சைகள். ஆழமான சுத்தம், எக்ஸ்ஃபோலியேஷன், செரம் & மாஸ்க், ஆக்ஸிஜன் & கோல்ட் ஃபேஷியல், டெர்மா க்ளீன்அப், டான் & பிரகாச சிகிச்சைகள் மற்றும் வீட்டு பராமரிப்பு பரிந்துரைகள். உண்மையான முன்-பின் போர்ட்ஃபோலியோவுடன் அரசு அங்கீகார சான்றிதழ்.",
@@ -365,6 +401,10 @@ export const courses: Course[] = [
     slug: "saree-draping",
     title: { en: "Saree Draping", ta: "சேலை கட்டுதல்" },
     tagline: { en: "20+ styles, bridal and party-ready.", ta: "20+ ஸ்டைல்கள், மணப்பெண் & பார்ட்டிக்கு தயார்." },
+    whoFor: {
+      en: "Anyone looking to master the art of draping for weddings, events, and photoshoots, covering traditional to modern styles.",
+      ta: "திருமணங்கள் மற்றும் நிகழ்வுகளுக்கு பாரம்பரியம் முதல் நவீன ஸ்டைல் வரை சேலை கட்டும் கலையைக் கற்க விரும்புபவர்கள்.",
+    },
     description: {
       en: "A great drape can change a face, and a great draper is booked solid every wedding season. This Saree Draping course walks you through 20+ styles spanning Tamil traditional madisar, Nivi, butterfly, lehenga-style, mermaid, dhoti, modern bridal and reception drapes. You learn pleat counting, pinning that holds for twelve hours, accessory placement, ironing and emergency fixes, and on-set draping for photoshoots. We use a wide range of fabric weights so you graduate confident with both silk and lighter fabrics, and the course closes with a portfolio shoot and our certificate.",
       ta: "ஒரு சிறந்த சேலை அலங்காரம் முகத்தையே மாற்றும், திறமையான ட்ரேப்பருக்கு திருமண சீசனில் வேலை குறையாது. இந்த பாடம் 20+ ஸ்டைல்களை கற்றுக்கொடுக்கிறது — தமிழ் பாரம்பரிய மடிசார், நிவி, பட்டர்ஃப்ளை, லெஹங்கா-ஸ்டைல், மெர்மெய்ட், தோத்தி, நவீன மணப்பெண் & வரவேற்பு. ப்ளீட் எண்ணுதல், 12 மணி நேரம் தாங்கும் பின்னிங், அக்செசரி அமைப்பு, இஸ்திரி & அவசர சரிசெய்தல், ஃபோட்டோஷூட் அலங்காரம். பல்வேறு துணி எடைகளில் பயிற்சி, போர்ட்ஃபோலியோ ஷூட் & சான்றிதழ்.",
@@ -403,6 +443,10 @@ export const courses: Course[] = [
     slug: "eyelash-extension",
     title: { en: "Eyelash Extension", ta: "ஐலாஷ் எக்ஸ்டென்ஷன்" },
     tagline: { en: "A premium add-on every salon now wants.", ta: "ஒவ்வொரு அழகு நிலையமும் விரும்பும் ப்ரீமியம் சேவை." },
+    whoFor: {
+      en: "Existing beauty professionals or beginners looking to master this premium, high-demand service for modern salon menus.",
+      ta: "நவீன அழகு நிலையங்களில் அதிக தேவையுள்ள இந்த ப்ரீமியம் சேவையைக் கற்றுக்கொள்ள விரும்பும் நிபுணர்கள் அல்லது ஆரம்பநிலையாளர்கள்.",
+    },
     description: {
       en: "Lash extensions are the fastest-growing premium service in Indian salons because clients pay well and rebook every three weeks. This course makes you a confident certified lash artist. You learn eye anatomy and contraindications, hygiene and patch testing, mapping for different eye shapes, isolation, classic one-to-one application, hybrid mixing, volume fans handmade and pre-made, retouch and removal, and aftercare. We practise on mannequin pads first, then real models. You exit with a portfolio, a starter lash kit and a government-recognised certificate, ready to add lashes to your menu or freelance immediately.",
       ta: "ஐலாஷ் எக்ஸ்டென்ஷன் இந்திய அழகு நிலையங்களில் வேகமாக வளரும் ப்ரீமியம் சேவை — வாடிக்கையாளர்கள் 3 வாரத்திற்கு ஒருமுறை மீண்டும் வருகிறார்கள். இந்த பாடம் உங்களை சான்றளிக்கப்பட்ட லாஷ் கலைஞராக மாற்றும். கண் அமைப்பு & எதிர்-சுட்டிகள், சுகாதாரம் & பேட்ச் டெஸ்ட், மேப்பிங், ஐசோலேஷன், கிளாசிக் 1:1, ஹைபிரிட், வால்யூம் ஃபேன், ரீடச் & நீக்கம், ஆஃப்டர்கேர். மேனிகின் பேட்களில் முதலில், பின் உண்மையான மாடல்களில் பயிற்சி. போர்ட்ஃபோலியோ, ஆரம்ப கிட் & அரசு அங்கீகார சான்றிதழ்.",

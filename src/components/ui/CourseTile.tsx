@@ -36,9 +36,11 @@ export function CourseTile({
           <h3 className="heading-display text-xl text-cream transition-colors group-hover:text-gold-200">
             {pick(course.title, locale)}
           </h3>
-          <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-cream-muted">
-            {pick(course.tagline, locale)}
-          </p>
+          {course.tagline && (
+            <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-cream-muted">
+              {pick(course.tagline, locale)}
+            </p>
+          )}
           <div className="mt-5 flex items-center justify-between border-t border-ink-border pt-4">
             <span className="text-sm font-semibold text-gold-200">
               {course.price !== null
