@@ -120,6 +120,7 @@ export interface Faq {
   question: Localized;
   answer: Localized;
   order: number;
+  published: boolean;
 }
 
 export interface Enquiry {

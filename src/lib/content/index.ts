@@ -124,6 +124,7 @@ export async function getFaqs(): Promise<Faq[]> {
     question: { en: r.question_en, ta: r.question_ta },
     answer: { en: r.answer_en, ta: r.answer_ta },
     order: r.sort_order ?? 0,
+    published: !!r.published,
   }));
   /* eslint-enable @typescript-eslint/no-explicit-any */
 }

@@ -125,8 +125,17 @@ export const ENTITIES: Record<string, EntityConfig> = {
       { name: "value_json", label: "Value (JSON)", type: "textarea", list: false },
     ],
   },
+  faqs: {
+    table: "faqs", label: "FAQs", titleField: "question_en", orderBy: "sort_order",
+    fields: [
+      ...bilingual("question", "Question").map((f, i) => ({ ...f, list: i === 0 })),
+      ...bilingual("answer", "Answer", "textarea"),
+      { name: "sort_order", label: "Sort order", type: "number" },
+      { name: "published", label: "Published", type: "bool", list: true },
+    ],
+  },
 };
 
 export const ENTITY_ORDER = [
-  "courses", "services", "offers", "gallery", "testimonials", "blog_posts", "settings",
+  "courses", "services", "offers", "gallery", "testimonials", "blog_posts", "faqs", "settings",
 ] as const;

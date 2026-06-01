@@ -218,6 +218,15 @@
     "ctaTitle": "Still have a question?",
     "ctaText": "Message us on WhatsApp — we're happy to help."
   },
+  "admin": {
+    "faqs": "FAQs",
+    "faq": {
+      "question": "Question",
+      "answer": "Answer",
+      "sortOrder": "Sort Order",
+      "isActive": "Active"
+    }
+  },
   "contact": {
     "title": "Visit us",
     "subtitle": "Inside Ambattur, opposite FUEL Juice & Pasta Bar. Easy parking, AC, women-friendly studio.",
