@@ -56,6 +56,7 @@ export default async function CourseDetailPage({
   if (!course) notFound();
 
   const t = await getTranslations("courses.detail");
+  const tRoot = await getTranslations("courses");
   const tp = await getTranslations("courses.perks");
   const tc = await getTranslations("common");
   const tb = await getTranslations("breadcrumb");
@@ -68,6 +69,8 @@ export default async function CourseDetailPage({
   const enrolHref = whatsappHref(waMessage.course(course.title.en));
   const syllabus = course.syllabus[l] ?? course.syllabus.en;
   const outcomes = course.outcomes[l] ?? course.outcomes.en;
+  const whoFor = pick(course.whoFor, l);
+  const tagline = pick(course.tagline, l);
 
   return (
     <>
@@ -111,7 +114,9 @@ export default async function CourseDetailPage({
               <h1 className="heading-display mt-4 text-4xl text-cream sm:text-5xl">
                 {pick(course.title, l)}
               </h1>
-              <p className="mt-3 text-lg text-gold-200">{pick(course.tagline, l)}</p>
+              {tagline && (
+                <p className="heading-display mt-3 text-lg text-gold-200">{tagline}</p>
+              )}
 
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 <div className="rounded-2xl border border-ink-border bg-ink-surface p-5">
@@ -157,37 +162,47 @@ export default async function CourseDetailPage({
               {pick(course.description, l)}
             </p>
 
-            <h2 className="heading-display mt-10 text-2xl text-cream">{t("syllabus")}</h2>
-            <p className="mt-2 text-sm text-cream-dim">{t("syllabusNote")}</p>
-            <ul className="mt-5 space-y-3">
-              {syllabus.map((row, i) => (
-                <li key={i} className="flex gap-3 text-cream-muted">
-                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-gold-500/40 text-xs font-bold text-gold-200">
-                    {i + 1}
-                  </span>
-                  <span>{row}</span>
-                </li>
-              ))}
-            </ul>
+            {syllabus.length > 0 && (
+              <>
+                <h2 className="heading-display mt-10 text-2xl text-cream">{t("syllabus")}</h2>
+                <p className="mt-2 text-sm text-cream-dim">{t("syllabusNote")}</p>
+                <ul className="mt-5 space-y-3">
+                  {syllabus.map((row, i) => (
+                    <li key={i} className="flex gap-3 text-cream-muted">
+                      <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-gold-500/40 text-xs font-bold text-gold-200">
+                        {i + 1}
+                      </span>
+                      <span>{row}</span>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
 
-            <h2 className="heading-display mt-10 text-2xl text-cream">{t("whoFor")}</h2>
-            <p className="mt-4 leading-relaxed text-cream-muted">{t("whoForText")}</p>
+            {whoFor && (
+              <>
+                <h2 className="heading-display mt-10 text-2xl text-cream">{tRoot("whoForTitle")}</h2>
+                <p className="mt-4 leading-relaxed text-cream-muted">{whoFor}</p>
+              </>
+            )}
           </div>
 
           {/* Sidebar */}
           <aside className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
-              <div className="rounded-3xl border border-ink-border bg-ink-surface p-6">
-                <h3 className="heading-display text-lg text-cream">{t("outcomes")}</h3>
-                <ul className="mt-4 space-y-2.5">
-                  {outcomes.map((row, i) => (
-                    <li key={i} className="flex gap-2 text-sm text-cream-muted">
-                      <span className="text-gold-300">✓</span>
-                      <span>{row}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {outcomes.length > 0 && (
+                <div className="rounded-3xl border border-ink-border bg-ink-surface p-6">
+                  <h3 className="heading-display text-lg text-cream">{tRoot("outcomesTitle")}</h3>
+                  <ul className="mt-4 space-y-2.5">
+                    {outcomes.map((row, i) => (
+                      <li key={i} className="flex gap-2 text-sm text-cream-muted">
+                        <span className="text-gold-300">✓</span>
+                        <span>{row}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
 
               <div className="rounded-3xl border border-gold-500/25 bg-gold-500/[0.06] p-6">
                 <h3 className="heading-display text-lg text-gold-200">{t("perksTitle")}</h3>

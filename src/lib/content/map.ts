@@ -30,6 +30,7 @@ export function mapCourse(r: any): Course {
     price: r.price === null || r.price === undefined ? null : Number(r.price),
     priceNote: { en: "Fee on enquiry", ta: "கட்டணம் கேள்விக்கு" },
     syllabus: list(r.syllabus_en, r.syllabus_ta),
+    whoFor: loc(r.who_for_en, r.who_for_ta),
     outcomes: list(r.outcomes_en, r.outcomes_ta),
     image: { src: r.image_url ?? "", alt: loc(r.name_en, r.name_ta) },
     featured: !!r.featured,

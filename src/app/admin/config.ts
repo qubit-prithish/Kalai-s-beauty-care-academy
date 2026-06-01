@@ -8,6 +8,8 @@ export type Field = {
   bucket?: string;
   /** Show in the list table. */
   list?: boolean;
+  /** Handle as a newline-separated list (string array in DB). */
+  is_array?: boolean;
 };
 export type EntityConfig = {
   table: string;
@@ -34,6 +36,9 @@ export const ENTITIES: Record<string, EntityConfig> = {
       { name: "price", label: "Price (blank = on enquiry)", type: "number", list: true },
       ...bilingual("tagline", "Tagline"),
       ...bilingual("summary", "Summary", "textarea"),
+      ...bilingual("who_for", "Who is this for", "textarea"),
+      ...bilingual("outcomes", "What you'll learn (one per line)", "textarea").map(f => ({ ...f, is_array: true })),
+      ...bilingual("syllabus", "Syllabus (one per line)", "textarea").map(f => ({ ...f, is_array: true })),
       { name: "image_url", label: "Image", type: "image", bucket: "courses" },
       { name: "sort_order", label: "Sort order", type: "number" },
       { name: "featured", label: "Featured", type: "bool", list: true },
