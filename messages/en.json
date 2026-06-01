@@ -225,6 +225,16 @@
       "answer": "Answer",
       "sortOrder": "Sort Order",
       "isActive": "Active"
+    },
+    "enquiry": {
+      "status": "Status",
+      "statusNew": "New",
+      "statusContacted": "Contacted",
+      "statusInProgress": "In Progress",
+      "statusResolved": "Resolved",
+      "deleteConfirm": "Delete this enquiry? This action cannot be undone.",
+      "deleteSuccess": "Enquiry deleted",
+      "statusUpdateSuccess": "Status updated"
     }
   },
   "contact": {

@@ -123,6 +123,8 @@ export interface Faq {
   published: boolean;
 }
 
+export type EnquiryStatus = "new" | "contacted" | "in_progress" | "resolved";
+
 export interface Enquiry {
   id: string;
   name: string;
@@ -130,7 +132,9 @@ export interface Enquiry {
   message: string;
   /** What the enquiry is about (course/service slug or "general"). */
   topic: string;
+  status: EnquiryStatus;
   createdAt: string;
+  updatedAt?: string;
 }
 
 export interface NapHours {

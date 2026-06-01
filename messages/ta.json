@@ -225,6 +225,16 @@
       "answer": "பதில்",
       "sortOrder": "வரிசை",
       "isActive": "செயலில்"
+    },
+    "enquiry": {
+      "status": "நிலை",
+      "statusNew": "புதிய",
+      "statusContacted": "தொடர்பு கொள்ளப்பட்டது",
+      "statusInProgress": "செயல்பாட்டில்",
+      "statusResolved": "தீர்க்கப்பட்டது",
+      "deleteConfirm": "இந்த விசாரணையை நீக்கவா? இதை மீட்டமைக்க முடியாது.",
+      "deleteSuccess": "விசாரணை நீக்கப்பட்டது",
+      "statusUpdateSuccess": "நிலை புதுப்பிக்கப்பட்டது"
     }
   },
   "contact": {
