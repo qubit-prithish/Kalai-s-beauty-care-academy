@@ -90,10 +90,10 @@ async function main() {
     await c.query(
       `insert into public.gallery
         (title_en,title_ta,category,category_label_en,category_label_ta,media_type,
-         image_url,video_url,before_url,after_url,featured,sort_order)
-       values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)`,
+         image_url,before_url,after_url,featured,sort_order)
+       values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)`,
       [g.caption.en, g.caption.ta, g.category, g.categoryLabel.en, g.categoryLabel.ta,
-       g.type, g.src || null, g.type === "video" ? (g.src || null) : null,
+       g.type, g.src || null,
        g.before || null, g.after || null, g.featured ?? false, g.order],
     );
   }

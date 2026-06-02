@@ -91,12 +91,10 @@ export const ENTITIES: Record<string, EntityConfig> = {
         list: true,
         options: [
           { label: "Image", value: "image" },
-          { label: "Video", value: "video" },
           { label: "Before/After", value: "beforeafter" },
         ],
       },
       { name: "image_url", label: "Image", type: "image", bucket: "gallery" },
-      { name: "video_url", label: "Video URL", type: "text" },
       { name: "before_url", label: "Before image", type: "image", bucket: "gallery" },
       { name: "after_url", label: "After image", type: "image", bucket: "gallery" },
       { name: "sort_order", label: "Sort order", type: "number" },
@@ -117,17 +115,12 @@ export const ENTITIES: Record<string, EntityConfig> = {
       { name: "featured", label: "Featured", type: "bool", list: true },
     ],
   },
-  blog_posts: {
-    table: "blog_posts", label: "Blog", titleField: "title_en", orderBy: "published_at",
+  about: {
+    table: "about", label: "About Page", titleField: "id", orderBy: "id",
     fields: [
-      { name: "slug", label: "Slug", type: "text", list: true },
-      ...bilingual("title", "Title").map((f, i) => ({ ...f, list: i === 0 })),
-      ...bilingual("excerpt", "Excerpt", "textarea"),
-      { name: "body_en", label: "Body EN (HTML)", type: "textarea" },
-      { name: "body_ta", label: "Body TA (HTML)", type: "textarea" },
-      { name: "cover_url", label: "Cover", type: "image", bucket: "blog" },
-      { name: "published_at", label: "Published at", type: "date" },
-      { name: "published", label: "Published", type: "bool", list: true },
+      { name: "image_url", label: "Section Image", type: "image", bucket: "about" },
+      { name: "image_alt_en", label: "Alt Text (EN)", type: "text" },
+      { name: "image_alt_ta", label: "Alt Text (TA)", type: "text" },
     ],
   },
   settings: {
@@ -149,5 +142,5 @@ export const ENTITIES: Record<string, EntityConfig> = {
 };
 
 export const ENTITY_ORDER = [
-  "courses", "services", "offers", "gallery", "testimonials", "blog_posts", "faqs", "settings",
+  "courses", "services", "offers", "gallery", "testimonials", "about", "faqs", "settings",
 ] as const;

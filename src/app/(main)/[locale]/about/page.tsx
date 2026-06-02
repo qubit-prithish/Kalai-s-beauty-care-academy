@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { getSettings } from "@/lib/content";
@@ -77,11 +78,25 @@ export default async function AboutPage({
       <section className="pb-section">
         <div className="container-luxe grid items-center gap-10 lg:grid-cols-5">
           <Reveal className="lg:col-span-2">
-            <Placeholder
-              ratio="aspect-[4/5]"
-              className="rounded-3xl"
-              label={pick({ en: "Founder photo", ta: "நிறுவனர் புகைப்படம்" }, l)}
-            />
+            {settings.aboutImage?.url ? (
+              <div className="relative h-full overflow-hidden rounded-3xl">
+                <Image
+                  src={settings.aboutImage.url}
+                  alt={pick(settings.aboutImage.alt, l)}
+                  width={600}
+                  height={750}
+                  className="h-full w-full object-cover"
+                  priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+            ) : (
+              <Placeholder
+                ratio="aspect-[4/5]"
+                className="rounded-3xl"
+                label={pick({ en: "Founder photo", ta: "நிறுவனர் புகைப்படம்" }, l)}
+              />
+            )}
           </Reveal>
           <div className="lg:col-span-3">
             <Reveal>
@@ -105,7 +120,7 @@ export default async function AboutPage({
       {/* Why choose us */}
       <section className="border-y border-ink-border bg-ink-surface/40 py-section">
         <div className="container-luxe">
-          <SectionHeading eyebrow={t("whyTitle")} title={t("whyTitle")} />
+          <SectionHeading title={t("whyTitle")} />
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {USP_KEYS.map((key, i) => (
               <Reveal key={key} delay={i * 0.06}>
@@ -124,7 +139,7 @@ export default async function AboutPage({
       {/* Facilities */}
       <section className="py-section">
         <div className="container-luxe">
-          <SectionHeading eyebrow={t("facilitiesTitle")} title={t("facilitiesTitle")} />
+          <SectionHeading title={t("facilitiesTitle")} />
           <div className="mt-12 flex flex-wrap justify-center gap-3">
             {FACILITY_KEYS.map((key) => (
               <TrustBadge key={key} tone="gold" className="px-4 py-2 text-sm">
@@ -138,7 +153,7 @@ export default async function AboutPage({
       {/* Team */}
       <section className="pb-section">
         <div className="container-luxe">
-          <SectionHeading eyebrow={t("teamTitle")} title={t("teamTitle")} subtitle={t("teamSubtitle")} />
+          <SectionHeading title={t("teamTitle")} subtitle={t("teamSubtitle")} />
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: settings.trainers }).map((_, i) => (
               <Reveal key={i} delay={i * 0.08}>

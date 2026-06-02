@@ -9,7 +9,6 @@
 
 import { restSelect, restSingle } from "@/lib/supabase/public";
 import {
-  mapBlogPost,
   mapCourse,
   mapGallery,
   mapOffer,
@@ -17,7 +16,7 @@ import {
   mapTestimonial,
 } from "./map";
 import type {
-  BlogPost,
+  AboutImage,
   Course,
   Faq,
   GalleryItem,
@@ -170,44 +169,38 @@ export async function getGalleryCategories(): Promise<
   return [...seen.entries()].map(([id, label]) => ({ id, label }));
 }
 
-// ── Blog ─────────────────────────────────────────────────────────────────────
-export async function getBlogPosts(): Promise<BlogPost[]> {
-  const rows = await restSelect("blog_posts", {
-    query: "select=*&published=eq.true&order=published_at.desc",
-    revalidate: REVALIDATE,
-  });
-  return rows.map(mapBlogPost);
-}
-
-export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
-  const row = await restSingle("blog_posts", {
-    query: `select=*&published=eq.true&slug=eq.${encodeURIComponent(slug)}&limit=1`,
-    revalidate: REVALIDATE,
-  });
-  return row ? mapBlogPost(row) : null;
-}
-
-export async function getBlogSlugs(): Promise<string[]> {
-  const rows = await restSelect<{ slug: string }>("blog_posts", {
-    query: "select=slug&published=eq.true",
-    revalidate: REVALIDATE,
-  });
-  return rows.map((r) => r.slug);
-}
-
 // ── Settings / NAP ────────────────────────────────────────────────────────────
 export async function getSettings(): Promise<Settings> {
-  const rows = await restSelect<{ key: string; value_json: Record<string, unknown> }>(
-    "settings",
-    { query: "select=key,value_json", revalidate: REVALIDATE },
+  const [settingsRows, aboutRow] = await Promise.all([
+    restSelect("settings", { revalidate: REVALIDATE }),
+    restSingle("about", { query: "select=*", revalidate: REVALIDATE }),
+  ]);
+
+  const map = new Map(
+    (settingsRows as { key: string; value_json: Record<string, unknown> }[]).map((r) => [
+      r.key,
+      r.value_json,
+    ]),
   );
-  const map = new Map(rows.map((r) => [r.key, r.value_json]));
+
   const brand = (map.get("brand") ?? {}) as Record<string, unknown>;
   const contact = (map.get("contact") ?? {}) as Record<string, unknown>;
   const address = (map.get("address") ?? {}) as Record<string, unknown>;
   const hours = (map.get("hours") ?? {}) as Record<string, unknown>;
   const s = (v: unknown, d = "") => (v as string) ?? d;
   const n = (v: unknown, d = 0) => (typeof v === "number" ? v : d);
+
+  // Extract about image from dedicated singleton table
+  let aboutImage: AboutImage | undefined;
+  if (aboutRow?.image_url) {
+    aboutImage = {
+      url: aboutRow.image_url as string,
+      alt: {
+        en: s(aboutRow.image_alt_en, "Kalai's Beauty Care & Academy founder photo"),
+        ta: s(aboutRow.image_alt_ta, "கலையின் அழகு பராமரிப்பு & கல்விக்கூடம் நிறுவனர் புகைப்படம்"),
+      },
+    };
+  }
 
   return {
     brandName: { en: s(brand.name_en), ta: s(brand.name_ta) },
@@ -245,11 +238,11 @@ export async function getSettings(): Promise<Settings> {
       academy: { en: s(hours.academy_en), ta: s(hours.academy_ta) },
       note: { en: s(hours.note_en), ta: s(hours.note_ta) },
     },
+    aboutImage,
   };
 }
 
 export type {
-  BlogPost,
   Course,
   Faq,
   GalleryItem,

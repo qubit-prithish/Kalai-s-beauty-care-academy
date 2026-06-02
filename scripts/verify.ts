@@ -29,7 +29,7 @@ async function main() {
   await pg.connect();
 
   const tableNames = [
-    "courses","services","gallery","testimonials","offers","blog_posts",
+    "courses","services","gallery","testimonials","offers",
     "faqs","enquiries","settings","page_views","admins",
   ];
   const tablesRes = await pg.query(
@@ -42,14 +42,13 @@ async function main() {
 
   const courseCount = Number((await pg.query("select count(*) from public.courses")).rows[0].count);
   const serviceCount = Number((await pg.query("select count(*) from public.services")).rows[0].count);
-  const blogCount = Number((await pg.query("select count(*) from public.blog_posts")).rows[0].count);
   const testiCount = Number((await pg.query("select count(*) from public.testimonials")).rows[0].count);
   const offerCount = Number((await pg.query("select count(*) from public.offers")).rows[0].count);
   const faqCount = Number((await pg.query("select count(*) from public.faqs")).rows[0].count);
-  results.push(`Seed — courses=${courseCount}/11, services=${serviceCount}/8, blog=${blogCount}, testimonials=${testiCount}, offers=${offerCount}, faqs=${faqCount}: ${ok(courseCount === 11 && serviceCount === 8)}`);
+  results.push(`Seed — courses=${courseCount}/11, services=${serviceCount}/8, testimonials=${testiCount}, offers=${offerCount}, faqs=${faqCount}: ${ok(courseCount === 11 && serviceCount === 8)}`);
 
-  const buckets = (await pg.query("select id from storage.buckets where id = any($1)", [["gallery","courses","services","blog","banners"]])).rows.map((r) => r.id);
-  results.push(`Storage buckets (${buckets.length}/5): ${ok(buckets.length === 5)}`);
+  const buckets = (await pg.query("select id from storage.buckets where id = any($1)", [["gallery","courses","services","banners"]])).rows.map((r) => r.id);
+  results.push(`Storage buckets (${buckets.length}/4): ${ok(buckets.length === 4)}`);
 
   const rlsOff = (await pg.query(
     `select count(*) from pg_tables where schemaname='public' and tablename = any($1) and rowsecurity = false`,

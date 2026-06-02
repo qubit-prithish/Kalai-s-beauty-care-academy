@@ -47,7 +47,7 @@ export default async function ContactPage({
   return (
     <section className="py-section">
       <div className="container-luxe">
-        <SectionHeading eyebrow={t("title")} title={t("title")} subtitle={t("subtitle")} as="h1" />
+        <SectionHeading title={t("title")} subtitle={t("subtitle")} as="h1" />
 
         <div className="mt-12 grid gap-8 lg:grid-cols-5">
           {/* Left: NAP + hours + contact */}

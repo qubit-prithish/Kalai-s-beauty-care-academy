@@ -92,22 +92,6 @@ create table if not exists public.offers (
   created_at     timestamptz not null default now()
 );
 
--- Blog posts ──────────────────────────────────────────────────────────────────
-create table if not exists public.blog_posts (
-  id           uuid primary key default gen_random_uuid(),
-  slug         text unique not null,
-  title_en     text not null,
-  title_ta     text not null,
-  excerpt_en   text,
-  excerpt_ta   text,
-  body_en      text,                   -- sanitized HTML (Tiptap)
-  body_ta      text,                   -- sanitized HTML (Tiptap)
-  cover_url    text,
-  tags         text[] not null default '{}',
-  published    boolean not null default true,
-  published_at timestamptz not null default now()
-);
-
 -- FAQs (seeded source; settings could also hold these but a table is cleaner) ──
 create table if not exists public.faqs (
   id         uuid primary key default gen_random_uuid(),
@@ -153,7 +137,6 @@ create table if not exists public.page_views (
 -- Helpful indexes for published/active reads + ordering.
 create index if not exists courses_pub_idx       on public.courses (published, sort_order);
 create index if not exists services_pub_idx      on public.services (published, sort_order);
-create index if not exists blog_pub_idx           on public.blog_posts (published, published_at desc);
 create index if not exists offers_active_idx      on public.offers (active, sort_order);
 create index if not exists gallery_order_idx      on public.gallery (sort_order);
 create index if not exists testimonials_order_idx on public.testimonials (featured, sort_order);

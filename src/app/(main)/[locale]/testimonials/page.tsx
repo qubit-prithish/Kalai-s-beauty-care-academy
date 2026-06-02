@@ -40,7 +40,7 @@ export default async function TestimonialsPage({
   return (
     <section className="py-section">
       <div className="container-luxe">
-        <SectionHeading eyebrow={t("title")} title={t("title")} subtitle={t("subtitle")} as="h1" />
+        <SectionHeading title={t("title")} subtitle={t("subtitle")} as="h1" />
 
         {/* Google-style summary */}
         <Reveal className="mx-auto mt-12 max-w-md">

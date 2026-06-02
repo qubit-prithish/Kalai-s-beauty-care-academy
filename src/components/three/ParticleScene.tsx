@@ -4,30 +4,59 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
 import { GoldenParticles } from "./GoldenParticles";
-import { isLowPowerDevice, prefersReducedMotion } from "@/lib/motion";
+import { prefersReducedMotion, shouldUseReduced3D } from "@/lib/motion";
 
 /**
  * The actual R3F canvas. Loaded only via dynamic import (ssr:false) so it never
- * blocks first paint. Performance guards:
- *  - dpr capped to [1, 1.5]
- *  - frameloop toggles to "never" when offscreen or the tab is hidden
- *  - particle count downgraded on low-power / small devices
- *  - animation frozen (static frame) under prefers-reduced-motion
+ * blocks first paint. Enhanced mobile support:
+ *  - dpr capped to [1, 1] on mobile for better performance
+ *  - particle count reduced to ≤ 40% on capable mobile devices
+ *  - WebGL context loss handling with graceful fallback
+ *  - animation frozen under prefers-reduced-motion
  */
 export default function ParticleScene() {
   const containerRef = useRef<HTMLDivElement>(null);
   const glRef = useRef<THREE.WebGLRenderer | null>(null);
   const [active, setActive] = useState(true);
   const [mounted, setMounted] = useState(false);
+  const [webglLost, setWebglLost] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
   const reduced = prefersReducedMotion();
-  const lowPower = isLowPowerDevice();
-  const count = lowPower ? 280 : 900;
+  const reduced3D = shouldUseReduced3D();
+  
+  // Particle count: desktop 900, capable mobile ≤ 40% (360), incapable mobile uses CSS fallback
+  const count = reduced3D ? Math.floor(900 * 0.4) : 900;
   const animate = !reduced;
+  const dpr: [number, number] = reduced3D ? [1, 1] : [1, 1.5]; // Lower DPR on mobile
+
+  // Handle WebGL context loss
+  useEffect(() => {
+    if (!mounted || !glRef.current) return;
+    
+    const handleContextLost = (e: Event) => {
+      e.preventDefault();
+      console.warn("WebGL context lost, switching to CSS fallback");
+      setWebglLost(true);
+    };
+    
+    const handleContextRestored = () => {
+      console.log("WebGL context restored");
+      setWebglLost(false);
+    };
+    
+    const canvas = glRef.current.domElement;
+    canvas.addEventListener("webglcontextlost", handleContextLost);
+    canvas.addEventListener("webglcontextrestored", handleContextRestored);
+    
+    return () => {
+      canvas.removeEventListener("webglcontextlost", handleContextLost);
+      canvas.removeEventListener("webglcontextrestored", handleContextRestored);
+    };
+  }, [mounted]);
 
   // Pause rendering when the hero is offscreen or the tab is hidden.
   useEffect(() => {
@@ -61,10 +90,9 @@ export default function ParticleScene() {
       // Proper WebGL cleanup on unmount
       if (glRef.current) {
         try {
-          // Dispose of WebGL resources properly
-          glRef.current.dispose();
-          // Only force context loss if we still have a valid context
           const gl = glRef.current.getContext();
+          glRef.current.dispose();
+          
           if (gl && !gl.isContextLost()) {
             const loseContext = gl.getExtension('WEBGL_lose_context');
             if (loseContext) {
@@ -72,7 +100,7 @@ export default function ParticleScene() {
             }
           }
         } catch (e) {
-          // Silently handle cleanup errors during unmount
+          // Silently handle cleanup errors
         } finally {
           glRef.current = null;
         }
@@ -80,9 +108,11 @@ export default function ParticleScene() {
     };
   }, [mounted]);
 
-  // Under reduced motion we render exactly one frame ("never" after mount is
-  // overkill); use "demand"-like behaviour by rendering always only when active
-  // and not reduced. When reduced, render a single static frame.
+  // If WebGL context is lost, don't render canvas
+  if (webglLost) {
+    return null;
+  }
+
   const frameloop = reduced ? "demand" : active ? "always" : "never";
 
   if (!mounted) return null;
@@ -90,33 +120,30 @@ export default function ParticleScene() {
   return (
     <div ref={containerRef} className="h-full w-full">
       <Canvas
-        key={`particle-canvas-${mounted}`}
+        key={`particle-canvas-${mounted}-${reduced3D ? 'mobile' : 'desktop'}`}
         frameloop={frameloop}
-        dpr={[1, 1.5]}
+        dpr={dpr}
         camera={{ position: [0, 0, 6], fov: 60 }}
         gl={{ 
-          antialias: true, 
-          powerPreference: "high-performance",
+          antialias: !reduced3D, // Disable antialiasing on mobile for performance
+          powerPreference: reduced3D ? "default" : "high-performance",
           alpha: true,
           stencil: false,
           depth: true,
-          preserveDrawingBuffer: false
+          preserveDrawingBuffer: false,
+          failIfMajorPerformanceCaveat: reduced3D ? false : true, // Be more lenient on mobile
         }}
         onCreated={({ gl }) => {
           glRef.current = gl;
-          // Prevent default context loss behavior - let us handle it
-          gl.domElement.addEventListener("webglcontextlost", (e) => {
-            e.preventDefault();
-            console.warn("WebGL context lost, recovering...");
-          }, false);
           
-          gl.domElement.addEventListener("webglcontextrestored", () => {
-            console.log("WebGL context restored");
-          }, false);
+          // Performance tuning for mobile
+          if (reduced3D) {
+            gl.setPixelRatio(Math.min(window.devicePixelRatio, 1)); // Cap pixel ratio on mobile
+          }
         }}
         style={{ pointerEvents: "none" }}
       >
-        <GoldenParticles count={count} animate={animate} />
+        <GoldenParticles count={count} animate={animate} reduced3D={reduced3D} />
       </Canvas>
     </div>
   );

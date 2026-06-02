@@ -1,6 +1,5 @@
 import { requireAdmin } from "@/lib/admin-auth";
 import {
-  getBlogPosts,
   getCourses,
   getFaqs,
   getGallery,
@@ -21,13 +20,12 @@ export default async function AdminDashboardPage() {
   const user = await requireAdmin();
 
   // Live counts from the content layer.
-  const [courses, services, testimonials, offers, blog, gallery, faqs] =
+  const [courses, services, testimonials, offers, gallery, faqs] =
     await Promise.all([
       getCourses(),
       getServices(),
       getTestimonials(),
       getOffers(),
-      getBlogPosts(),
       getGallery(),
       getFaqs(),
     ]);
@@ -37,7 +35,6 @@ export default async function AdminDashboardPage() {
     { label: "Services", count: services.length, hint: "Salon services" },
     { label: "Testimonials", count: testimonials.length, hint: "Student reviews" },
     { label: "Offers", count: offers.length, hint: "Live promotions" },
-    { label: "Blog posts", count: blog.length, hint: "Published articles" },
     { label: "Gallery items", count: gallery.length, hint: "Photos & videos" },
     { label: "FAQs", count: faqs.length, hint: "Questions answered" },
   ];
@@ -91,7 +88,6 @@ export default async function AdminDashboardPage() {
               { id: "gallery", title: "Gallery", desc: ENTITIES.gallery.label },
               { id: "offers", title: "Offers", desc: ENTITIES.offers.label },
               { id: "testimonials", title: "Testimonials", desc: ENTITIES.testimonials.label },
-              { id: "blog_posts", title: "Blog", desc: ENTITIES.blog_posts.label },
               { id: "faqs", title: "FAQs", desc: ENTITIES.faqs.label },
             ].map((c) => (
               <Link

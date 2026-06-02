@@ -7,35 +7,46 @@ import * as THREE from "three";
 
 /**
  * A slowly drifting field of champagne/gold particles. Editorial, not busy.
- * Count is passed in so the wrapper can downgrade on low-power devices.
+ * Enhanced for mobile: reduced particle size and slower animation on reduced3D.
  */
 export function GoldenParticles({
   count = 900,
   animate = true,
+  reduced3D = false,
 }: {
   count?: number;
   animate?: boolean;
+  reduced3D?: boolean;
 }) {
   const ref = useRef<THREE.Points>(null);
 
   // Stable random positions in a wide, shallow volume around the hero.
   const positions = useMemo(() => {
     const arr = new Float32Array(count * 3);
+    // Adjust spread based on device capability
+    const xSpread = reduced3D ? 8 : 12;
+    const ySpread = reduced3D ? 5 : 7;
+    const zSpread = reduced3D ? 4 : 6;
+    
     for (let i = 0; i < count; i++) {
-      arr[i * 3] = (Math.random() - 0.5) * 12; // x
-      arr[i * 3 + 1] = (Math.random() - 0.5) * 7; // y
-      arr[i * 3 + 2] = (Math.random() - 0.5) * 6; // z
+      arr[i * 3] = (Math.random() - 0.5) * xSpread; // x
+      arr[i * 3 + 1] = (Math.random() - 0.5) * ySpread; // y
+      arr[i * 3 + 2] = (Math.random() - 0.5) * zSpread; // z
     }
     return arr;
-  }, [count]);
+  }, [count, reduced3D]);
 
   useFrame((state, delta) => {
     if (!animate || !ref.current) return;
-    // Very gentle drift + parallax sway.
-    ref.current.rotation.y += delta * 0.03;
-    ref.current.rotation.x += delta * 0.008;
+    // Slower animation on reduced3D devices
+    const rotationSpeed = reduced3D ? 0.015 : 0.03;
+    const verticalSpeed = reduced3D ? 0.08 : 0.15;
+    const verticalAmplitude = reduced3D ? 0.1 : 0.15;
+    
+    ref.current.rotation.y += delta * rotationSpeed;
+    ref.current.rotation.x += delta * (rotationSpeed * 0.3);
     const t = state.clock.elapsedTime;
-    ref.current.position.y = Math.sin(t * 0.15) * 0.15;
+    ref.current.position.y = Math.sin(t * verticalSpeed) * verticalAmplitude;
   });
 
   return (
@@ -44,10 +55,10 @@ export function GoldenParticles({
         <PointMaterial
           transparent
           color="#E6D2A8"
-          size={0.035}
+          size={reduced3D ? 0.025 : 0.035} // Smaller particles on mobile
           sizeAttenuation
           depthWrite={false}
-          opacity={0.9}
+          opacity={reduced3D ? 0.8 : 0.9} // Slightly less opaque on mobile
           blending={THREE.AdditiveBlending}
         />
       </Points>
