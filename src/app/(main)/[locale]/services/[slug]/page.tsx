@@ -23,6 +23,8 @@ export async function generateStaticParams() {
   );
 }
 
+export const dynamicParams = true;
+
 export async function generateMetadata({
   params,
 }: {
