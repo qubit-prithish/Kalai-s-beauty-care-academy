@@ -1,11 +1,13 @@
 // One config per table drives the shared List + Create/Edit form. No per-entity pages.
-export type FieldType = "text" | "textarea" | "number" | "bool" | "date" | "image";
+export type FieldType = "text" | "textarea" | "number" | "bool" | "date" | "image" | "select";
 export type Field = {
   name: string;
   label: string;
   type: FieldType;
   /** Storage bucket for image fields. */
   bucket?: string;
+  /** Options for select fields. */
+  options?: { label: string; value: string }[];
   /** Show in the list table. */
   list?: boolean;
   /** Handle as a newline-separated list (string array in DB). */
@@ -82,7 +84,17 @@ export const ENTITIES: Record<string, EntityConfig> = {
       ...bilingual("title", "Title").map((f, i) => ({ ...f, list: i === 0 })),
       { name: "category", label: "Category id", type: "text", list: true },
       ...bilingual("category_label", "Category label"),
-      { name: "media_type", label: "Type (image|video|beforeafter)", type: "text", list: true },
+      {
+        name: "media_type",
+        label: "Type",
+        type: "select",
+        list: true,
+        options: [
+          { label: "Image", value: "image" },
+          { label: "Video", value: "video" },
+          { label: "Before/After", value: "beforeafter" },
+        ],
+      },
       { name: "image_url", label: "Image", type: "image", bucket: "gallery" },
       { name: "video_url", label: "Video URL", type: "text" },
       { name: "before_url", label: "Before image", type: "image", bucket: "gallery" },
