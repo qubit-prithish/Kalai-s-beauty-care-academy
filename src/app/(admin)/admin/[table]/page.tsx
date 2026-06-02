@@ -22,7 +22,9 @@ export default async function ListPage({ params }: { params: Promise<{ table: st
     <Shell>
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-bold text-cream">{cfg.label}</h1>
-        <Link href={`/admin/${table}/new`} className="rounded-full bg-gold-gradient px-4 py-2 text-sm font-semibold text-ink-page">+ New</Link>
+        {!cfg.singleton && (
+          <Link href={`/admin/${table}/new`} className="rounded-full bg-gold-gradient px-4 py-2 text-sm font-semibold text-ink-page">+ New</Link>
+        )}
       </div>
       <div className="mt-5 overflow-x-auto rounded-xl border border-ink-border">
         <table className="w-full text-sm">
@@ -40,7 +42,7 @@ export default async function ListPage({ params }: { params: Promise<{ table: st
                     {typeof r[f.name] === "boolean" ? (r[f.name] ? "✓" : "—") : String(r[f.name] ?? "—")}
                   </td>
                 ))}
-                <td className="px-3 py-2 text-right"><RowActions table={table} id={r.id as string} /></td>
+                <td className="px-3 py-2 text-right"><RowActions table={table} id={r.id as string} noDelete={cfg.singleton} /></td>
               </tr>
             ))}
             {(rows ?? []).length === 0 ? (
