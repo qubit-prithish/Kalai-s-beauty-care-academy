@@ -25,6 +25,7 @@ export function Parallax({
     if (!el) return;
 
     const ctx = gsap.context(() => {
+      const trigger = el.parentElement ?? el;
       gsap.fromTo(
         el,
         { yPercent: -amount / 10 },
@@ -32,7 +33,7 @@ export function Parallax({
           yPercent: amount / 10,
           ease: "none",
           scrollTrigger: {
-            trigger: el.parentElement ?? el,
+            trigger,
             start: "top bottom",
             end: "bottom top",
             scrub: true,

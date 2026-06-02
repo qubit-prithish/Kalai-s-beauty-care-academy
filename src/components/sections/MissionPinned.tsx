@@ -31,6 +31,8 @@ export function MissionPinned({ content }: { content: MissionContent }) {
       const steps = gsap.utils.toArray<HTMLElement>("[data-mission-step]");
       const goal = el.querySelector("[data-mission-goal]");
 
+      if (steps.length === 0) return;
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: el,

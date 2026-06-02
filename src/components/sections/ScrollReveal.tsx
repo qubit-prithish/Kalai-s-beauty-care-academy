@@ -31,7 +31,10 @@ export function ScrollReveal({
     if (!el) return;
 
     const ctx = gsap.context(() => {
-      const targets = stagger ? Array.from(el.children) : [el];
+      const children = Array.from(el.children);
+      if (stagger && children.length === 0) return;
+
+      const targets = stagger ? children : [el];
       const from =
         variant === "clip"
           ? { opacity: 0, clipPath: "inset(0 0 100% 0)" }

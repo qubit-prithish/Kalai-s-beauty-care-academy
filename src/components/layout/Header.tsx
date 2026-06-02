@@ -33,8 +33,10 @@ export function Header() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname.startsWith(href);
+  const isActive = (href: string) => {
+    if (!pathname) return false;
+    return href === "/" ? pathname === "/" : pathname.startsWith(href);
+  };
 
   return (
     <header className="sticky top-0 z-40 border-b border-ink-border/70 bg-ink-page/80 backdrop-blur-md">
