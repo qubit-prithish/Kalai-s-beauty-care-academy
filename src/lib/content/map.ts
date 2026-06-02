@@ -6,6 +6,10 @@ import type {
   Offer,
   Service,
   Testimonial,
+  AboutPageData,
+  AboutWhyItem,
+  AboutFacility,
+  AboutTrainer,
 } from "./types";
 
 const loc = (en: unknown, ta: unknown) => ({
@@ -18,6 +22,62 @@ const list = (en: unknown, ta: unknown) => ({
 });
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
+export function mapAboutPage(r: any): AboutPageData {
+  return {
+    heroEyebrow: loc(r.hero_eyebrow_en, r.hero_eyebrow_ta),
+    heroTitle: loc(r.hero_title_en, r.hero_title_ta),
+    heroSubtitle: loc(r.hero_subtitle_en, r.hero_subtitle_ta),
+    storyTitle: loc(r.story_title_en, r.story_title_ta),
+    story: loc(r.story_en, r.story_ta),
+    missionTitle: loc(r.mission_title_en, r.mission_title_ta),
+    mission: loc(r.mission_en, r.mission_ta),
+    founderTitle: loc(r.founder_title_en, r.founder_title_ta),
+    founderName: loc(r.founder_name_en, r.founder_name_ta),
+    founderRole: loc(r.founder_role_en, r.founder_role_ta),
+    founderBio: loc(r.founder_bio_en, r.founder_bio_ta),
+    founderImage: r.founder_image_url
+      ? {
+          url: r.founder_image_url,
+          alt: loc(r.founder_name_en, r.founder_name_ta),
+        }
+      : null,
+    credentialsTitle: loc(r.credentials_title_en, r.credentials_title_ta),
+    credentialsDesc: loc(r.credentials_desc_en, r.credentials_desc_ta),
+  };
+}
+
+export function mapAboutWhy(r: any): AboutWhyItem {
+  return {
+    id: r.id,
+    text: loc(r.text_en, r.text_ta),
+    order: r.sort_order ?? 0,
+  };
+}
+
+export function mapAboutFacility(r: any): AboutFacility {
+  return {
+    id: r.id,
+    name: loc(r.name_en, r.name_ta),
+    order: r.sort_order ?? 0,
+  };
+}
+
+export function mapAboutTrainer(r: any): AboutTrainer {
+  return {
+    id: r.id,
+    name: loc(r.name_en, r.name_ta),
+    role: loc(r.role_en, r.role_ta),
+    bio: loc(r.bio_en, r.bio_ta),
+    image: r.image_url
+      ? {
+          url: r.image_url,
+          alt: loc(r.name_en, r.name_ta),
+        }
+      : null,
+    order: r.sort_order ?? 0,
+  };
+}
+
 export function mapCourse(r: any): Course {
   return {
     id: r.id,
