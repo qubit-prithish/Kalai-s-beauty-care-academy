@@ -38,14 +38,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const l of routing.locales) {
       languages[l === "en" ? "en-IN" : "ta-IN"] = absoluteUrl(l, path);
     }
+    
+    // Priority mapping for better SEO weighting:
+    // / (Home) -> 1.0
+    // /courses, /services, /gallery, etc. (Listings) -> 0.8
+    // /about, /contact, /faq (Static) -> 0.7
+    // /courses/[slug], /services/[slug] (Detail) -> 0.6
+    // /blog/[slug] (Individual posts) -> 0.5
+    let priority = 0.5;
+    if (path === "/") priority = 1.0;
+    else if (STATIC_PATHS.includes(path)) {
+      priority = ["/courses", "/services", "/gallery", "/offers", "/blog"].includes(path) ? 0.8 : 0.7;
+    } else if (path.startsWith("/courses/") || path.startsWith("/services/")) {
+      priority = 0.6;
+    }
+
     return {
       url: absoluteUrl(routing.defaultLocale, path),
       lastModified: now,
       changeFrequency: path === "/" ? "weekly" : "monthly",
-      priority: path === "/" ? 1 : path.includes("/") && path.length > 1 ? 0.7 : 0.8,
+      priority,
       alternates: { languages },
     };
   });
 }
 
-export const dynamic = "force-static";
+export const revalidate = 3600; // Refresh every hour

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
-import { deleteRow } from "@/app/admin/actions";
+import { deleteRow } from "@/app/(admin)/admin/actions";
 
 export function RowActions({ table, id }: { table: string; id: string }) {
   const router = useRouter();

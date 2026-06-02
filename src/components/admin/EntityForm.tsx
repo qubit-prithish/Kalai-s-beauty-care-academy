@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import type { Field } from "@/app/admin/config";
-import { saveRow } from "@/app/admin/actions";
+import type { Field } from "@/app/(admin)/admin/config";
+import { saveRow } from "@/app/(admin)/admin/actions";
 
 const inputCls =
   "mt-1 w-full rounded-lg border border-ink-border bg-ink-page px-3 py-2 text-sm text-cream";
@@ -92,6 +92,13 @@ export function EntityForm({
             <div className="mt-1"><input type="checkbox" checked={!!values[f.name]} onChange={(e) => set(f.name, e.target.checked)} /></div>
           ) : f.type === "image" ? (
             <ImageField field={f} value={String(values[f.name] ?? "")} onChange={(v) => set(f.name, v)} />
+          ) : f.type === "select" ? (
+            <select value={String(values[f.name] ?? "")} onChange={(e) => set(f.name, e.target.value)} className={inputCls}>
+              <option value="">Select...</option>
+              {f.options?.map((opt) => (
+                <option key={opt.value} value={opt.value}>{opt.label}</option>
+              ))}
+            </select>
           ) : (
             <input type={f.type === "number" ? "number" : f.type === "date" ? "datetime-local" : "text"}
               value={f.type === "date" && values[f.name] ? String(values[f.name]).slice(0, 16) : String(values[f.name] ?? "")}

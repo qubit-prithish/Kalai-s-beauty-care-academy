@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { TrustBadge } from "@/components/ui/TrustBadge";
 import { WhatsAppIcon } from "@/components/ui/icons";
+import { usePrefersReducedMotion } from "@/lib/motion";
 
 export type PopupOffer = {
   id: string;
@@ -23,12 +24,19 @@ export type PopupOffer = {
  */
 export function OffersPopup({ offer }: { offer: PopupOffer }) {
   const [open, setOpen] = useState(false);
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const storageKey = `kbca_offer_dismissed_${offer.id}`;
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (localStorage.getItem(storageKey) === "1") return;
+    try {
+      if (localStorage.getItem(storageKey) === "1") return;
+    } catch {
+      /* ignore */
+    }
     const timer = setTimeout(() => setOpen(true), 1200);
     return () => clearTimeout(timer);
   }, [storageKey]);
@@ -51,7 +59,7 @@ export function OffersPopup({ offer }: { offer: PopupOffer }) {
 
   return (
     <AnimatePresence>
-      {open ? (
+      {mounted && open ? (
         <motion.div
           className="fixed inset-0 z-[60] grid place-items-center p-4"
           initial={reduce ? false : { opacity: 0 }}

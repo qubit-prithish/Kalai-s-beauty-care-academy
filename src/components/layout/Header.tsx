@@ -1,14 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Link, usePathname } from "@/i18n/navigation";
 import { Button } from "@/components/ui/Button";
 import { WhatsAppIcon } from "@/components/ui/icons";
 import { LocaleToggle } from "./LocaleToggle";
 import { whatsappHref, waMessage } from "@/lib/whatsapp";
 import { cn } from "@/lib/cn";
+import { usePrefersReducedMotion } from "@/lib/motion";
 
 const NAV = [
   { href: "/", key: "home" },
@@ -28,10 +29,14 @@ export function Header() {
   const tc = useTranslations("common");
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
-  const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname.startsWith(href);
+  const isActive = (href: string) => {
+    if (!pathname) return false;
+    return href === "/" ? pathname === "/" : pathname.startsWith(href);
+  };
 
   return (
     <header className="sticky top-0 z-40 border-b border-ink-border/70 bg-ink-page/80 backdrop-blur-md">
@@ -102,7 +107,7 @@ export function Header() {
 
       {/* Mobile menu */}
       <AnimatePresence>
-        {open ? (
+        {mounted && open ? (
           <motion.div
             initial={reduce ? false : { height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}

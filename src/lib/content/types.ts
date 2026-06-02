@@ -120,7 +120,10 @@ export interface Faq {
   question: Localized;
   answer: Localized;
   order: number;
+  published: boolean;
 }
+
+export type EnquiryStatus = "new" | "contacted" | "in_progress" | "resolved";
 
 export interface Enquiry {
   id: string;
@@ -129,7 +132,9 @@ export interface Enquiry {
   message: string;
   /** What the enquiry is about (course/service slug or "general"). */
   topic: string;
+  status: EnquiryStatus;
   createdAt: string;
+  updatedAt?: string;
 }
 
 export interface NapHours {

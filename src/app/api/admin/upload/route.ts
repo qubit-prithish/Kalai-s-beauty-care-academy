@@ -1,15 +1,12 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { getAdminUser } from "@/lib/admin-auth";
+import { getServiceRoleClient } from "@/lib/supabase/admin";
 
 // Admin-only media upload. Verifies the caller is a registered admin, then
 // uploads to the given Storage bucket and returns the public URL.
 export async function POST(req: Request) {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
-  const { data: row } = await supabase.from("admins").select("user_id").eq("user_id", user.id).maybeSingle();
-  if (!row) return NextResponse.json({ error: "forbidden" }, { status: 403 });
+  const { user, error, status } = await getAdminUser();
+  if (error) return NextResponse.json({ error }, { status });
 
   const form = await req.formData();
   const file = form.get("file") as File | null;
@@ -18,12 +15,12 @@ export async function POST(req: Request) {
 
   const ext = (file.name.split(".").pop() ?? "bin").toLowerCase();
   const path = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
-  const db = createAdminClient();
-  const { error } = await db.storage.from(bucket).upload(path, file, {
+  const db = getServiceRoleClient();
+  const { error: uploadError } = await db.storage.from(bucket).upload(path, file, {
     contentType: file.type || undefined,
     upsert: false,
   });
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (uploadError) return NextResponse.json({ error: uploadError.message }, { status: 500 });
   const { data } = db.storage.from(bucket).getPublicUrl(path);
   return NextResponse.json({ url: data.publicUrl });
 }

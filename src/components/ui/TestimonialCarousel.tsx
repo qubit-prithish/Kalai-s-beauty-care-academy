@@ -1,8 +1,9 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { StarIcon } from "./icons";
+import { usePrefersReducedMotion } from "@/lib/motion";
 
 export type TestimonialItem = {
   id: string;
@@ -19,7 +20,10 @@ export function TestimonialCarousel({
   items: TestimonialItem[];
   autoPlay?: boolean;
 }) {
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const [index, setIndex] = useState(0);
   const count = items.length;
 
@@ -29,10 +33,10 @@ export function TestimonialCarousel({
   );
 
   useEffect(() => {
-    if (!autoPlay || reduce || count <= 1) return;
+    if (!autoPlay || reduce || count <= 1 || !mounted) return;
     const id = setInterval(() => setIndex((i) => (i + 1) % count), 6000);
     return () => clearInterval(id);
-  }, [autoPlay, reduce, count]);
+  }, [autoPlay, reduce, count, mounted]);
 
   if (count === 0) return null;
   const item = items[index];
@@ -41,26 +45,28 @@ export function TestimonialCarousel({
     <div className="mx-auto max-w-3xl">
       <div className="relative min-h-[15rem] rounded-3xl border border-ink-border bg-ink-surface p-8 sm:p-10">
         <AnimatePresence mode="wait">
-          <motion.figure
-            key={item.id}
-            initial={reduce ? false : { opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reduce ? undefined : { opacity: 0, y: -12 }}
-            transition={{ duration: 0.4 }}
-          >
-            <div className="flex justify-center gap-1 text-gold-400" aria-label={`${item.rating} out of 5`}>
-              {Array.from({ length: item.rating }).map((_, i) => (
-                <StarIcon key={i} className="h-4 w-4" />
-              ))}
-            </div>
-            <blockquote className="mt-5 text-center text-lg leading-relaxed text-cream">
-              &ldquo;{item.quote}&rdquo;
-            </blockquote>
-            <figcaption className="mt-6 text-center">
-              <div className="font-semibold text-gold-200">{item.name}</div>
-              <div className="text-sm text-cream-dim">{item.role}</div>
-            </figcaption>
-          </motion.figure>
+          {mounted && (
+            <motion.figure
+              key={item.id}
+              initial={reduce ? false : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduce ? undefined : { opacity: 0, y: -12 }}
+              transition={{ duration: 0.4 }}
+            >
+              <div className="flex justify-center gap-1 text-gold-400" aria-label={`${item.rating} out of 5`}>
+                {Array.from({ length: item.rating }).map((_, i) => (
+                  <StarIcon key={i} className="h-4 w-4" />
+                ))}
+              </div>
+              <blockquote className="mt-5 text-center text-lg leading-relaxed text-cream">
+                &ldquo;{item.quote}&rdquo;
+              </blockquote>
+              <figcaption className="mt-6 text-center">
+                <div className="font-semibold text-gold-200">{item.name}</div>
+                <div className="text-sm text-cream-dim">{item.role}</div>
+              </figcaption>
+            </motion.figure>
+          )}
         </AnimatePresence>
       </div>
 

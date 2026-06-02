@@ -1,17 +1,14 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { getAdminUser } from "@/lib/admin-auth";
+import { getServiceRoleClient } from "@/lib/supabase/admin";
 
 const esc = (v: unknown) => `"${String(v ?? "").replace(/"/g, '""')}"`;
 
 export async function GET() {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
-  const { data: admin } = await supabase.from("admins").select("user_id").eq("user_id", user.id).maybeSingle();
-  if (!admin) return NextResponse.json({ error: "forbidden" }, { status: 403 });
+  const { user, error, status } = await getAdminUser();
+  if (error) return NextResponse.json({ error }, { status });
 
-  const db = createAdminClient();
+  const db = getServiceRoleClient();
   const { data: rows } = await db.from("enquiries").select("*").order("created_at", { ascending: false });
   const cols = ["created_at", "name", "phone", "course_interest", "message", "page_source", "status"];
   const lines = [cols.join(",")];

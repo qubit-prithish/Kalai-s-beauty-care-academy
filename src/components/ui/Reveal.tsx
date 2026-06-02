@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
-import type { ReactNode } from "react";
+import { motion, type Variants } from "framer-motion";
+import { useEffect, useState, type ReactNode } from "react";
+import { usePrefersReducedMotion } from "@/lib/motion";
 
 type RevealProps = {
   children: ReactNode;
@@ -22,7 +23,10 @@ export function Reveal({
   className,
   as = "div",
 }: RevealProps) {
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const MotionTag = motion[as];
 
   const variants: Variants = {
@@ -34,11 +38,13 @@ export function Reveal({
     },
   };
 
+  // On server and first client pass, we render the "hidden" state with 0 opacity.
+  // This is safe for hydration. The "show" animation triggers once in view.
   return (
     <MotionTag
       className={className}
       variants={variants}
-      initial="hidden"
+      initial={mounted ? "hidden" : false}
       whileInView="show"
       viewport={{ once: true, amount: 0.2 }}
     >
