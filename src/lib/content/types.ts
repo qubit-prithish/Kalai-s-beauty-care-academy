@@ -140,6 +140,7 @@ export interface AboutImage {
 }
 
 export interface AboutPageData {
+  navbarLogo: AboutImage | null;
   heroEyebrow: Localized;
   heroTitle: Localized;
   heroSubtitle: Localized;
@@ -210,4 +211,5 @@ export interface Settings {
   };
   hours: NapHours;
   aboutImage?: AboutImage;
+  navbarLogo?: AboutImage;
 }

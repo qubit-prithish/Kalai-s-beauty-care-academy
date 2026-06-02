@@ -120,6 +120,10 @@ export const ENTITIES: Record<string, EntityConfig> = {
     table: "about_page", label: "About Page (Main)", titleField: "id", orderBy: "id",
     singleton: true,
     fields: [
+      { name: "navbar_logo_url", label: "Navbar Logo", type: "image", bucket: "about" },
+      { name: "navbar_logo_alt_en", label: "Logo Alt (EN)", type: "text" },
+      { name: "navbar_logo_alt_ta", label: "Logo Alt (TA)", type: "text" },
+
       { name: "hero_eyebrow_en", label: "Hero Eyebrow (EN)", type: "text" },
       { name: "hero_eyebrow_ta", label: "Hero Eyebrow (TA)", type: "text" },
       { name: "hero_title_en", label: "Hero Title (EN)", type: "text" },

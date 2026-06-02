@@ -82,7 +82,7 @@ export default async function LocaleLayout({
           >
             {t("skipToContent")}
           </a>
-          <Header />
+          <Header settings={settings} />
           <RouteTransition>
             {children}
           </RouteTransition>
