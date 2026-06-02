@@ -4,11 +4,11 @@ import {
   motion,
   useMotionTemplate,
   useMotionValue,
-  useReducedMotion,
   useSpring,
 } from "framer-motion";
-import type { PointerEvent, ReactNode } from "react";
+import { useEffect, useState, type PointerEvent, type ReactNode } from "react";
 import { cn } from "@/lib/cn";
+import { usePrefersReducedMotion } from "@/lib/motion";
 
 type CardProps = {
   children: ReactNode;
@@ -22,15 +22,16 @@ const MAX_TILT = 6; // degrees — subtle, editorial
 /**
  * Surface card. When `interactive`, the card tilts gently toward the pointer
  * and lifts on hover, cohesive with the site's scroll motion.
- *
- * To avoid hydration mismatches, the DOM structure does NOT depend on
- * prefers-reduced-motion: we always render a motion.div for interactive cards
- * and simply skip the tilt handlers when motion is reduced.
  */
 export function Card({ children, className, interactive = false }: CardProps) {
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   const base = "rounded-3xl border border-ink-border bg-ink-surface shadow-soft";
 
+  // Hooks must be called at the top level, but their values only matter when
+  // mounted and not reduced.
   const rx = useSpring(useMotionValue(0), { stiffness: 200, damping: 18 });
   const ry = useSpring(useMotionValue(0), { stiffness: 200, damping: 18 });
   const transform = useMotionTemplate`perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg)`;
@@ -39,7 +40,7 @@ export function Card({ children, className, interactive = false }: CardProps) {
     return <div className={cn(base, className)}>{children}</div>;
   }
 
-  const enabled = !reduce;
+  const enabled = mounted && !reduce;
 
   const onMove = (e: PointerEvent<HTMLDivElement>) => {
     if (!enabled) return;
