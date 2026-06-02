@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { StarIcon } from "./icons";
 import { usePrefersReducedMotion } from "@/lib/motion";
 
@@ -44,30 +44,27 @@ export function TestimonialCarousel({
   return (
     <div className="mx-auto max-w-3xl">
       <div className="relative min-h-[15rem] rounded-3xl border border-ink-border bg-ink-surface p-8 sm:p-10">
-        <AnimatePresence mode="wait">
-          {mounted && (
-            <motion.figure
-              key={item.id}
-              initial={reduce ? false : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={reduce ? undefined : { opacity: 0, y: -12 }}
-              transition={{ duration: 0.4 }}
-            >
-              <div className="flex justify-center gap-1 text-gold-400" aria-label={`${item.rating} out of 5`}>
-                {Array.from({ length: item.rating }).map((_, i) => (
-                  <StarIcon key={i} className="h-4 w-4" />
-                ))}
-              </div>
-              <blockquote className="mt-5 text-center text-lg leading-relaxed text-cream">
-                &ldquo;{item.quote}&rdquo;
-              </blockquote>
-              <figcaption className="mt-6 text-center">
-                <div className="font-semibold text-gold-200">{item.name}</div>
-                <div className="text-sm text-cream-dim">{item.role}</div>
-              </figcaption>
-            </motion.figure>
-          )}
-        </AnimatePresence>
+        {mounted && (
+          <motion.figure
+            key={item.id}
+            initial={reduce ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <div className="flex justify-center gap-1 text-gold-400" aria-label={`${item.rating} out of 5`}>
+              {Array.from({ length: item.rating }).map((_, i) => (
+                <StarIcon key={i} className="h-4 w-4" />
+              ))}
+            </div>
+            <blockquote className="mt-5 text-center text-lg leading-relaxed text-cream">
+              &ldquo;{item.quote}&rdquo;
+            </blockquote>
+            <figcaption className="mt-6 text-center">
+              <div className="font-semibold text-gold-200">{item.name}</div>
+              <div className="text-sm text-cream-dim">{item.role}</div>
+            </figcaption>
+          </motion.figure>
+        )}
       </div>
 
       {count > 1 ? (

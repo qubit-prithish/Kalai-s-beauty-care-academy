@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/cn";
 import { usePrefersReducedMotion } from "@/lib/motion";
 
@@ -38,21 +38,18 @@ export function FaqAccordion({ items }: { items: FaqItem[] }) {
                 </span>
               </button>
             </h3>
-            <AnimatePresence initial={false}>
-              {mounted && isOpen ? (
-                <motion.div
-                  initial={reduce ? false : { height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={reduce ? undefined : { height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
-                  className="overflow-hidden"
-                >
-                  <p className="px-6 pb-5 text-sm leading-relaxed text-cream-muted">
-                    {item.answer}
-                  </p>
-                </motion.div>
-              ) : null}
-            </AnimatePresence>
+            {mounted && isOpen ? (
+              <motion.div
+                initial={reduce ? false : { height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                className="overflow-hidden"
+              >
+                <p className="px-6 pb-5 text-sm leading-relaxed text-cream-muted">
+                  {item.answer}
+                </p>
+              </motion.div>
+            ) : null}
           </div>
         );
       })}

@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
+import { useRef, type ReactNode } from "react";
 import { gsap } from "@/lib/gsap";
-import { prefersReducedMotion } from "@/lib/motion";
+import { prefersReducedMotion, useIsomorphicLayoutEffect } from "@/lib/motion";
 
 type ScrollRevealProps = {
   children: ReactNode;
@@ -25,7 +25,7 @@ export function ScrollReveal({
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (prefersReducedMotion()) return;
     const el = ref.current;
     if (!el) return;

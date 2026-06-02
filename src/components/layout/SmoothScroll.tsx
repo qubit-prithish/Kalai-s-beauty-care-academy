@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
-import { usePrefersReducedMotion } from "@/lib/motion";
+import { usePrefersReducedMotion, useIsomorphicLayoutEffect } from "@/lib/motion";
 
 /**
  * Site-wide smooth scroll via Lenis, integrated with GSAP ScrollTrigger on a
@@ -19,11 +19,11 @@ export function SmoothScroll() {
   const lenisRef = useRef<Lenis | null>(null);
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     setMounted(true);
   }, []);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (reduce || !mounted) return;
 
     // Guard against SSR or double-initialization
@@ -70,13 +70,16 @@ export function SmoothScroll() {
   }, [reduce, mounted]);
 
   // Handle route changes: reset scroll and refresh ScrollTrigger.
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const lenis = lenisRef.current;
     if (!lenis) return;
 
     // 1) Immediately reset scroll to top on route change.
     // This prevents ScrollTriggers from firing based on old scroll positions.
     lenis.scrollTo(0, { immediate: true });
+    
+    // Kill all current triggers to prevent "removeChild" on old DOM nodes
+    ScrollTrigger.getAll().forEach((t) => t.kill());
 
     // 2) Refresh ScrollTrigger once the new page content has likely settled.
     // Use a longer delay and a safety check to avoid "removeChild" errors

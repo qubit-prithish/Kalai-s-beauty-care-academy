@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link, usePathname } from "@/i18n/navigation";
 import { Button } from "@/components/ui/Button";
 import { WhatsAppIcon } from "@/components/ui/icons";
@@ -106,47 +106,44 @@ export function Header() {
       </div>
 
       {/* Mobile menu */}
-      <AnimatePresence>
-        {mounted && open ? (
-          <motion.div
-            initial={reduce ? false : { height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={reduce ? undefined : { height: 0, opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="overflow-hidden border-t border-ink-border bg-ink-page xl:hidden"
-          >
-            <nav className="container-luxe grid gap-1 py-4" aria-label="Mobile">
-              {NAV.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  prefetch={false}
-                  onClick={() => setOpen(false)}
-                  className={cn(
-                    "rounded-xl px-3 py-2.5 text-sm font-medium transition-colors",
-                    isActive(item.href)
-                      ? "bg-ink-raised text-gold-200"
-                      : "text-cream-muted hover:bg-ink-raised hover:text-cream",
-                  )}
-                >
-                  {t(item.key)}
-                </Link>
-              ))}
-              <div className="mt-3 flex items-center gap-3">
-                <LocaleToggle />
-                <Button
-                  href={whatsappHref(waMessage.general())}
-                  variant="whatsapp"
-                  className="flex-1"
-                >
-                  <WhatsAppIcon className="h-4 w-4" />
-                  {tc("enquireWhatsApp")}
-                </Button>
-              </div>
-            </nav>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+      {mounted && open ? (
+        <motion.div
+          initial={reduce ? false : { height: 0, opacity: 0 }}
+          animate={{ height: "auto", opacity: 1 }}
+          transition={{ duration: 0.25 }}
+          className="overflow-hidden border-t border-ink-border bg-ink-page xl:hidden"
+        >
+          <nav className="container-luxe grid gap-1 py-4" aria-label="Mobile">
+            {NAV.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                prefetch={false}
+                onClick={() => setOpen(false)}
+                className={cn(
+                  "rounded-xl px-3 py-2.5 text-sm font-medium transition-colors",
+                  isActive(item.href)
+                    ? "bg-ink-raised text-gold-200"
+                    : "text-cream-muted hover:bg-ink-raised hover:text-cream",
+                )}
+              >
+                {t(item.key)}
+              </Link>
+            ))}
+            <div className="mt-3 flex items-center gap-3">
+              <LocaleToggle />
+              <Button
+                href={whatsappHref(waMessage.general())}
+                variant="whatsapp"
+                className="flex-1"
+              >
+                <WhatsAppIcon className="h-4 w-4" />
+                {tc("enquireWhatsApp")}
+              </Button>
+            </div>
+          </nav>
+        </motion.div>
+      ) : null}
     </header>
   );
 }
