@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { gsap } from "@/lib/gsap";
-import { prefersReducedMotion } from "@/lib/motion";
+import { prefersReducedMotion, useIsomorphicLayoutEffect } from "@/lib/motion";
 
 export type MissionContent = {
   eyebrow: string;
@@ -22,7 +22,7 @@ export type MissionContent = {
 export function MissionPinned({ content }: { content: MissionContent }) {
   const root = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (prefersReducedMotion()) return;
     const el = root.current;
     if (!el) return;

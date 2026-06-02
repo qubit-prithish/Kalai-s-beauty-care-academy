@@ -58,10 +58,24 @@ export default function ParticleScene() {
       io.disconnect();
       document.removeEventListener("visibilitychange", onVisibility);
       
-      // Let R3F manage WebGL renderer cleanup internally.
-      // Calling forceContextLoss manually causes the "Context Lost" errors.
+      // Proper WebGL cleanup on unmount
       if (glRef.current) {
-        glRef.current = null;
+        try {
+          // Dispose of WebGL resources properly
+          glRef.current.dispose();
+          // Only force context loss if we still have a valid context
+          const gl = glRef.current.getContext();
+          if (gl && !gl.isContextLost()) {
+            const loseContext = gl.getExtension('WEBGL_lose_context');
+            if (loseContext) {
+              loseContext.loseContext();
+            }
+          }
+        } catch (e) {
+          // Silently handle cleanup errors during unmount
+        } finally {
+          glRef.current = null;
+        }
       }
     };
   }, [mounted]);
@@ -76,7 +90,7 @@ export default function ParticleScene() {
   return (
     <div ref={containerRef} className="h-full w-full">
       <Canvas
-        key="hero-particle-canvas"
+        key={`particle-canvas-${mounted}`}
         frameloop={frameloop}
         dpr={[1, 1.5]}
         camera={{ position: [0, 0, 6], fov: 60 }}
@@ -85,13 +99,19 @@ export default function ParticleScene() {
           powerPreference: "high-performance",
           alpha: true,
           stencil: false,
-          depth: true
+          depth: true,
+          preserveDrawingBuffer: false
         }}
         onCreated={({ gl }) => {
           glRef.current = gl;
-          // Guard against context leaks
+          // Prevent default context loss behavior - let us handle it
           gl.domElement.addEventListener("webglcontextlost", (e) => {
             e.preventDefault();
+            console.warn("WebGL context lost, recovering...");
+          }, false);
+          
+          gl.domElement.addEventListener("webglcontextrestored", () => {
+            console.log("WebGL context restored");
           }, false);
         }}
         style={{ pointerEvents: "none" }}

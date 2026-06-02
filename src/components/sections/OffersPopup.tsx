@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { TrustBadge } from "@/components/ui/TrustBadge";
 import { WhatsAppIcon } from "@/components/ui/icons";
@@ -58,47 +58,43 @@ export function OffersPopup({ offer }: { offer: PopupOffer }) {
   }, [open]);
 
   return (
-    <AnimatePresence>
-      {mounted && open ? (
+    mounted && open ? (
+      <motion.div
+        className="fixed inset-0 z-[60] grid place-items-center p-4"
+        initial={reduce ? false : { opacity: 0 }}
+        animate={{ opacity: 1 }}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="offer-popup-title"
+      >
+        <div className="absolute inset-0 bg-ink-page/70 backdrop-blur-sm" onClick={dismiss} />
         <motion.div
-          className="fixed inset-0 z-[60] grid place-items-center p-4"
-          initial={reduce ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={reduce ? undefined : { opacity: 0 }}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="offer-popup-title"
+          className="relative w-full max-w-md overflow-hidden rounded-3xl border border-gold-500/30 bg-ink-surface p-8 shadow-gold"
+          initial={reduce ? false : { y: 20, scale: 0.96, opacity: 0 }}
+          animate={{ y: 0, scale: 1, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 240, damping: 24 }}
         >
-          <div className="absolute inset-0 bg-ink-page/70 backdrop-blur-sm" onClick={dismiss} />
-          <motion.div
-            className="relative w-full max-w-md overflow-hidden rounded-3xl border border-gold-500/30 bg-ink-surface p-8 shadow-gold"
-            initial={reduce ? false : { y: 20, scale: 0.96, opacity: 0 }}
-            animate={{ y: 0, scale: 1, opacity: 1 }}
-            exit={reduce ? undefined : { y: 20, scale: 0.96, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 240, damping: 24 }}
+          <button
+            type="button"
+            onClick={dismiss}
+            aria-label={offer.closeLabel}
+            className="absolute right-4 top-4 grid h-8 w-8 place-items-center rounded-full border border-ink-border text-cream-muted transition hover:text-gold-200"
           >
-            <button
-              type="button"
-              onClick={dismiss}
-              aria-label={offer.closeLabel}
-              className="absolute right-4 top-4 grid h-8 w-8 place-items-center rounded-full border border-ink-border text-cream-muted transition hover:text-gold-200"
-            >
-              ✕
-            </button>
-            <TrustBadge tone="gold">{offer.badge}</TrustBadge>
-            <h2 id="offer-popup-title" className="heading-display mt-4 text-2xl text-cream">
-              {offer.title}
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed text-cream-muted">{offer.description}</p>
-            <div className="mt-6">
-              <Button href={offer.href} variant="primary" className="w-full" >
-                <WhatsAppIcon className="h-4 w-4" />
-                {offer.ctaLabel}
-              </Button>
-            </div>
-          </motion.div>
+            ✕
+          </button>
+          <TrustBadge tone="gold">{offer.badge}</TrustBadge>
+          <h2 id="offer-popup-title" className="heading-display mt-4 text-2xl text-cream">
+            {offer.title}
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed text-cream-muted">{offer.description}</p>
+          <div className="mt-6">
+            <Button href={offer.href} variant="primary" className="w-full" >
+              <WhatsAppIcon className="h-4 w-4" />
+              {offer.ctaLabel}
+            </Button>
+          </div>
         </motion.div>
-      ) : null}
-    </AnimatePresence>
+      </motion.div>
+    ) : null
   );
 }

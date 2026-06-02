@@ -1,6 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
+
+/** SSR-safe useLayoutEffect hook. */
+export const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 /** SSR-safe prefers-reduced-motion hook (for Lenis / GSAP / R3F, outside Framer).
  * Returns false during SSR and initial hydration to match server output.
