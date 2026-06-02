@@ -1,14 +1,17 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/cn";
+import { usePrefersReducedMotion } from "@/lib/motion";
 
 export type FaqItem = { id: string; question: string; answer: string };
 
 export function FaqAccordion({ items }: { items: FaqItem[] }) {
   const [open, setOpen] = useState<string | null>(items[0]?.id ?? null);
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   return (
     <div className="divide-y divide-ink-border overflow-hidden rounded-3xl border border-ink-border bg-ink-surface">
@@ -36,7 +39,7 @@ export function FaqAccordion({ items }: { items: FaqItem[] }) {
               </button>
             </h3>
             <AnimatePresence initial={false}>
-              {isOpen ? (
+              {mounted && isOpen ? (
                 <motion.div
                   initial={reduce ? false : { height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
