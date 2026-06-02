@@ -4,9 +4,11 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { getServiceRoleClient, isAdminUser } from "@/lib/supabase/admin";
+import type { SupabaseClient } from "@supabase/supabase-js";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { requireAdmin } from "@/lib/admin-auth";
 import type { EnquiryStatus } from "@/lib/content/types";
+import { ENTITIES } from "./config";
 
 export type SignInState = { error: string | null };
 
@@ -101,13 +103,40 @@ function revalidatePublic(table?: string, slug?: string) {
   }
 }
 
+async function cleanupStorage(db: SupabaseClient, value: unknown) {
+  if (typeof value === "string") {
+    // Match all storage URLs. The regex is global (g) to find multiple images in HTML.
+    const matches = value.matchAll(/\/storage\/v1\/object\/public\/([^/]+)\/([^"'\s>]+)/g);
+    for (const match of matches) {
+      const bucket = match[1];
+      const path = match[2];
+      await db.storage.from(bucket).remove([path]);
+    }
+  } else if (Array.isArray(value)) {
+    for (const item of value) await cleanupStorage(db, item);
+  } else if (value && typeof value === "object") {
+    for (const item of Object.values(value)) await cleanupStorage(db, item);
+  }
+}
+
 export async function saveRow(table: string, id: string | null, values: Record<string, unknown>) {
+  await requireAdmin();
+  const cfg = ENTITIES[table];
+  if (!cfg) return { error: "Unauthorized table access" };
+
+  // Only allow updating/inserting fields defined in the config.
+  const allowedKeys = new Set(cfg.fields.map(f => f.name));
+  const cleanValues: Record<string, unknown> = {};
+  for (const key of Object.keys(values)) {
+    if (allowedKeys.has(key)) cleanValues[key] = values[key];
+  }
+
   const db = getServiceRoleClient();
   if (id) {
-    const { error } = await db.from(table).update(values).eq("id", id);
+    const { error } = await db.from(table).update(cleanValues).eq("id", id);
     if (error) return { error: error.message };
   } else {
-    const { error } = await db.from(table).insert(values);
+    const { error } = await db.from(table).insert(cleanValues);
     if (error) return { error: error.message };
   }
   revalidatePublic(table, values.slug as string | undefined);
@@ -115,13 +144,17 @@ export async function saveRow(table: string, id: string | null, values: Record<s
 }
 
 export async function deleteRow(table: string, id: string) {
+  await requireAdmin();
+  if (!ENTITIES[table]) return { error: "Unauthorized table access" };
+
   const db = getServiceRoleClient();
 
-  // Try to find the slug before deleting so we can revalidate it
+  // Fetch the entire row before deleting so we can clean up any storage files.
+  const { data: row } = await db.from(table).select("*").eq("id", id).single();
   let slug: string | undefined;
-  if (["courses", "services", "blog_posts"].includes(table)) {
-    const { data } = await db.from(table).select("slug").eq("id", id).single();
-    if (data) slug = data.slug;
+  if (row) {
+    if ("slug" in row) slug = String(row.slug);
+    await cleanupStorage(db, row);
   }
 
   const { error } = await db.from(table).delete().eq("id", id);

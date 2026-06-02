@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-import { createAdminClient } from "@/lib/supabase/admin";
+import { createAdminClient, isAdminUser } from "@/lib/supabase/admin";
 
 // Admin-only media upload. Verifies the caller is a registered admin, then
 // uploads to the given Storage bucket and returns the public URL.
@@ -8,8 +8,8 @@ export async function POST(req: Request) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
-  const { data: row } = await supabase.from("admins").select("user_id").eq("user_id", user.id).maybeSingle();
-  if (!row) return NextResponse.json({ error: "forbidden" }, { status: 403 });
+  const allowed = await isAdminUser(user.id);
+  if (!allowed) return NextResponse.json({ error: "forbidden" }, { status: 403 });
 
   const form = await req.formData();
   const file = form.get("file") as File | null;

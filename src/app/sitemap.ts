@@ -38,14 +38,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const l of routing.locales) {
       languages[l === "en" ? "en-IN" : "ta-IN"] = absoluteUrl(l, path);
     }
+    
+    // / is 1, top-level like /courses is 0.8, deeper like /courses/slug is 0.7
+    const priority = path === "/" ? 1 : path.split("/").length > 2 ? 0.7 : 0.8;
+
     return {
       url: absoluteUrl(routing.defaultLocale, path),
       lastModified: now,
       changeFrequency: path === "/" ? "weekly" : "monthly",
-      priority: path === "/" ? 1 : path.includes("/") && path.length > 1 ? 0.7 : 0.8,
+      priority,
       alternates: { languages },
     };
   });
 }
 
-export const dynamic = "force-static";
+export const revalidate = 3600; // Refresh every hour
