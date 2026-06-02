@@ -62,10 +62,28 @@ export function SmoothScroll() {
 
     return () => {
       ctx.revert();
-      lenis.destroy();
+      
+      // Cleanup must be defensive to avoid "removeChild" errors
+      try {
+        lenis.destroy();
+      } catch (e) {
+        // Ignore errors during cleanup
+      }
+      
       lenisRef.current = null;
-      // 3) Final safety: kill any global triggers on unmount
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      
+      // Kill all ScrollTriggers safely
+      try {
+        ScrollTrigger.getAll().forEach((t) => {
+          try {
+            t.kill(true); // true = immediately, don't animate out
+          } catch (e) {
+            // Ignore individual trigger errors
+          }
+        });
+      } catch (e) {
+        // Ignore batch kill errors
+      }
     };
   }, [reduce, mounted]);
 
@@ -76,17 +94,35 @@ export function SmoothScroll() {
 
     // 1) Immediately reset scroll to top on route change.
     // This prevents ScrollTriggers from firing based on old scroll positions.
-    lenis.scrollTo(0, { immediate: true });
+    try {
+      lenis.scrollTo(0, { immediate: true });
+    } catch (e) {
+      // Ignore scroll reset errors during navigation
+    }
     
     // Kill all current triggers to prevent "removeChild" on old DOM nodes
-    ScrollTrigger.getAll().forEach((t) => t.kill());
+    try {
+      ScrollTrigger.getAll().forEach((t) => {
+        try {
+          t.kill(true); // Immediate kill, don't animate
+        } catch (e) {
+          // Ignore individual trigger errors
+        }
+      });
+    } catch (e) {
+      // Ignore batch errors
+    }
 
     // 2) Refresh ScrollTrigger once the new page content has likely settled.
     // Use a longer delay and a safety check to avoid "removeChild" errors
     // if the component unmounts before the timer fires.
     const timer = setTimeout(() => {
       if (lenisRef.current) {
-        ScrollTrigger.refresh();
+        try {
+          ScrollTrigger.refresh();
+        } catch (e) {
+          // Ignore refresh errors during rapid navigation
+        }
       }
     }, 250);
 
