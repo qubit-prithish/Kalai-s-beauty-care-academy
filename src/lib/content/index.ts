@@ -14,6 +14,10 @@ import {
   mapOffer,
   mapService,
   mapTestimonial,
+  mapAboutPage,
+  mapAboutWhy,
+  mapAboutFacility,
+  mapAboutTrainer,
 } from "./map";
 import type {
   AboutImage,
@@ -24,6 +28,10 @@ import type {
   Service,
   Settings,
   Testimonial,
+  AboutPageData,
+  AboutWhyItem,
+  AboutFacility,
+  AboutTrainer,
 } from "./types";
 
 const REVALIDATE = 300; // 5 min — admin edits appear without redeploy.
@@ -169,7 +177,39 @@ export async function getGalleryCategories(): Promise<
   return [...seen.entries()].map(([id, label]) => ({ id, label }));
 }
 
+export async function getAboutTrainers(): Promise<AboutTrainer[]> {
+  const rows = await restSelect("about_trainers", {
+    query: "select=*&order=sort_order.asc",
+    revalidate: REVALIDATE,
+  });
+  return rows.map(mapAboutTrainer);
+}
+
 // ── Settings / NAP ────────────────────────────────────────────────────────────
+export async function getAboutPageData(): Promise<AboutPageData | null> {
+  const row = await restSingle("about_page", {
+    query: "select=*",
+    revalidate: REVALIDATE,
+  });
+  return row ? mapAboutPage(row) : null;
+}
+
+export async function getAboutWhyItems(): Promise<AboutWhyItem[]> {
+  const rows = await restSelect("about_why_choose_us", {
+    query: "select=*&order=sort_order.asc",
+    revalidate: REVALIDATE,
+  });
+  return rows.map(mapAboutWhy);
+}
+
+export async function getAboutFacilities(): Promise<AboutFacility[]> {
+  const rows = await restSelect("about_facilities", {
+    query: "select=*&order=sort_order.asc",
+    revalidate: REVALIDATE,
+  });
+  return rows.map(mapAboutFacility);
+}
+
 export async function getSettings(): Promise<Settings> {
   const [settingsRows, aboutRow] = await Promise.all([
     restSelect("settings", { revalidate: REVALIDATE }),
@@ -251,4 +291,8 @@ export type {
   Service,
   Settings,
   Testimonial,
+  AboutPageData,
+  AboutWhyItem,
+  AboutFacility,
+  AboutTrainer,
 } from "./types";

@@ -115,12 +115,64 @@ export const ENTITIES: Record<string, EntityConfig> = {
       { name: "featured", label: "Featured", type: "bool", list: true },
     ],
   },
-  about: {
-    table: "about", label: "About Page", titleField: "id", orderBy: "id",
+  about_page: {
+    table: "about_page", label: "About Page (Main)", titleField: "id", orderBy: "id",
     fields: [
-      { name: "image_url", label: "Section Image", type: "image", bucket: "about" },
-      { name: "image_alt_en", label: "Alt Text (EN)", type: "text" },
-      { name: "image_alt_ta", label: "Alt Text (TA)", type: "text" },
+      { name: "hero_eyebrow_en", label: "Hero Eyebrow (EN)", type: "text" },
+      { name: "hero_eyebrow_ta", label: "Hero Eyebrow (TA)", type: "text" },
+      { name: "hero_title_en", label: "Hero Title (EN)", type: "text" },
+      { name: "hero_title_ta", label: "Hero Title (TA)", type: "text" },
+      { name: "hero_subtitle_en", label: "Hero Subtitle (EN)", type: "textarea" },
+      { name: "hero_subtitle_ta", label: "Hero Subtitle (TA)", type: "textarea" },
+      
+      { name: "story_title_en", label: "Story Title (EN)", type: "text" },
+      { name: "story_title_ta", label: "Story Title (TA)", type: "text" },
+      { name: "story_en", label: "Story (EN)", type: "textarea" },
+      { name: "story_ta", label: "Story (TA)", type: "textarea" },
+      
+      { name: "mission_title_en", label: "Mission Title (EN)", type: "text" },
+      { name: "mission_title_ta", label: "Mission Title (TA)", type: "text" },
+      { name: "mission_en", label: "Mission (EN)", type: "textarea" },
+      { name: "mission_ta", label: "Mission (TA)", type: "textarea" },
+      
+      { name: "founder_title_en", label: "Founder Header (EN)", type: "text" },
+      { name: "founder_title_ta", label: "Founder Header (TA)", type: "text" },
+      { name: "founder_name_en", label: "Founder Name (EN)", type: "text" },
+      { name: "founder_name_ta", label: "Founder Name (TA)", type: "text" },
+      { name: "founder_role_en", label: "Founder Role (EN)", type: "text" },
+      { name: "founder_role_ta", label: "Founder Role (TA)", type: "text" },
+      { name: "founder_bio_en", label: "Founder Bio (EN)", type: "textarea" },
+      { name: "founder_bio_ta", label: "Founder Bio (TA)", type: "textarea" },
+      { name: "founder_image_url", label: "Founder Photo", type: "image", bucket: "about" },
+      
+      { name: "credentials_title_en", label: "Credentials Title (EN)", type: "text" },
+      { name: "credentials_title_ta", label: "Credentials Title (TA)", type: "text" },
+      { name: "credentials_desc_en", label: "Credentials Desc (EN)", type: "textarea" },
+      { name: "credentials_desc_ta", label: "Credentials Desc (TA)", type: "textarea" },
+    ],
+  },
+  about_why: {
+    table: "about_why_choose_us", label: "About: Why Choose Us", titleField: "text_en", orderBy: "sort_order",
+    fields: [
+      ...bilingual("text", "Reason"),
+      { name: "sort_order", label: "Sort order", type: "number" },
+    ],
+  },
+  about_facilities: {
+    table: "about_facilities", label: "About: Facilities", titleField: "name_en", orderBy: "sort_order",
+    fields: [
+      ...bilingual("name", "Facility Name"),
+      { name: "sort_order", label: "Sort order", type: "number" },
+    ],
+  },
+  trainers: {
+    table: "about_trainers", label: "About: Trainers", titleField: "name_en", orderBy: "sort_order",
+    fields: [
+      ...bilingual("name", "Trainer Name").map((f, i) => ({ ...f, list: i === 0 })),
+      ...bilingual("role", "Role"),
+      ...bilingual("bio", "Short Bio", "textarea"),
+      { name: "image_url", label: "Trainer Photo", type: "image", bucket: "about" },
+      { name: "sort_order", label: "Sort order", type: "number" },
     ],
   },
   settings: {
@@ -142,5 +194,5 @@ export const ENTITIES: Record<string, EntityConfig> = {
 };
 
 export const ENTITY_ORDER = [
-  "courses", "services", "offers", "gallery", "testimonials", "about", "faqs", "settings",
+  "courses", "services", "offers", "gallery", "testimonials", "about_page", "about_why", "about_facilities", "trainers", "faqs", "settings",
 ] as const;

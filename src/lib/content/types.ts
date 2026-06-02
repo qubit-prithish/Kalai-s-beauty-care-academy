@@ -139,6 +139,44 @@ export interface AboutImage {
   alt: Localized;
 }
 
+export interface AboutPageData {
+  heroEyebrow: Localized;
+  heroTitle: Localized;
+  heroSubtitle: Localized;
+  storyTitle: Localized;
+  story: Localized;
+  missionTitle: Localized;
+  mission: Localized;
+  founderTitle: Localized;
+  founderName: Localized;
+  founderRole: Localized;
+  founderBio: Localized;
+  founderImage: AboutImage | null;
+  credentialsTitle: Localized;
+  credentialsDesc: Localized;
+}
+
+export interface AboutWhyItem {
+  id: string;
+  text: Localized;
+  order: number;
+}
+
+export interface AboutFacility {
+  id: string;
+  name: Localized;
+  order: number;
+}
+
+export interface AboutTrainer {
+  id: string;
+  name: Localized;
+  role: Localized;
+  bio: Localized;
+  image: AboutImage | null;
+  order: number;
+}
+
 export interface Settings {
   brandName: Localized;
   tagline: Localized;

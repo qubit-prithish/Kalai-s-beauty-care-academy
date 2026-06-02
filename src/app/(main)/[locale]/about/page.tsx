@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
-import { getSettings } from "@/lib/content";
+import {
+  getAboutFacilities,
+  getAboutPageData,
+  getAboutTrainers,
+  getAboutWhyItems,
+} from "@/lib/content";
 import { pick } from "@/lib/locale";
 import { whatsappHref, waMessage } from "@/lib/whatsapp";
 import { buildMetadata } from "@/lib/seo";
@@ -29,9 +34,6 @@ export async function generateMetadata({
   });
 }
 
-const USP_KEYS = ["techniques", "accessories", "treatments", "handsOn", "reputation", "legacy"] as const;
-const FACILITY_KEYS = ["ac", "wifi", "parking", "wheelchair", "restroom", "refreshments", "women"] as const;
-
 export default async function AboutPage({
   params,
 }: {
@@ -41,18 +43,26 @@ export default async function AboutPage({
   setRequestLocale(locale);
   const l = locale as Locale;
 
-  const t = await getTranslations("about");
-  const tu = await getTranslations("usps");
-  const tf = await getTranslations("facilities");
   const tc = await getTranslations("common");
-  const settings = await getSettings();
+  
+  const [page, usps, facilities, trainers] = await Promise.all([
+    getAboutPageData(),
+    getAboutWhyItems(),
+    getAboutFacilities(),
+    getAboutTrainers(),
+  ]);
+
+  // Fallback defaults for safety (unlikely with seeded DB)
+  const heroEyebrow = page ? pick(page.heroEyebrow, l) : "";
+  const heroTitle = page ? pick(page.heroTitle, l) : "";
+  const heroSubtitle = page ? pick(page.heroSubtitle, l) : "";
 
   return (
     <>
       {/* Intro */}
       <section className="py-section">
         <div className="container-luxe">
-          <SectionHeading eyebrow={t("eyebrow")} title={t("title")} subtitle={t("subtitle")} as="h1" />
+          <SectionHeading eyebrow={heroEyebrow} title={heroTitle} subtitle={heroSubtitle} as="h1" />
         </div>
       </section>
 
@@ -61,14 +71,14 @@ export default async function AboutPage({
         <div className="container-luxe grid gap-10 lg:grid-cols-2">
           <Reveal>
             <div className="rounded-3xl border border-ink-border bg-ink-surface p-8">
-              <h2 className="heading-display text-2xl text-cream">{t("storyTitle")}</h2>
-              <p className="mt-4 leading-relaxed text-cream-muted">{t("story")}</p>
+              <h2 className="heading-display text-2xl text-cream">{page ? pick(page.storyTitle, l) : ""}</h2>
+              <p className="mt-4 leading-relaxed text-cream-muted">{page ? pick(page.story, l) : ""}</p>
             </div>
           </Reveal>
           <Reveal delay={0.1}>
             <div className="flex h-full flex-col justify-center rounded-3xl border border-gold-500/25 bg-gold-500/[0.06] p-8">
-              <h2 className="heading-display text-2xl text-gold-200">{t("missionTitle")}</h2>
-              <p className="mt-4 leading-relaxed text-cream">{t("mission")}</p>
+              <h2 className="heading-display text-2xl text-gold-200">{page ? pick(page.missionTitle, l) : ""}</h2>
+              <p className="mt-4 leading-relaxed text-cream">{page ? pick(page.mission, l) : ""}</p>
             </div>
           </Reveal>
         </div>
@@ -78,11 +88,11 @@ export default async function AboutPage({
       <section className="pb-section">
         <div className="container-luxe grid items-center gap-10 lg:grid-cols-5">
           <Reveal className="lg:col-span-2">
-            {settings.aboutImage?.url ? (
+            {page?.founderImage?.url ? (
               <div className="relative h-full overflow-hidden rounded-3xl">
                 <Image
-                  src={settings.aboutImage.url}
-                  alt={pick(settings.aboutImage.alt, l)}
+                  src={page.founderImage.url}
+                  alt={pick(page.founderImage.alt, l)}
                   width={600}
                   height={750}
                   className="h-full w-full object-cover"
@@ -100,17 +110,17 @@ export default async function AboutPage({
           </Reveal>
           <div className="lg:col-span-3">
             <Reveal>
-              <p className="eyebrow">{t("founderTitle")}</p>
+              <p className="eyebrow">{page ? pick(page.founderTitle, l) : ""}</p>
               <h2 className="heading-display mt-3 text-3xl text-cream sm:text-4xl">
-                {t("founderName")}
+                {page ? pick(page.founderName, l) : ""}
               </h2>
-              <p className="mt-2 text-gold-200">{t("founderRole")}</p>
-              <p className="mt-5 leading-relaxed text-cream-muted">{t("founderBio")}</p>
+              <p className="mt-2 text-gold-200">{page ? pick(page.founderRole, l) : ""}</p>
+              <p className="mt-5 leading-relaxed text-cream-muted">{page ? pick(page.founderBio, l) : ""}</p>
               <div className="mt-6">
                 <h3 className="text-sm font-semibold uppercase tracking-luxe text-gold-300">
-                  {t("credentialsTitle")}
+                  {page ? pick(page.credentialsTitle, l) : ""}
                 </h3>
-                <p className="mt-2 text-sm text-cream-dim">{t("credentialsPending")}</p>
+                <p className="mt-2 text-sm text-cream-dim">{page ? pick(page.credentialsDesc, l) : ""}</p>
               </div>
             </Reveal>
           </div>
@@ -120,15 +130,16 @@ export default async function AboutPage({
       {/* Why choose us */}
       <section className="border-y border-ink-border bg-ink-surface/40 py-section">
         <div className="container-luxe">
-          <SectionHeading title={t("whyTitle")} />
+          {/* We'll use a hardcoded translation key for section title if not in singleton */}
+          <SectionHeading title={pick({ en: "Why choose us", ta: "ஏன் எங்களை தேர்வு செய்வது" }, l)} />
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {USP_KEYS.map((key, i) => (
-              <Reveal key={key} delay={i * 0.06}>
+            {usps.map((item, i) => (
+              <Reveal key={item.id} delay={i * 0.06}>
                 <div className="flex h-full items-start gap-4 rounded-3xl border border-ink-border bg-ink-page p-6">
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-gold-gradient font-display text-lg font-bold text-ink-page">
                     {i + 1}
                   </span>
-                  <p className="text-sm leading-relaxed text-cream-muted">{tu(key)}</p>
+                  <p className="text-sm leading-relaxed text-cream-muted">{pick(item.text, l)}</p>
                 </div>
               </Reveal>
             ))}
@@ -139,11 +150,11 @@ export default async function AboutPage({
       {/* Facilities */}
       <section className="py-section">
         <div className="container-luxe">
-          <SectionHeading title={t("facilitiesTitle")} />
+          <SectionHeading title={pick({ en: "Facilities", ta: "வசதிகள்" }, l)} />
           <div className="mt-12 flex flex-wrap justify-center gap-3">
-            {FACILITY_KEYS.map((key) => (
-              <TrustBadge key={key} tone="gold" className="px-4 py-2 text-sm">
-                {tf(key)}
+            {facilities.map((f) => (
+              <TrustBadge key={f.id} tone="gold" className="px-4 py-2 text-sm">
+                {pick(f.name, l)}
               </TrustBadge>
             ))}
           </div>
@@ -153,21 +164,44 @@ export default async function AboutPage({
       {/* Team */}
       <section className="pb-section">
         <div className="container-luxe">
-          <SectionHeading title={t("teamTitle")} subtitle={t("teamSubtitle")} />
+          <SectionHeading
+            title={pick({ en: "Our trainers", ta: "எங்கள் பயிற்சியாளர்கள்" }, l)}
+            subtitle={pick({ en: "A small, dedicated team so every student gets individual attention.", ta: "ஒவ்வொரு மாணவிக்கும் தனிப்பட்ட கவனம் கிடைக்க சிறிய அர்ப்பணிப்பு குழு." }, l)}
+          />
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {Array.from({ length: settings.trainers }).map((_, i) => (
-              <Reveal key={i} delay={i * 0.08}>
+            {trainers.map((t, i) => (
+              <Reveal key={t.id} delay={i * 0.08}>
                 <div className="overflow-hidden rounded-3xl border border-ink-border bg-ink-surface">
-                  <Placeholder ratio="aspect-square" label={t("trainerPending")} />
+                  {t.image?.url ? (
+                    <div className="relative aspect-square">
+                      <Image
+                        src={t.image.url}
+                        alt={pick(t.image.alt, l)}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                    </div>
+                  ) : (
+                    <Placeholder ratio="aspect-square" label={pick(t.name, l)} />
+                  )}
                   <div className="p-5 text-center">
                     <div className="heading-display text-lg text-cream">
-                      {t("trainerRole")} {i + 1}
+                      {pick(t.name, l)}
                     </div>
-                    <div className="text-sm text-cream-dim">{t("trainerPending")}</div>
+                    <div className="text-sm text-gold-200">{pick(t.role, l)}</div>
+                    {t.bio && (
+                      <p className="mt-3 text-sm text-cream-dim line-clamp-3">{pick(t.bio, l)}</p>
+                    )}
                   </div>
                 </div>
               </Reveal>
             ))}
+            {trainers.length === 0 && (
+              <p className="col-span-full py-10 text-center text-cream-muted">
+                {pick({ en: "Trainer profiles coming soon", ta: "பயிற்சியாளர் விவரம் விரைவில்" }, l)}
+              </p>
+            )}
           </div>
         </div>
       </section>
