@@ -18,6 +18,8 @@ import type { Metadata } from "next";
 import { fontVariables } from "../../fonts";
 import "@/styles/globals.css";
 
+import { RouteTransition } from "@/components/layout/RouteTransition";
+
 const analyticsEnabled = process.env.NEXT_PUBLIC_ENABLE_ANALYTICS === "true";
 const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 
@@ -81,9 +83,9 @@ export default async function LocaleLayout({
             {t("skipToContent")}
           </a>
           <Header />
-          <main id="main" className="min-h-[60vh]">
+          <RouteTransition>
             {children}
-          </main>
+          </RouteTransition>
           <Footer locale={l} settings={settings} />
           <FloatingCTAs />
         </NextIntlClientProvider>

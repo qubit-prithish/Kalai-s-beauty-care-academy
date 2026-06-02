@@ -41,6 +41,8 @@ export function MissionPinned({ content }: { content: MissionContent }) {
           scrub: 1,
           pin: true,
           anticipatePin: 1,
+          invalidateOnRefresh: true,
+          fastScrollEnd: true,
         },
       });
 

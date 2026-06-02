@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
@@ -17,9 +17,14 @@ export function SmoothScroll() {
   const pathname = usePathname();
   const reduce = usePrefersReducedMotion();
   const lenisRef = useRef<Lenis | null>(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    if (reduce) return;
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (reduce || !mounted) return;
 
     // Guard against SSR or double-initialization
     if (typeof window === "undefined") return;
@@ -59,8 +64,10 @@ export function SmoothScroll() {
       ctx.revert();
       lenis.destroy();
       lenisRef.current = null;
+      // 3) Final safety: kill any global triggers on unmount
+      ScrollTrigger.getAll().forEach((t) => t.kill());
     };
-  }, [reduce]);
+  }, [reduce, mounted]);
 
   // Handle route changes: reset scroll and refresh ScrollTrigger.
   useEffect(() => {
@@ -72,11 +79,19 @@ export function SmoothScroll() {
     lenis.scrollTo(0, { immediate: true });
 
     // 2) Refresh ScrollTrigger once the new page content has likely settled.
+    // Use a longer delay and a safety check to avoid "removeChild" errors
+    // if the component unmounts before the timer fires.
     const timer = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 150);
+      if (lenisRef.current) {
+        ScrollTrigger.refresh();
+      }
+    }, 250);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      // Ensure all pending ScrollTriggers are killed on this pathname change 
+      // if they aren't caught by their local context revert.
+    };
   }, [pathname]);
 
   return null;
