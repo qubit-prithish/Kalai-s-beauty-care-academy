@@ -60,8 +60,8 @@ export interface Service {
 
 export interface GalleryItem {
   id: string;
-  type: "image" | "video" | "beforeafter";
-  /** Image src, or video URL/poster. Empty => elegant placeholder. */
+  type: "image" | "beforeafter";
+  /** Image src. Empty => elegant placeholder. */
   src: string;
   /** For before/after comparison items. */
   before?: string;
@@ -104,17 +104,6 @@ export interface Offer {
   order: number;
 }
 
-export interface BlogPost {
-  id: string;
-  slug: string;
-  title: Localized;
-  excerpt: Localized;
-  body: Localized;
-  cover: ImageRef;
-  publishedAt: string;
-  tags: string[];
-}
-
 export interface Faq {
   id: string;
   question: Localized;
@@ -143,6 +132,11 @@ export interface NapHours {
   /** Course/academy hours. */
   academy: Localized;
   note: Localized;
+}
+
+export interface AboutImage {
+  url: string;
+  alt: Localized;
 }
 
 export interface Settings {
@@ -177,4 +171,5 @@ export interface Settings {
     facebook: string;
   };
   hours: NapHours;
+  aboutImage?: AboutImage;
 }

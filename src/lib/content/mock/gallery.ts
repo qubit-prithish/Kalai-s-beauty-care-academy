@@ -55,7 +55,7 @@ export const gallery: GalleryItem[] = [
   },
   {
     id: "g06",
-    type: "video",
+    type: "image",
     src: "",
     caption: { en: "Inside the academy", ta: "கல்விக்கூடத்தின் உள்ளே" },
     category: "academy",

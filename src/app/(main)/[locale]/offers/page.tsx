@@ -51,7 +51,7 @@ export default async function OffersPage({
   return (
     <section className="py-section">
       <div className="container-luxe">
-        <SectionHeading eyebrow={t("title")} title={t("title")} subtitle={t("subtitle")} as="h1" />
+        <SectionHeading title={t("title")} subtitle={t("subtitle")} as="h1" />
 
         {offers.length === 0 ? (
           <div className="mx-auto mt-16 max-w-md rounded-3xl border border-ink-border bg-ink-surface p-10 text-center">

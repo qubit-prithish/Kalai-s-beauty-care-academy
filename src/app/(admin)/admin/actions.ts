@@ -74,7 +74,6 @@ const PUBLIC_PATHS = [
   "/offers",
   "/gallery",
   "/testimonials",
-  "/blog",
   "/contact",
   "/faq",
 ];
@@ -87,7 +86,7 @@ function revalidatePublic(table?: string, slug?: string) {
     revalidatePath(`/ta${p}`, "layout");
   }
 
-  // 2. If we have a specific slug (courses/services/blog), revalidate that specific detail page
+  // 2. If we have a specific slug (courses/services), revalidate that specific detail page
   if (slug) {
     const locales = ["en", "ta"];
     for (const loc of locales) {
@@ -96,8 +95,6 @@ function revalidatePublic(table?: string, slug?: string) {
         revalidatePath(`${prefix}/courses/${slug}`, "page");
       } else if (table === "services") {
         revalidatePath(`${prefix}/services/${slug}`, "page");
-      } else if (table === "blog_posts") {
-        revalidatePath(`${prefix}/blog/${slug}`, "page");
       }
     }
   }

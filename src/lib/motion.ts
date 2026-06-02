@@ -35,21 +35,69 @@ export function prefersReducedMotion(): boolean {
 }
 
 /**
- * Heuristic for low-power / small devices so we can downgrade the 3D scene.
- * Combines viewport width, device memory, and CPU cores where available.
+ * Enhanced mobile/device capability detection for 3D particle support.
+ * Returns true if device is mobile or tablet (for reduced particle count).
  */
-export function isLowPowerDevice(): boolean {
+export function shouldUseReduced3D(): boolean {
   if (typeof window === "undefined") return false;
   try {
-    const smallScreen = window.matchMedia("(max-width: 768px)").matches;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const nav = navigator as any;
-    const lowMemory = typeof nav.deviceMemory === "number" && nav.deviceMemory <= 4;
-    const fewCores =
-      typeof nav.hardwareConcurrency === "number" && nav.hardwareConcurrency <= 4;
-    const coarse = window.matchMedia("(pointer: coarse)").matches;
-    return smallScreen || (coarse && (lowMemory || fewCores));
+    // Width < 1024 is typically mobile/tablet
+    return window.innerWidth < 1024;
   } catch {
     return false;
   }
+}
+
+/**
+ * Check WebGL availability and context support.
+ * Returns true if WebGL is available and context can be created.
+ */
+export function isWebGLAvailable(): boolean {
+  if (typeof window === "undefined" || typeof document === "undefined") return false;
+  
+  try {
+    const canvas = document.createElement("canvas");
+    const gl = canvas.getContext("webgl2") || canvas.getContext("webgl");
+    return gl !== null;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Detect low-end devices using specific requirements:
+ * - hardwareConcurrency <= 4
+ * - innerWidth < 768
+ * - WebGL unavailable
+ */
+export function isLowEndDevice(): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    const webglAvailable = isWebGLAvailable();
+    if (!webglAvailable) return true;
+
+    const lowCores = navigator.hardwareConcurrency <= 4;
+    const smallScreen = window.innerWidth < 768;
+    
+    // Low-end if small screen AND low cores, OR no WebGL
+    return (lowCores && smallScreen);
+  } catch {
+    return true; // Assume low-end on error for safety
+  }
+}
+
+/**
+ * Determines if 3D should be shown or CSS fallback used.
+ * Requirements:
+ * - NOT prefers-reduced-motion
+ * - WebGL available
+ * - NOT a low-end device
+ */
+export function shouldUse3D(): boolean {
+  if (typeof window === "undefined") return false;
+  if (prefersReducedMotion()) return false;
+  if (!isWebGLAvailable()) return false;
+  if (isLowEndDevice()) return false;
+  
+  return true;
 }

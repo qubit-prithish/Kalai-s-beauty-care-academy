@@ -1,17 +1,15 @@
 import { test, expect, type Page } from "@playwright/test";
 import { courses } from "../../src/lib/content/mock/courses";
 import { services } from "../../src/lib/content/mock/services";
-import { blogPosts } from "../../src/lib/content/mock/blog";
 
 const STATIC = [
   "/", "/about", "/courses", "/services", "/gallery",
-  "/testimonials", "/offers", "/blog", "/faq", "/contact",
+  "/testimonials", "/offers", "/faq", "/contact",
 ];
 const ALL_ROUTES = [
   ...STATIC,
   ...courses.map((c) => `/courses/${c.slug}`),
   ...services.map((s) => `/services/${s.slug}`),
-  ...blogPosts.map((p) => `/blog/${p.slug}`),
 ];
 
 const ignore = (t: string) => /_vercel\/insights|_vercel\/speed-insights/.test(t);
@@ -129,7 +127,7 @@ test("reduced-motion: no canvas, usable, clean console", async ({ page }) => {
 for (const w of [360, 768, 1280]) {
   test(`no overflow @ ${w}px`, async ({ page }) => {
     await page.setViewportSize({ width: w, height: 900 });
-    for (const p of ["/", "/about", "/services", "/blog", "/contact"]) {
+    for (const p of ["/", "/about", "/services", "/contact"]) {
       await page.goto(p);
       const diff = await page.evaluate(
         () => document.documentElement.scrollWidth - document.documentElement.clientWidth,

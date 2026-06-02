@@ -34,7 +34,6 @@ alter table public.services     enable row level security;
 alter table public.gallery      enable row level security;
 alter table public.testimonials enable row level security;
 alter table public.offers       enable row level security;
-alter table public.blog_posts   enable row level security;
 alter table public.faqs         enable row level security;
 alter table public.enquiries    enable row level security;
 alter table public.settings     enable row level security;
@@ -57,14 +56,6 @@ drop policy if exists "services admin write" on public.services;
 create policy "services public read" on public.services
   for select to anon, authenticated using (published = true or public.is_admin());
 create policy "services admin write" on public.services
-  for all to authenticated using (public.is_admin()) with check (public.is_admin());
-
--- BLOG POSTS
-drop policy if exists "blog public read" on public.blog_posts;
-drop policy if exists "blog admin write" on public.blog_posts;
-create policy "blog public read" on public.blog_posts
-  for select to anon, authenticated using (published = true or public.is_admin());
-create policy "blog admin write" on public.blog_posts
   for all to authenticated using (public.is_admin()) with check (public.is_admin());
 
 -- OFFERS: anon reads active (and within date window if set).

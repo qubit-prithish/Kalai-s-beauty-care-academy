@@ -1,7 +1,6 @@
 // Row → typed-interface mappers. Keep the shapes IDENTICAL to the mock layer so
 // no UI component changes are required.
 import type {
-  BlogPost,
   Course,
   GalleryItem,
   Offer,
@@ -56,11 +55,13 @@ export function mapService(r: any): Service {
 }
 
 export function mapGallery(r: any): GalleryItem {
-  const type = (r.media_type as GalleryItem["type"]) ?? "image";
+  let type = (r.media_type as GalleryItem["type"]) ?? "image";
+  if (type !== "image" && type !== "beforeafter") type = "image";
+
   return {
     id: r.id,
     type,
-    src: r.image_url ?? r.video_url ?? "",
+    src: r.image_url ?? "",
     before: r.before_url ?? undefined,
     after: r.after_url ?? undefined,
     caption: loc(r.title_en, r.title_ta),
@@ -97,19 +98,6 @@ export function mapOffer(r: any): Offer {
     startsAt: r.starts_at ?? null,
     endsAt: r.ends_at ?? null,
     order: r.sort_order ?? 0,
-  };
-}
-
-export function mapBlogPost(r: any): BlogPost {
-  return {
-    id: r.id,
-    slug: r.slug,
-    title: loc(r.title_en, r.title_ta),
-    excerpt: loc(r.excerpt_en, r.excerpt_ta),
-    body: loc(r.body_en, r.body_ta),
-    cover: { src: r.cover_url ?? "", alt: loc(r.title_en, r.title_ta) },
-    publishedAt: r.published_at ?? new Date().toISOString(),
-    tags: (r.tags as string[]) ?? [],
   };
 }
 /* eslint-enable @typescript-eslint/no-explicit-any */

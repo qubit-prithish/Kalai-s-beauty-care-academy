@@ -8,7 +8,7 @@ import { cn } from "@/lib/cn";
 
 export type GalleryGridItem = {
   id: string;
-  type: "image" | "video" | "beforeafter";
+  type: "image" | "beforeafter";
   src: string;
   before?: string;
   after?: string;
@@ -24,14 +24,12 @@ export function GalleryGrid({
   allLabel,
   beforeLabel,
   afterLabel,
-  videoLabel,
 }: {
   items: GalleryGridItem[];
   categories: GalleryCategory[];
   allLabel: string;
   beforeLabel: string;
   afterLabel: string;
-  videoLabel: string;
 }) {
   const [active, setActive] = useState<string>("all");
   const reduce = useReducedMotion();
@@ -98,15 +96,7 @@ export function GalleryGrid({
                     src={item.src}
                     alt={item.caption}
                     ratio="aspect-[4/3]"
-                    label={item.type === "video" ? videoLabel : undefined}
                   />
-                  {item.type === "video" ? (
-                    <span className="pointer-events-none absolute inset-0 grid place-items-center">
-                      <span className="grid h-14 w-14 place-items-center rounded-full bg-ink-page/70 text-gold-200">
-                        ▶
-                      </span>
-                    </span>
-                  ) : null}
                 </div>
                 <figcaption className="p-4 text-sm text-cream-muted">{item.caption}</figcaption>
               </figure>

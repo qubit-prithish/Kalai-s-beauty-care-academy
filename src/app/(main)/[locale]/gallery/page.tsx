@@ -38,7 +38,7 @@ export default async function GalleryPage({
   return (
     <section className="py-section">
       <div className="container-luxe">
-        <SectionHeading eyebrow={t("title")} title={t("title")} subtitle={t("subtitle")} as="h1" />
+        <SectionHeading title={t("title")} subtitle={t("subtitle")} as="h1" />
 
         {items.length === 0 ? (
           <p className="mt-16 text-center text-cream-muted">{t("empty")}</p>
@@ -58,7 +58,6 @@ export default async function GalleryPage({
               allLabel={t("all")}
               beforeLabel={t("before")}
               afterLabel={t("after")}
-              videoLabel={t("video")}
             />
           </div>
         )}

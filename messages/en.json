@@ -14,8 +14,7 @@
     "testimonialsDescription": "Real stories from students and clients of Kalai's Beauty Care & Academy across Tamil Nadu.",
     "offersTitle": "Offers — Free Demo, EMI & Student Kit",
     "offersDescription": "Current offers at Kalai's Beauty Care & Academy: free demo class, easy EMI on all courses, and a free student starter kit.",
-    "blogTitle": "Beauty Tips & Academy News",
-    "blogDescription": "Guides, advice and stories from Kalai's Beauty Care & Academy — choosing a course, ear lobe repair and more.",
+
     "faqTitle": "FAQ — Timings, Fees, Certificates & Placement",
     "faqDescription": "Answers about course timings, fees, EMI, government-recognised certificates, placement, batch sizes and our Ambattur location.",
     "contactTitle": "Contact & Visit — Ambattur, Chennai",
@@ -46,7 +45,6 @@
     "gallery": "Gallery",
     "testimonials": "Testimonials",
     "offers": "Offers",
-    "blog": "Blog",
     "faq": "FAQ",
     "contact": "Contact",
     "openMenu": "Open menu",
@@ -183,8 +181,7 @@
     "all": "All",
     "empty": "Gallery is being updated. Please check back soon.",
     "before": "Before",
-    "after": "After",
-    "video": "Video coming soon"
+    "after": "After"
   },
   "testimonials": {
     "title": "What our students & clients say",
@@ -203,14 +200,7 @@
     "popupClose": "Close",
     "popupCta": "Enquire now"
   },
-  "blog": {
-    "title": "Beauty tips & academy news",
-    "subtitle": "Guides, advice and stories from Kalai's.",
-    "empty": "Articles coming soon.",
-    "readArticle": "Read article",
-    "backToBlog": "All articles",
-    "published": "Published"
-  },
+
   "faq": {
     "title": "Frequently asked questions",
     "subtitle": "Timings, fees, certificates, placement, batches and location.",

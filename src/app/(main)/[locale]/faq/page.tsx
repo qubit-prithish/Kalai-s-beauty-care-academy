@@ -42,7 +42,7 @@ export default async function FaqPage({
   return (
     <section className="py-section">
       <div className="container-luxe max-w-3xl">
-        <SectionHeading eyebrow={t("title")} title={t("title")} subtitle={t("subtitle")} as="h1" />
+        <SectionHeading title={t("title")} subtitle={t("subtitle")} as="h1" />
 
         {faqs.length === 0 ? (
           <p className="mt-16 text-center text-cream-muted">{t("empty")}</p>

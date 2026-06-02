@@ -67,7 +67,7 @@ export default async function HomePage({
       {/* USP strip */}
       <section className="py-section">
         <div className="container-luxe">
-          <SectionHeading eyebrow={t("uspTitle")} title={t("uspTitle")} subtitle={t("uspSubtitle")} />
+          <SectionHeading title={t("uspTitle")} subtitle={t("uspSubtitle")} />
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {USP_KEYS.map((key, i) => (
               <Reveal key={key} delay={i * 0.06}>
@@ -165,7 +165,6 @@ export default async function HomePage({
         <section className="py-section">
           <div className="container-luxe">
             <SectionHeading
-              eyebrow={t("testimonialsTitle")}
               title={t("testimonialsTitle")}
               subtitle={t("testimonialsSubtitle")}
             />
@@ -189,7 +188,6 @@ export default async function HomePage({
         <section className="py-section">
           <div className="container-luxe">
             <SectionHeading
-              eyebrow={t("offersTitle")}
               title={t("offersTitle")}
               subtitle={t("offersSubtitle")}
             />
