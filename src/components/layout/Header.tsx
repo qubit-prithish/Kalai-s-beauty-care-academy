@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Link, usePathname } from "@/i18n/navigation";
 import { Button } from "@/components/ui/Button";
@@ -10,6 +11,8 @@ import { LocaleToggle } from "./LocaleToggle";
 import { whatsappHref, waMessage } from "@/lib/whatsapp";
 import { cn } from "@/lib/cn";
 import { usePrefersReducedMotion } from "@/lib/motion";
+import type { Settings } from "@/lib/content/types";
+import { pick } from "@/lib/locale";
 
 const NAV = [
   { href: "/", key: "home" },
@@ -23,7 +26,7 @@ const NAV = [
   { href: "/contact", key: "contact" },
 ] as const;
 
-export function Header() {
+export function Header({ settings }: { settings: Settings }) {
   const t = useTranslations("nav");
   const tc = useTranslations("common");
   const pathname = usePathname();
@@ -37,13 +40,28 @@ export function Header() {
     return href === "/" ? pathname === "/" : pathname.startsWith(href);
   };
 
+  const logo = settings.navbarLogo;
+
   return (
     <header className="sticky top-0 z-40 border-b border-ink-border/70 bg-ink-page/80 backdrop-blur-md">
       <div className="container-luxe flex h-16 items-center justify-between gap-4 lg:h-20">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3" aria-label={tc("brand")}>
-          <span className="grid h-10 w-10 place-items-center rounded-full bg-gold-gradient text-ink-page">
-            <span className="heading-display text-lg font-bold">K</span>
+          <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full">
+            {logo?.url ? (
+              <Image
+                src={logo.url}
+                alt={pick(logo.alt, pathname?.startsWith("/ta") ? "ta" : "en")}
+                fill
+                className="object-cover"
+                priority
+                sizes="40px"
+              />
+            ) : (
+              <span className="grid h-full w-full place-items-center bg-gold-gradient text-ink-page">
+                <span className="heading-display text-lg font-bold">K</span>
+              </span>
+            )}
           </span>
           <span className="hidden flex-col leading-tight sm:flex">
             <span className="heading-display text-sm font-semibold text-cream">

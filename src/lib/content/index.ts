@@ -213,7 +213,7 @@ export async function getAboutFacilities(): Promise<AboutFacility[]> {
 export async function getSettings(): Promise<Settings> {
   const [settingsRows, aboutRow] = await Promise.all([
     restSelect("settings", { revalidate: REVALIDATE }),
-    restSingle("about", { query: "select=*", revalidate: REVALIDATE }),
+    restSingle("about_page", { query: "select=*", revalidate: REVALIDATE }),
   ]);
 
   const map = new Map(
@@ -230,14 +230,25 @@ export async function getSettings(): Promise<Settings> {
   const s = (v: unknown, d = "") => (v as string) ?? d;
   const n = (v: unknown, d = 0) => (typeof v === "number" ? v : d);
 
-  // Extract about image from dedicated singleton table
+  // Extract about image and navbar logo from dedicated singleton table
   let aboutImage: AboutImage | undefined;
-  if (aboutRow?.image_url) {
+  if (aboutRow?.founder_image_url) {
     aboutImage = {
-      url: aboutRow.image_url as string,
+      url: aboutRow.founder_image_url as string,
       alt: {
-        en: s(aboutRow.image_alt_en, "Kalai's Beauty Care & Academy founder photo"),
-        ta: s(aboutRow.image_alt_ta, "கலையின் அழகு பராமரிப்பு & கல்விக்கூடம் நிறுவனர் புகைப்படம்"),
+        en: s(aboutRow.founder_name_en, "Kalai's Beauty Care & Academy founder photo"),
+        ta: s(aboutRow.founder_name_ta, "கலையின் அழகு பராமரிப்பு & கல்விக்கூடம் நிறுவனர் புகைப்படம்"),
+      },
+    };
+  }
+
+  let navbarLogo: AboutImage | undefined;
+  if (aboutRow?.navbar_logo_url) {
+    navbarLogo = {
+      url: aboutRow.navbar_logo_url as string,
+      alt: {
+        en: s(aboutRow.navbar_logo_alt_en, "Kalai's Beauty Care & Academy logo"),
+        ta: s(aboutRow.navbar_logo_alt_ta, "கலையின் அழகு பராமரிப்பு & கல்விக்கூடம் சின்னம்"),
       },
     };
   }
@@ -279,6 +290,7 @@ export async function getSettings(): Promise<Settings> {
       note: { en: s(hours.note_en), ta: s(hours.note_ta) },
     },
     aboutImage,
+    navbarLogo,
   };
 }
 

@@ -24,6 +24,12 @@ const list = (en: unknown, ta: unknown) => ({
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export function mapAboutPage(r: any): AboutPageData {
   return {
+    navbarLogo: r.navbar_logo_url
+      ? {
+          url: r.navbar_logo_url,
+          alt: loc(r.navbar_logo_alt_en, r.navbar_logo_alt_ta),
+        }
+      : null,
     heroEyebrow: loc(r.hero_eyebrow_en, r.hero_eyebrow_ta),
     heroTitle: loc(r.hero_title_en, r.hero_title_ta),
     heroSubtitle: loc(r.hero_subtitle_en, r.hero_subtitle_ta),
