@@ -2,7 +2,7 @@
 
 import { useTransition, useState } from "react";
 import { useRouter } from "next/navigation";
-import { updateEnquiryStatus, deleteEnquiry } from "@/app/admin/actions";
+import { updateEnquiryStatus, deleteEnquiry } from "@/app/(admin)/admin/actions";
 import type { EnquiryStatus } from "@/lib/content/types";
 import { cn } from "@/lib/cn";
 

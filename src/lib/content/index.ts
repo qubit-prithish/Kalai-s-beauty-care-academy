@@ -39,7 +39,11 @@ export async function getCourses(): Promise<Course[]> {
 }
 
 export async function getFeaturedCourses(): Promise<Course[]> {
-  return (await getCourses()).filter((c) => c.featured);
+  const rows = await restSelect("courses", {
+    query: "select=*&published=eq.true&featured=eq.true&order=sort_order.asc",
+    revalidate: REVALIDATE,
+  });
+  return rows.map(mapCourse);
 }
 
 export async function getCourseBySlug(slug: string): Promise<Course | null> {
@@ -68,7 +72,11 @@ export async function getServices(): Promise<Service[]> {
 }
 
 export async function getFeaturedServices(): Promise<Service[]> {
-  return (await getServices()).filter((s) => s.featured);
+  const rows = await restSelect("services", {
+    query: "select=*&published=eq.true&featured=eq.true&order=sort_order.asc",
+    revalidate: REVALIDATE,
+  });
+  return rows.map(mapService);
 }
 
 export async function getServiceBySlug(slug: string): Promise<Service | null> {

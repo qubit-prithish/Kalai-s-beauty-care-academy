@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { ENTITY_ORDER, ENTITIES } from "@/app/admin/config";
-import { signOut } from "@/app/admin/actions";
+import { ENTITY_ORDER, ENTITIES } from "@/app/(admin)/admin/config";
+import { signOut } from "@/app/(admin)/admin/actions";
 
 export function Shell({ children }: { children: React.ReactNode }) {
   return (
