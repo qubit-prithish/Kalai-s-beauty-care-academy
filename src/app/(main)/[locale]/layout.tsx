@@ -13,7 +13,7 @@ import { PageViews } from "@/components/layout/PageViews";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { localBusinessJsonLd } from "@/lib/jsonld";
 import { buildMetadata } from "@/lib/seo";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, getMessages } from "next-intl/server";
 import type { Metadata } from "next";
 import { fontVariables } from "../../fonts";
 import "@/styles/globals.css";
@@ -57,6 +57,7 @@ export default async function LocaleLayout({
   const l = locale as Locale;
   const settings = await getSettings();
   const t = await getTranslations({ locale: l, namespace: "common" });
+  const messages = await getMessages();
 
   return (
     <html lang={l} className={fontVariables} suppressHydrationWarning>
@@ -70,7 +71,7 @@ export default async function LocaleLayout({
             strategy="afterInteractive"
           />
         ) : null}
-        <NextIntlClientProvider>
+        <NextIntlClientProvider messages={messages}>
           <SmoothScroll />
           <PageViews />
           <a

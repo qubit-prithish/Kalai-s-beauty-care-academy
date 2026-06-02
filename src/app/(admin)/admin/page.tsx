@@ -1,6 +1,4 @@
-import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
-import { isAdminUser } from "@/lib/supabase/admin";
+import { requireAdmin } from "@/lib/admin-auth";
 import {
   getBlogPosts,
   getCourses,
@@ -20,18 +18,7 @@ export const dynamic = "force-dynamic";
 type Stat = { label: string; count: number; hint: string };
 
 export default async function AdminDashboardPage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  // Defense in depth — middleware already gates this, but verify again here
-  // and enforce admin membership (the membership check needs the server).
-  if (!user) redirect("/admin/login");
-  if (!(await isAdminUser(user.id))) {
-    await supabase.auth.signOut();
-    redirect("/admin/login?error=not-admin");
-  }
+  const user = await requireAdmin();
 
   // Live counts from the content layer.
   const [courses, services, testimonials, offers, blog, gallery, faqs] =
