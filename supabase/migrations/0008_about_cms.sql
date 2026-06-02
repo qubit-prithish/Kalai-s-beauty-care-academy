@@ -3,7 +3,8 @@
 -- ─────────────────────────────────────────────────────────────────────────────
 
 -- 1. Create singleton table
-create table if not exists public.about (
+drop table if exists public.about cascade;
+create table public.about (
   id text primary key check (id = 'about'),
   image_url text,
   image_alt_en text,

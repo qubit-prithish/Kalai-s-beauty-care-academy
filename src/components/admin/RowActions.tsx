@@ -5,22 +5,24 @@ import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { deleteRow } from "@/app/(admin)/admin/actions";
 
-export function RowActions({ table, id }: { table: string; id: string }) {
+export function RowActions({ table, id, noDelete }: { table: string; id: string; noDelete?: boolean }) {
   const router = useRouter();
   const [pending, start] = useTransition();
   return (
     <div className="flex gap-3 text-sm">
       <Link href={`/admin/${table}/${id}`} className="text-gold-200">Edit</Link>
-      <button
-        disabled={pending}
-        onClick={() =>
-          confirm("Delete this row?") &&
-          start(async () => { await deleteRow(table, id); router.refresh(); })
-        }
-        className="text-rose-300"
-      >
-        Delete
-      </button>
+      {!noDelete && (
+        <button
+          disabled={pending}
+          onClick={() =>
+            confirm("Delete this row?") &&
+            start(async () => { await deleteRow(table, id); router.refresh(); })
+          }
+          className="text-rose-300"
+        >
+          Delete
+        </button>
+      )}
     </div>
   );
 }

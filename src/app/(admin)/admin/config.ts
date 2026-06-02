@@ -20,6 +20,7 @@ export type EntityConfig = {
   titleField: string;
   orderBy: string;
   fields: Field[];
+  singleton?: boolean;
 };
 
 const bilingual = (base: string, label: string, type: FieldType = "text"): Field[] => [
@@ -117,6 +118,7 @@ export const ENTITIES: Record<string, EntityConfig> = {
   },
   about_page: {
     table: "about_page", label: "About Page (Main)", titleField: "id", orderBy: "id",
+    singleton: true,
     fields: [
       { name: "hero_eyebrow_en", label: "Hero Eyebrow (EN)", type: "text" },
       { name: "hero_eyebrow_ta", label: "Hero Eyebrow (TA)", type: "text" },
