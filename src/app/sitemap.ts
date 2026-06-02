@@ -39,8 +39,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       languages[l === "en" ? "en-IN" : "ta-IN"] = absoluteUrl(l, path);
     }
     
-    // / is 1, top-level like /courses is 0.8, deeper like /courses/slug is 0.7
-    const priority = path === "/" ? 1 : path.split("/").length > 2 ? 0.7 : 0.8;
+    // Priority mapping for better SEO weighting:
+    // / (Home) -> 1.0
+    // /courses, /services, /gallery, etc. (Listings) -> 0.8
+    // /about, /contact, /faq (Static) -> 0.7
+    // /courses/[slug], /services/[slug] (Detail) -> 0.6
+    // /blog/[slug] (Individual posts) -> 0.5
+    let priority = 0.5;
+    if (path === "/") priority = 1.0;
+    else if (STATIC_PATHS.includes(path)) {
+      priority = ["/courses", "/services", "/gallery", "/offers", "/blog"].includes(path) ? 0.8 : 0.7;
+    } else if (path.startsWith("/courses/") || path.startsWith("/services/")) {
+      priority = 0.6;
+    }
 
     return {
       url: absoluteUrl(routing.defaultLocale, path),
