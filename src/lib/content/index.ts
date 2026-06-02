@@ -116,8 +116,11 @@ export async function getOffers(): Promise<Offer[]> {
 
 /** The single offer (if any) eligible to surface as the homepage popup. */
 export async function getPopupOffer(): Promise<Offer | null> {
-  const offers = await getOffers();
-  return offers.find((o) => o.showPopup) ?? null;
+  const row = await restSingle("offers", {
+    query: "select=*&show_popup=eq.true&limit=1",
+    revalidate: REVALIDATE,
+  });
+  return row ? mapOffer(row) : null;
 }
 
 // ── FAQs ─────────────────────────────────────────────────────────────────────
@@ -150,10 +153,19 @@ export async function getGallery(): Promise<GalleryItem[]> {
 export async function getGalleryCategories(): Promise<
   { id: string; label: GalleryItem["categoryLabel"] }[]
 > {
-  const items = await getGallery();
+  const rows = await restSelect<{
+    category: string;
+    category_label_en: string;
+    category_label_ta: string;
+  }>("gallery", {
+    query: "select=category,category_label_en,category_label_ta",
+    revalidate: REVALIDATE,
+  });
   const seen = new Map<string, GalleryItem["categoryLabel"]>();
-  for (const item of items) {
-    if (!seen.has(item.category)) seen.set(item.category, item.categoryLabel);
+  for (const row of rows) {
+    if (!seen.has(row.category)) {
+      seen.set(row.category, { en: row.category_label_en, ta: row.category_label_ta });
+    }
   }
   return [...seen.entries()].map(([id, label]) => ({ id, label }));
 }
