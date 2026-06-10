@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import { routing, type Locale } from "@/i18n/routing";
 import { getSettings } from "@/lib/content";
@@ -10,7 +9,9 @@ import { Footer } from "@/components/layout/Footer";
 import { FloatingCTAs } from "@/components/layout/FloatingCTAs";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { PageViews } from "@/components/layout/PageViews";
+import { CookieBanner } from "@/components/layout/CookieBanner";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { PlausibleScript } from "@/components/analytics/PlausibleScript";
 import { localBusinessJsonLd } from "@/lib/jsonld";
 import { buildMetadata } from "@/lib/seo";
 import { getTranslations, getMessages } from "next-intl/server";
@@ -21,7 +22,6 @@ import "@/styles/globals.css";
 import { RouteTransition } from "@/components/layout/RouteTransition";
 
 const analyticsEnabled = process.env.NEXT_PUBLIC_ENABLE_ANALYTICS === "true";
-const plausibleDomain = process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN;
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -65,14 +65,7 @@ export default async function LocaleLayout({
     <html lang={locale} className={fontVariables}>
       <body>
         <JsonLd data={localBusinessJsonLd(settings, l)} />
-        {plausibleDomain ? (
-          <Script
-            defer
-            data-domain={plausibleDomain}
-            src="https://plausible.io/js/script.js"
-            strategy="afterInteractive"
-          />
-        ) : null}
+        <PlausibleScript />
         <NextIntlClientProvider messages={messages}>
           <SmoothScroll />
           <PageViews />
@@ -90,6 +83,7 @@ export default async function LocaleLayout({
           <FloatingCTAs />
         </NextIntlClientProvider>
         {analyticsEnabled ? <Analytics /> : null}
+        <CookieBanner />
       </body>
     </html>
   );

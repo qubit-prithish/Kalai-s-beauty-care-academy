@@ -30,8 +30,16 @@ class WebGLErrorBoundary extends Component<{ fallback: React.ReactNode; children
 // Dynamic import, no SSR — the 3D bundle never blocks first paint.
 const ParticleScene = dynamic(() => import("./ParticleScene"), {
   ssr: false,
-  loading: () => <StaticHeroBackdrop />,
+  loading: () => <ParticleCanvasFallback />,
 });
+
+function ParticleCanvasFallback() {
+  return (
+    <div className="h-full w-full min-h-[600px] bg-transparent">
+      <StaticHeroBackdrop />
+    </div>
+  );
+}
 
 /** Enhanced static gold backdrop with animated CSS dots — used as the fallback. */
 function StaticHeroBackdrop() {
@@ -118,10 +126,10 @@ export function HeroParticles() {
   }
 
   return (
-    <div className="pointer-events-none absolute inset-0 -z-10">
+    <div className="pointer-events-none absolute inset-0 -z-10 min-h-[600px]" style={{ willChange: "transform" }}>
       {mode === "three" ? (
         <WebGLErrorBoundary fallback={<StaticHeroBackdrop />}>
-          <Suspense fallback={<StaticHeroBackdrop />}>
+          <Suspense fallback={<ParticleCanvasFallback />}>
             <ParticleScene />
           </Suspense>
         </WebGLErrorBoundary>

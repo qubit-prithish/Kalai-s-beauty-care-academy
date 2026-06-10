@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
+import Image from "next/image";
 import type { Settings } from "@/lib/content/types";
 import { pick } from "@/lib/locale";
 import { telHref } from "@/lib/whatsapp";
@@ -24,6 +25,7 @@ export async function Footer({
   const t = await getTranslations("footer");
   const tn = await getTranslations("nav");
   const { address, contact, hours } = settings;
+  const logo = settings.navbarLogo;
 
   return (
     <footer className="mt-section border-t border-ink-border bg-ink-surface">
@@ -31,8 +33,20 @@ export async function Footer({
         {/* Brand + NAP */}
         <div className="lg:col-span-4">
           <div className="flex items-center gap-3">
-            <span className="grid h-10 w-10 place-items-center rounded-full bg-gold-gradient text-ink-page">
-              <span className="heading-display text-lg font-bold">K</span>
+            <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full">
+              {logo?.url ? (
+                <Image
+                  src={logo.url}
+                  alt={pick(logo.alt, locale)}
+                  fill
+                  className="object-cover"
+                  sizes="40px"
+                />
+              ) : (
+                <span className="grid h-full w-full place-items-center bg-gold-gradient text-ink-page">
+                  <span className="heading-display text-lg font-bold">K</span>
+                </span>
+              )}
             </span>
             <span className="heading-display text-lg text-cream">
               {pick(settings.brandName, locale)}
@@ -153,7 +167,7 @@ export async function Footer({
           <div>
             <h3 className="heading-display mb-4 text-lg text-cream">{t("location")}</h3>
             <a
-              href="https://maps.app.goo.gl/762CCwLhbzDhtozT8"
+              href={settings.address.mapLink}
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 text-gold-200 transition-colors hover:text-gold-300"

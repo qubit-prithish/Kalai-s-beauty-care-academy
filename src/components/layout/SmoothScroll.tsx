@@ -61,28 +61,16 @@ export function SmoothScroll() {
     });
 
     return () => {
-      ctx.revert();
-      
-      // Cleanup must be defensive to avoid "removeChild" errors
       try {
+        ctx.revert();
         lenis.destroy();
-      } catch (e) {
-        // Ignore errors during cleanup
-      }
-      
-      lenisRef.current = null;
-      
-      // Kill all ScrollTriggers safely
-      try {
         ScrollTrigger.getAll().forEach((t) => {
-          try {
-            t.kill(true); // true = immediately, don't animate out
-          } catch (e) {
-            // Ignore individual trigger errors
-          }
+          t.kill(true); // true = immediately, don't animate out
         });
-      } catch (e) {
-        // Ignore batch kill errors
+      } catch {
+        // Ignore errors during cleanup
+      } finally {
+        lenisRef.current = null;
       }
     };
   }, [reduce, mounted]);
@@ -96,20 +84,16 @@ export function SmoothScroll() {
     // This prevents ScrollTriggers from firing based on old scroll positions.
     try {
       lenis.scrollTo(0, { immediate: true });
-    } catch (e) {
+    } catch {
       // Ignore scroll reset errors during navigation
     }
     
     // Kill all current triggers to prevent "removeChild" on old DOM nodes
     try {
       ScrollTrigger.getAll().forEach((t) => {
-        try {
-          t.kill(true); // Immediate kill, don't animate
-        } catch (e) {
-          // Ignore individual trigger errors
-        }
+        t.kill(true); // Immediate kill, don't animate
       });
-    } catch (e) {
+    } catch {
       // Ignore batch errors
     }
 
@@ -120,7 +104,7 @@ export function SmoothScroll() {
       if (lenisRef.current) {
         try {
           ScrollTrigger.refresh();
-        } catch (e) {
+        } catch {
           // Ignore refresh errors during rapid navigation
         }
       }

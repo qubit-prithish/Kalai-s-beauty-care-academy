@@ -16,7 +16,7 @@ export function RouteTransition({ children }: { children: ReactNode }) {
   const reduce = usePrefersReducedMotion();
 
   if (reduce) {
-    return <main id="main" className="min-h-[60vh]">{children}</main>;
+    return <main id="main" aria-label="Main content" className="min-h-[60vh]">{children}</main>;
   }
 
   return (
@@ -26,7 +26,7 @@ export function RouteTransition({ children }: { children: ReactNode }) {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.2, ease: "easeInOut" }}
     >
-      <main id="main" className="min-h-[60vh]">
+      <main id="main" aria-label="Main content" className="min-h-[60vh]">
         {children}
       </main>
     </motion.div>
