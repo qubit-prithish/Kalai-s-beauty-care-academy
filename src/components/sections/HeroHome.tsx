@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
@@ -21,7 +22,28 @@ export async function HeroHome({ settings }: { settings: Settings }) {
       {/* Golden-particles 3D accent (lazy, mobile/reduced-motion safe) */}
       <HeroParticles />
 
-      <div className="container-luxe flex min-h-[88vh] flex-col items-center justify-center py-24 text-center">
+      {/* Brand model — anchored to the right, bleeding off the top/right edge.
+          Hidden on small screens so the centered title stays the focus; on lg+
+          it fills the empty right half and gazes inward toward the CTA. A
+          left-to-right gradient keeps the gold title fully readable. */}
+      <div
+        className="pointer-events-none absolute inset-y-0 right-0 -z-[5] hidden w-[58%] max-w-3xl lg:block xl:w-1/2"
+        aria-hidden="true"
+      >
+        <Image
+          src="/images/hero-model.png"
+          alt=""
+          fill
+          priority
+          sizes="50vw"
+          className="object-cover object-top"
+        />
+        {/* Fade the image into the black background toward the title side */}
+        <div className="absolute inset-0 bg-gradient-to-r from-ink-page via-ink-page/55 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-ink-page to-transparent" />
+      </div>
+
+      <div className="container-luxe relative flex min-h-[88vh] flex-col items-center justify-center py-24 text-center">
         <Reveal>
           <TrustBadge tone="gold" icon={<StarIcon className="h-3 w-3" />}>
             {settings.googleRating}★ · {settings.googleReviews} Google reviews

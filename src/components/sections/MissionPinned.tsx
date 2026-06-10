@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { gsap } from "@/lib/gsap";
 import { prefersReducedMotion, useIsomorphicLayoutEffect } from "@/lib/motion";
 
@@ -85,6 +86,22 @@ export function MissionPinned({ content }: { content: MissionContent }) {
             </div>
             <div className="mt-2 text-sm uppercase tracking-luxe text-cream-muted">
               {content.goalLabel}
+            </div>
+          </div>
+
+          {/* Proof behind the promise — real hands-on training at the academy.
+              Fills the empty lower-left and grounds the mission claim. */}
+          <div className="mt-10 overflow-hidden rounded-3xl border border-ink-border">
+            <div className="relative aspect-[16/10] w-full sm:aspect-[3/2] lg:aspect-[16/9]">
+              <Image
+                src="/images/academy-training.jpg"
+                alt="A Kalai's Beauty Care instructor guiding a student through a hands-on salon treatment"
+                fill
+                loading="lazy"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink-page/50 to-transparent" />
             </div>
           </div>
         </div>
