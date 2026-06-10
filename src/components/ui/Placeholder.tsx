@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { cn } from "@/lib/cn";
 
 type PlaceholderProps = {
@@ -19,16 +20,20 @@ export function Placeholder({
   label,
   ratio = "aspect-[4/3]",
   className,
+  priority = false,
 }: PlaceholderProps) {
   if (src) {
-    // eslint-disable-next-line @next/next/no-img-element
     return (
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        className={cn("h-full w-full object-cover", ratio, className)}
-      />
+      <div className={cn("relative overflow-hidden", ratio, className)}>
+        <Image
+          src={src}
+          alt={alt || ""}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+          priority={priority}
+        />
+      </div>
     );
   }
   return (
@@ -49,11 +54,11 @@ export function Placeholder({
             "repeating-linear-gradient(45deg, #C8A24A 0 1px, transparent 1px 14px)",
         }}
       />
-      <div className="relative text-center px-4">
-        <div className="heading-display text-2xl text-gold-200/80">Kalai&apos;s</div>
-        <div className="mt-1 text-[10px] uppercase tracking-luxe text-cream-dim">
-          {label ?? "Photo coming soon"}
-        </div>
+      <div className="relative flex flex-col items-center justify-center px-4 text-center">
+        <svg className="mb-3 h-16 w-16 opacity-40 text-cream-dim" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+          <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+        </svg>
+        <p className="text-sm text-cream-dim">{label ?? "Photo coming soon"}</p>
       </div>
     </div>
   );

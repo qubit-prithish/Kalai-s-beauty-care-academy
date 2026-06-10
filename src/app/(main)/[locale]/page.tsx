@@ -17,7 +17,7 @@ import { CourseTile } from "@/components/ui/CourseTile";
 import { ServiceTile } from "@/components/ui/ServiceTile";
 import { TestimonialCarousel } from "@/components/ui/TestimonialCarousel";
 import { OffersBanner } from "@/components/ui/OffersBanner";
-import { WhatsAppIcon, InstagramIcon } from "@/components/ui/icons";
+import { WhatsAppIcon } from "@/components/ui/icons";
 import { HeroHome } from "@/components/sections/HeroHome";
 import { StatsBand } from "@/components/sections/StatsBand";
 import { OffersPopup } from "@/components/sections/OffersPopup";
@@ -55,10 +55,6 @@ export default async function HomePage({
     getOffers(),
     getPopupOffer(),
   ]);
-
-  const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(
-    settings.address.mapEmbedQuery,
-  )}&output=embed`;
 
   return (
     <>
@@ -204,46 +200,6 @@ export default async function HomePage({
           </div>
         </section>
       ) : null}
-
-      {/* Map + Instagram */}
-      <section className="py-section">
-        <div className="container-luxe grid gap-8 lg:grid-cols-2">
-          <Reveal>
-            <div className="overflow-hidden rounded-3xl border border-ink-border">
-              <iframe
-                title="Google map — Kalai's Beauty Care & Academy"
-                src={mapSrc}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="h-80 w-full border-0"
-              />
-            </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <div className="flex h-full flex-col justify-center rounded-3xl border border-ink-border bg-ink-surface p-8">
-              <h2 className="heading-display text-2xl text-cream sm:text-3xl">
-                {t("mapTitle")}
-              </h2>
-              <address className="mt-4 not-italic leading-relaxed text-cream-muted">
-                {settings.address.line1}, {settings.address.line2}
-                <br />
-                {settings.address.city} – {settings.address.pincode}
-                <br />
-                <span className="text-cream-dim">{pick(settings.address.landmark, l)}</span>
-              </address>
-              <a
-                href={settings.contact.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-6 inline-flex w-fit items-center gap-2 rounded-full border border-gold-500/30 bg-gold-500/[0.06] px-4 py-2 text-sm font-medium text-gold-200 hover:border-gold-400"
-              >
-                <InstagramIcon className="h-4 w-4" />
-                {t("instagramCta")}
-              </a>
-            </div>
-          </Reveal>
-        </div>
-      </section>
 
       {/* WhatsApp CTA band */}
       <section className="relative overflow-hidden py-section">

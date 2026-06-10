@@ -23,6 +23,7 @@ export function TestimonialCarousel({
   const reduce = usePrefersReducedMotion();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
+  const [paused, setPaused] = useState(false);
 
   const [index, setIndex] = useState(0);
   const count = items.length;
@@ -33,16 +34,22 @@ export function TestimonialCarousel({
   );
 
   useEffect(() => {
-    if (!autoPlay || reduce || count <= 1 || !mounted) return;
+    if (!autoPlay || reduce || count <= 1 || !mounted || paused) return;
     const id = setInterval(() => setIndex((i) => (i + 1) % count), 6000);
     return () => clearInterval(id);
-  }, [autoPlay, reduce, count, mounted]);
+  }, [autoPlay, reduce, count, mounted, paused]);
 
   if (count === 0) return null;
   const item = items[index];
 
   return (
-    <div className="mx-auto max-w-3xl">
+    <div
+      className="mx-auto max-w-3xl"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
+    >
       <div className="relative min-h-[15rem] rounded-3xl border border-ink-border bg-ink-surface p-8 sm:p-10">
         {mounted && (
           <motion.figure

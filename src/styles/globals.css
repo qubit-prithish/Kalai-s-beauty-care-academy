@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 @layer base {
+  html, body { overflow-x: clip; max-width: 100vw; }
+
   :root {
     --font-display: "Playfair Display", Georgia, serif;
     --font-sans: "Inter", system-ui, sans-serif;
@@ -19,6 +21,16 @@
     @apply bg-ink-page text-cream antialiased;
     font-family: var(--font-sans);
     text-rendering: optimizeLegibility;
+  }
+
+  /* Safe area support for iOS notched devices */
+  @supports (padding: env(safe-area-inset-bottom)) {
+    .pb-safe {
+      padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+    }
+    .pr-safe {
+      padding-right: calc(1rem + env(safe-area-inset-right));
+    }
   }
 
   /* Tamil locale: swap default families to Tamil-capable fonts */

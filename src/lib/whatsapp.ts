@@ -1,7 +1,7 @@
 // WhatsApp-only booking helpers. Single source for the number + prefilled
 // context messages. Booking is WhatsApp-only (no online payment).
 
-export const WHATSAPP_NUMBER = "919566229900";
+export const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP ?? "919566229900";
 export const PHONE_PRIMARY_E164 = "+919566229900";
 
 export function whatsappHref(message: string, number: string = WHATSAPP_NUMBER) {

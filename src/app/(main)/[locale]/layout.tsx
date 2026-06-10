@@ -62,7 +62,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={l} className={fontVariables} suppressHydrationWarning>
+    <html lang={locale} className={fontVariables}>
       <body>
         <JsonLd data={localBusinessJsonLd(settings, l)} />
         {plausibleDomain ? (

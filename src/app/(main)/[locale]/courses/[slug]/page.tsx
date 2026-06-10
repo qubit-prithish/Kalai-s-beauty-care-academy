@@ -68,7 +68,7 @@ export default async function CourseDetailPage({
   const all = await getCourses();
   const related = all.filter((c) => c.slug !== slug).slice(0, 3);
 
-  const enrolHref = whatsappHref(waMessage.course(course.title.en));
+  const enrolHref = whatsappHref(waMessage.course(pick(course.title, l)));
   const syllabus = course.syllabus[l] ?? course.syllabus.en;
   const outcomes = course.outcomes[l] ?? course.outcomes.en;
   const whoFor = pick(course.whoFor, l);

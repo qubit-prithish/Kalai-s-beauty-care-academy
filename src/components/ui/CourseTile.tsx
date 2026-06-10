@@ -1,10 +1,15 @@
+"use client";
+
+import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import type { Course } from "@/lib/content/types";
 import { pick } from "@/lib/locale";
+import { Button } from "./Button";
 import { Card } from "./Card";
 import { Placeholder } from "./Placeholder";
 import { TrustBadge } from "./TrustBadge";
+import { WhatsAppIcon } from "./icons";
 
 export function CourseTile({
   course,
@@ -15,6 +20,11 @@ export function CourseTile({
   locale: Locale;
   ctaLabel: string;
 }) {
+  const currentLocale = useLocale();
+  const title = currentLocale === "ta" ? course.title.ta : course.title.en;
+  const whatsappMessage = `I'm interested in the ${title} course at Kalai's Beauty Academy`;
+  const courseWhatsappHref = `https://wa.me/919566229900?text=${encodeURIComponent(whatsappMessage)}`;
+
   return (
     <Card interactive className="group flex h-full flex-col overflow-hidden">
       <Link
@@ -53,6 +63,12 @@ export function CourseTile({
           </div>
         </div>
       </Link>
+      <div className="border-t border-ink-border px-6 pb-6 pt-4">
+        <Button href={courseWhatsappHref} variant="whatsapp" className="w-full">
+          <WhatsAppIcon className="h-4 w-4" />
+          WhatsApp
+        </Button>
+      </div>
     </Card>
   );
 }

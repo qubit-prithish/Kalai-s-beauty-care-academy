@@ -16,6 +16,7 @@ export type EnquiryFormLabels = {
   sending: string;
   successTitle: string;
   successText: string;
+  sendAnother: string;
   errName: string;
   errPhone: string;
   errMessage: string;
@@ -74,13 +75,13 @@ export function EnquiryForm({ labels }: { labels: EnquiryFormLabels }) {
       <div className="rounded-3xl border border-gold-500/30 bg-gold-500/[0.08] p-8 text-center">
         <div className="heading-display text-2xl text-gold-200">{labels.successTitle}</div>
         <p className="mt-3 text-sm leading-relaxed text-cream-muted">{labels.successText}</p>
-        <button
-          type="button"
+        <Button
+          variant="secondary"
           onClick={() => setStatus("idle")}
-          className="mt-5 text-sm text-gold-300 underline underline-offset-4"
+          className="mt-4"
         >
-          ↺
-        </button>
+          {labels.sendAnother}
+        </Button>
       </div>
     );
   }

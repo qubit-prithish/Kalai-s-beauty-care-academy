@@ -24,9 +24,6 @@ export async function Footer({
   const t = await getTranslations("footer");
   const tn = await getTranslations("nav");
   const { address, contact, hours } = settings;
-  const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(
-    address.mapEmbedQuery,
-  )}&output=embed`;
 
   return (
     <footer className="mt-section border-t border-ink-border bg-ink-surface">
@@ -82,6 +79,21 @@ export async function Footer({
                 </Link>
               </li>
             ))}
+            <li>
+              <Link href="/testimonials" prefetch={false} className="text-cream-muted hover:text-gold-200 transition-colors">
+                {t("links.testimonials")}
+              </Link>
+            </li>
+            <li>
+              <Link href="/offers" prefetch={false} className="text-cream-muted hover:text-gold-200 transition-colors">
+                {t("links.offers")}
+              </Link>
+            </li>
+            <li>
+              <Link href="/faq" prefetch={false} className="text-cream-muted hover:text-gold-200 transition-colors">
+                {t("links.faq")}
+              </Link>
+            </li>
           </ul>
         </div>
 
@@ -136,28 +148,23 @@ export async function Footer({
           </a>
         </div>
 
-        {/* Map */}
+        {/* Location */}
         <div className="lg:col-span-3">
-          <h2 className="text-xs font-semibold uppercase tracking-luxe text-gold-300">
-            {t("visit")}
-          </h2>
-          <div className="mt-4 overflow-hidden rounded-2xl border border-ink-border">
-            <iframe
-              title="Google map — Kalai's Beauty Care & Academy"
-              src={mapSrc}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="h-44 w-full border-0"
-            />
+          <div>
+            <h3 className="heading-display mb-4 text-lg text-cream">{t("location")}</h3>
+            <a
+              href="https://maps.app.goo.gl/762CCwLhbzDhtozT8"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center gap-2 text-gold-200 transition-colors hover:text-gold-300"
+            >
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span className="group-hover:underline">{t("viewMap")}</span>
+            </a>
           </div>
-          <a
-            href={address.mapLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-3 inline-block text-sm text-cream-muted hover:text-gold-200"
-          >
-            {t("visit")} →
-          </a>
         </div>
       </div>
 

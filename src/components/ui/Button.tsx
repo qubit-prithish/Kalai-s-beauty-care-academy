@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import type { ComponentProps, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
@@ -54,7 +54,7 @@ export function Button(props: ButtonAsButton | ButtonAsLink) {
           href={href}
           className={classes}
           target={href.startsWith("http") ? "_blank" : undefined}
-          rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+          rel={isExternal ? "noopener noreferrer" : undefined}
         >
           {children}
         </a>

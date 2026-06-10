@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Link, usePathname } from "@/i18n/navigation";
+import type { Locale } from "@/i18n/routing";
 import { Button } from "@/components/ui/Button";
 import { WhatsAppIcon } from "@/components/ui/icons";
 import { LocaleToggle } from "./LocaleToggle";
@@ -29,6 +30,7 @@ const NAV = [
 export function Header({ settings }: { settings: Settings }) {
   const t = useTranslations("nav");
   const tc = useTranslations("common");
+  const locale = useLocale();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const reduce = usePrefersReducedMotion();
@@ -51,7 +53,7 @@ export function Header({ settings }: { settings: Settings }) {
             {logo?.url ? (
               <Image
                 src={logo.url}
-                alt={pick(logo.alt, pathname?.startsWith("/ta") ? "ta" : "en")}
+                alt={pick(logo.alt, locale as Locale)}
                 fill
                 className="object-cover"
                 priority
@@ -74,7 +76,7 @@ export function Header({ settings }: { settings: Settings }) {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Primary">
           {NAV.map((item) => (
             <Link
               key={item.href}
@@ -109,7 +111,7 @@ export function Header({ settings }: { settings: Settings }) {
             onClick={() => setOpen((s) => !s)}
             aria-expanded={open}
             aria-label={open ? t("closeMenu") : t("openMenu")}
-            className="grid h-10 w-10 place-items-center rounded-full border border-ink-border text-cream xl:hidden"
+            className="grid h-10 w-10 place-items-center rounded-full border border-ink-border text-cream lg:hidden"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               {open ? (
@@ -128,7 +130,7 @@ export function Header({ settings }: { settings: Settings }) {
           initial={reduce ? false : { height: 0, opacity: 0 }}
           animate={{ height: "auto", opacity: 1 }}
           transition={{ duration: 0.25 }}
-          className="overflow-hidden border-t border-ink-border bg-ink-page xl:hidden"
+          className="overflow-hidden border-t border-ink-border bg-ink-page lg:hidden"
         >
           <nav className="container-luxe grid gap-1 py-4" aria-label="Mobile">
             {NAV.map((item) => (

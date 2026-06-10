@@ -60,7 +60,14 @@
     "follow": "Follow us",
     "instagramBadge": "Follow us on Instagram — 42K+",
     "rights": "All rights reserved.",
-    "tagline": "Crafted with care for the women of Tamil Nadu."
+    "tagline": "Crafted with care for the women of Tamil Nadu.",
+    "location": "Find Us",
+    "viewMap": "View on Google Maps",
+    "links": {
+      "testimonials": "Testimonials",
+      "offers": "Special Offers",
+      "faq": "FAQ"
+    }
   },
   "home": {
     "heroEyebrow": "Established 2006 · Ambattur, Chennai",
@@ -247,6 +254,7 @@
     "sending": "Sending...",
     "successTitle": "Thank you!",
     "successText": "Your enquiry has been noted. For the fastest reply, message us on WhatsApp.",
+    "sendAnother": "Send Another Enquiry",
     "errName": "Please enter your name.",
     "errPhone": "Please enter a valid phone number.",
     "errMessage": "Please enter a short message."

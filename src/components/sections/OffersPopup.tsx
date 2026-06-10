@@ -33,18 +33,19 @@ export function OffersPopup({ offer }: { offer: PopupOffer }) {
   useEffect(() => {
     if (typeof window === "undefined") return;
     try {
-      if (localStorage.getItem(storageKey) === "1") return;
+      if (sessionStorage.getItem(storageKey) === "1") return;
     } catch {
       /* ignore */
     }
-    const timer = setTimeout(() => setOpen(true), 1200);
+    if (window.innerWidth < 768) return;
+    const timer = setTimeout(() => setOpen(true), 3000);
     return () => clearTimeout(timer);
   }, [storageKey]);
 
   const dismiss = () => {
     setOpen(false);
     try {
-      localStorage.setItem(storageKey, "1");
+      sessionStorage.setItem(storageKey, "1");
     } catch {
       /* ignore */
     }

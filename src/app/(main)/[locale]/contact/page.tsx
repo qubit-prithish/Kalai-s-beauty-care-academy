@@ -143,6 +143,7 @@ export default async function ContactPage({
                     sending: t("sending"),
                     successTitle: t("successTitle"),
                     successText: t("successText"),
+                    sendAnother: t("sendAnother"),
                     errName: t("errName"),
                     errPhone: t("errPhone"),
                     errMessage: t("errMessage"),
