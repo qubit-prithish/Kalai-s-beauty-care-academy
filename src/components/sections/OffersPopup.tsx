@@ -37,8 +37,8 @@ export function OffersPopup({ offer }: { offer: PopupOffer }) {
     } catch {
       /* ignore */
     }
-    if (window.innerWidth < 768) return;
-    const timer = setTimeout(() => setOpen(true), 3000);
+    const delay = window.innerWidth < 768 ? 10000 : 3000;
+    const timer = setTimeout(() => setOpen(true), delay);
     return () => clearTimeout(timer);
   }, [storageKey]);
 
