@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { gsap } from "@/lib/gsap";
 import { prefersReducedMotion, useIsomorphicLayoutEffect } from "@/lib/motion";
 
@@ -85,6 +86,26 @@ export function MissionPinned({ content }: { content: MissionContent }) {
             </div>
             <div className="mt-2 text-sm uppercase tracking-luxe text-cream-muted">
               {content.goalLabel}
+            </div>
+          </div>
+
+          {/* Real hands-on salon work — proof behind the mission. Blended into
+              the dark background with gradient masks so it reads as part of the
+              section, not a hard rectangle. */}
+          <div className="group relative mt-12 overflow-hidden rounded-3xl border border-ink-border/70">
+            <div className="relative aspect-[16/11] w-full sm:aspect-[16/9]">
+              <Image
+                src="/images/mission-salon.jpg"
+                alt="A stylist caring for a client at the salon wash station at Kalai's Beauty Care & Academy"
+                fill
+                loading="lazy"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover object-center"
+              />
+              {/* Warm tint + edge fades to merge with the section background */}
+              <div className="absolute inset-0 bg-gradient-to-t from-ink-page via-ink-page/15 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-ink-page/30 via-transparent to-ink-page/30" />
+              <div className="absolute inset-0 ring-1 ring-inset ring-gold-400/10" />
             </div>
           </div>
         </div>
