@@ -3,11 +3,11 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
-import { getServiceBySlug, getServices } from "@/lib/content";
+import { getServiceBySlug, getServices, getSettings } from "@/lib/content";
 import { pick } from "@/lib/locale";
 import { whatsappHref, waMessage, telHref } from "@/lib/whatsapp";
 import { buildMetadata } from "@/lib/seo";
-import { breadcrumbJsonLd } from "@/lib/jsonld";
+import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/jsonld";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
@@ -61,12 +61,14 @@ export default async function ServiceDetailPage({
   const tb = await getTranslations("breadcrumb");
   const tnav = await getTranslations("nav");
 
+  const settings = await getSettings();
   const all = await getServices();
   const related = all.filter((s) => s.slug !== slug).slice(0, 3);
   const bookHref = whatsappHref(waMessage.service(service.title.en));
 
   return (
     <>
+      <JsonLd data={serviceJsonLd(service, settings, l)} />
       <JsonLd
         data={breadcrumbJsonLd(
           [

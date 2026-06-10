@@ -39,7 +39,10 @@ export function Header({ settings }: { settings: Settings }) {
 
   const isActive = (href: string) => {
     if (!pathname) return false;
-    return href === "/" ? pathname === "/" : pathname.startsWith(href);
+    if (href === "/") {
+      return pathname === "/" || pathname === `/${locale}` || pathname === `/${locale}/`;
+    }
+    return pathname.startsWith(href);
   };
 
   const logo = settings.navbarLogo;

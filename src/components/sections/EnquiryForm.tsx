@@ -72,7 +72,7 @@ export function EnquiryForm({ labels }: { labels: EnquiryFormLabels }) {
 
   if (status === "success") {
     return (
-      <div className="rounded-3xl border border-gold-500/30 bg-gold-500/[0.08] p-8 text-center">
+      <div role="status" aria-live="polite" aria-atomic="true" className="rounded-3xl border border-gold-500/30 bg-gold-500/[0.08] p-8 text-center">
         <div className="heading-display text-2xl text-gold-200">{labels.successTitle}</div>
         <p className="mt-3 text-sm leading-relaxed text-cream-muted">{labels.successText}</p>
         <Button

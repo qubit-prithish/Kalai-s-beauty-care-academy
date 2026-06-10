@@ -1,4 +1,4 @@
-import type { Course, Settings } from "@/lib/content/types";
+import type { Course, Service, Settings } from "@/lib/content/types";
 import type { Locale } from "@/i18n/routing";
 import { pick } from "@/lib/locale";
 import { SITE_URL, absoluteUrl } from "@/lib/seo";
@@ -67,6 +67,30 @@ export function courseJsonLd(course: Course, settings: Settings, locale: Locale)
     name: pick(course.title, locale),
     description: pick(course.description, locale),
     url: absoluteUrl(locale, `/courses/${course.slug}`),
+    provider: {
+      "@type": "Organization",
+      name: pick(settings.brandName, locale),
+      sameAs: SITE_URL,
+    },
+    inLanguage: locale === "ta" ? "ta-IN" : "en-IN",
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: settings.googleRating,
+      reviewCount: settings.googleReviews,
+      bestRating: 5,
+      worstRating: 1,
+    },
+  };
+}
+
+/** Service schema for a service detail page. */
+export function serviceJsonLd(service: Service, settings: Settings, locale: Locale) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: pick(service.title, locale),
+    description: pick(service.description, locale),
+    url: absoluteUrl(locale, `/services/${service.slug}`),
     provider: {
       "@type": "Organization",
       name: pick(settings.brandName, locale),

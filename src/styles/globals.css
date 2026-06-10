@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+  @font-face { font-family: "Noto Serif Tamil"; unicode-range: U+0B80-0BFF; }
+  @font-face { font-family: "Noto Sans Tamil"; unicode-range: U+0B80-0BFF; }
+
   html, body { overflow-x: clip; max-width: 100vw; }
 
   :root {

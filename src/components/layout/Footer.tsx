@@ -68,12 +68,16 @@ export async function Footer({
             </span>
           </address>
           <div className="mt-4 space-y-1 text-sm">
-            <a href={telHref(contact.phonePrimaryE164)} className="block text-cream-muted hover:text-gold-200">
-              {contact.phonePrimary}
-            </a>
-            <a href={telHref(contact.phoneSecondaryE164)} className="block text-cream-muted hover:text-gold-200">
-              {contact.phoneSecondary}
-            </a>
+            {contact.phonePrimary ? (
+              <a href={telHref(contact.phonePrimaryE164)} className="block text-cream-muted hover:text-gold-200">
+                {contact.phonePrimary}
+              </a>
+            ) : null}
+            {contact.phoneSecondary ? (
+              <a href={telHref(contact.phoneSecondaryE164)} className="block text-cream-muted hover:text-gold-200">
+                {contact.phoneSecondary}
+              </a>
+            ) : null}
             <a href={`mailto:${contact.email}`} className="block break-all text-cream-muted hover:text-gold-200">
               {contact.email}
             </a>

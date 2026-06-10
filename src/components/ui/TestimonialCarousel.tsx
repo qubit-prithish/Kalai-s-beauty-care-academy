@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { StarIcon } from "./icons";
 import { usePrefersReducedMotion } from "@/lib/motion";
 
@@ -11,6 +12,7 @@ export type TestimonialItem = {
   role: string;
   quote: string;
   rating: number;
+  avatar?: { src: string; alt: string };
 };
 
 export function TestimonialCarousel({
@@ -67,6 +69,16 @@ export function TestimonialCarousel({
               &ldquo;{item.quote}&rdquo;
             </blockquote>
             <figcaption className="mt-6 text-center">
+              {item.avatar ? (
+                <Image
+                  src={item.avatar.src}
+                  alt={item.avatar.alt}
+                  width={48}
+                  height={48}
+                  loading="lazy"
+                  className="mx-auto rounded-full"
+                />
+              ) : null}
               <div className="font-semibold text-gold-200">{item.name}</div>
               <div className="text-sm text-cream-dim">{item.role}</div>
             </figcaption>

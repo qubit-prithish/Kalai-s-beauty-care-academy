@@ -89,15 +89,14 @@ export default async function AboutPage({
         <div className="container-luxe grid items-center gap-10 lg:grid-cols-5">
           <Reveal className="lg:col-span-2">
             {page?.founderImage?.url ? (
-              <div className="relative h-full overflow-hidden rounded-3xl">
+              <div className="relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-3xl">
                 <Image
                   src={page.founderImage.url}
                   alt={pick(page.founderImage.alt, l)}
-                  width={600}
-                  height={750}
-                  className="h-full w-full object-cover"
+                  fill
+                  className="object-cover"
                   priority
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  sizes="(max-width: 768px) 100vw, 400px"
                 />
               </div>
             ) : (

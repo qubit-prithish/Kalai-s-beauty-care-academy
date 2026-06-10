@@ -111,6 +111,7 @@ export default async function ContactPage({
                 src={mapSrc}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
+                sandbox="allow-scripts allow-same-origin"
                 className="h-72 w-full border-0"
               />
               <div className="flex items-center justify-between gap-3 p-4">
