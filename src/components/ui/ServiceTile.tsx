@@ -1,11 +1,13 @@
+import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import type { Service } from "@/lib/content/types";
 import { pick } from "@/lib/locale";
+import { Button } from "./Button";
 import { Card } from "./Card";
 import { Placeholder } from "./Placeholder";
 import { TrustBadge } from "./TrustBadge";
-import { StarIcon } from "./icons";
+import { StarIcon, WhatsAppIcon } from "./icons";
 
 export function ServiceTile({
   service,
@@ -18,6 +20,11 @@ export function ServiceTile({
   ctaLabel: string;
   signatureLabel: string;
 }) {
+  const currentLocale = useLocale();
+  const title = currentLocale === "ta" ? service.title.ta : service.title.en;
+  const message = encodeURIComponent(`I want to book: ${title}`);
+  const href = `https://wa.me/919566229900?text=${message}`;
+
   return (
     <Card interactive className="group flex h-full flex-col overflow-hidden">
       <Link
@@ -61,6 +68,12 @@ export function ServiceTile({
           </div>
         </div>
       </Link>
+      <div className="border-t border-ink-border px-6 pb-6 pt-4">
+        <Button href={href} variant="whatsapp" className="w-full">
+          <WhatsAppIcon className="h-4 w-4" />
+          Book on WhatsApp
+        </Button>
+      </div>
     </Card>
   );
 }
