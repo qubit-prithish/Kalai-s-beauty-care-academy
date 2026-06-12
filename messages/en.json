@@ -25,10 +25,10 @@
   },
   "common": {
     "brand": "Kalai's Beauty Care & Academy",
-    "enquireWhatsApp": "Enquire on WhatsApp",
+    "enquireWhatsApp": "Get Course Details on WhatsApp",
     "callNow": "Call Now",
     "bookWhatsApp": "Book on WhatsApp",
-    "freeDemo": "Free Demo Class",
+    "freeDemo": "Book a Free Demo Class",
     "viewAll": "View all",
     "learnMore": "Learn more",
     "readMore": "Read more",
@@ -156,6 +156,8 @@
       "placement": "Placement support",
       "freeDemo": "Free demo class"
     },
+    "tileCta": "View Syllabus & Fees",
+    "whatsappCta": "Ask about this course",
     "detail": {
       "overview": "Overview",
       "duration": "Duration",
@@ -167,7 +169,7 @@
       "whoForText": "Women aged 16–45 across Tamil Nadu — absolute beginners and working professionals who want a recognised qualification and a real career in beauty.",
       "perksTitle": "Included with every course",
       "related": "Other courses",
-      "enrolCta": "Enrol on WhatsApp",
+      "enrolCta": "Ask about this course",
       "backToCourses": "All courses"
     }
   },

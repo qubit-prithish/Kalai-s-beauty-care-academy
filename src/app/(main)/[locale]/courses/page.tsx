@@ -68,7 +68,7 @@ export default async function CoursesPage({
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {courses.map((course, i) => (
               <Reveal key={course.id} delay={(i % 3) * 0.06}>
-                <CourseTile course={course} locale={l} ctaLabel={tc("learnMore")} />
+                <CourseTile course={course} locale={l} ctaLabel={t("tileCta")} />
               </Reveal>
             ))}
           </div>

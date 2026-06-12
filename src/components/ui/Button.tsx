@@ -2,6 +2,14 @@ import { Link } from "@/i18n/navigation";
 import type { ComponentProps, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
+export function WhatsAppMicrocopy({ className }: { className?: string }) {
+  return (
+    <p className={cn("mt-1 text-xs text-cream-muted", className)}>
+      Typically replies within 10 minutes · Mon–Sat
+    </p>
+  );
+}
+
 type Variant = "primary" | "secondary" | "whatsapp" | "ghost";
 type Size = "md" | "lg";
 

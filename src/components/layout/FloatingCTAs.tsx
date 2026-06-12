@@ -1,14 +1,24 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { WhatsAppIcon, PhoneIcon } from "@/components/ui/icons";
 import { telHref, whatsappHref, waMessage, PHONE_PRIMARY_E164 } from "@/lib/whatsapp";
+import { cn } from "@/lib/cn";
 
-/** Floating WhatsApp + Call buttons, fixed on every page. */
 export function FloatingCTAs() {
   const t = useTranslations("common");
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const updateScrolled = () => setScrolled(window.scrollY > 8);
+    updateScrolled();
+    window.addEventListener("scroll", updateScrolled, { passive: true });
+    return () => window.removeEventListener("scroll", updateScrolled);
+  }, []);
+
   return (
-    <div className="fixed bottom-4 right-4 z-40 flex flex-col gap-3 pb-safe pr-safe">
+    <div className="fixed bottom-4 right-4 z-40 flex flex-col items-end gap-3 pb-safe pr-safe">
       <a
         href={telHref(PHONE_PRIMARY_E164)}
         aria-label={t("callNow")}
@@ -16,15 +26,25 @@ export function FloatingCTAs() {
       >
         <PhoneIcon className="h-5 w-5" />
       </a>
-      <a
-        href={whatsappHref(waMessage.general())}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={t("enquireWhatsApp")}
-        className="grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-gold transition hover:scale-105"
-      >
-        <WhatsAppIcon className="h-7 w-7" />
-      </a>
+      <div className="flex items-center gap-2">
+        <span
+          className={cn(
+            "overflow-hidden whitespace-nowrap rounded-full border border-ink-border bg-ink-surface px-3 py-2 text-xs font-semibold text-cream shadow-soft transition-all duration-300",
+            scrolled ? "max-w-0 translate-x-2 px-0 opacity-0" : "max-w-32 opacity-100",
+          )}
+        >
+          Chat with us
+        </span>
+        <a
+          href={whatsappHref(waMessage.general())}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={t("enquireWhatsApp")}
+          className="grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-gold transition hover:scale-105"
+        >
+          <WhatsAppIcon className="h-7 w-7" />
+        </a>
+      </div>
     </div>
   );
 }

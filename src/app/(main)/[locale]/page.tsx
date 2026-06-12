@@ -18,6 +18,7 @@ import { ServiceTile } from "@/components/ui/ServiceTile";
 import { TestimonialCarousel } from "@/components/ui/TestimonialCarousel";
 import { OffersBanner } from "@/components/ui/OffersBanner";
 import { WhatsAppIcon } from "@/components/ui/icons";
+import { WhatsAppMicrocopy } from "@/components/ui/Button";
 import { HeroHome } from "@/components/sections/HeroHome";
 import { StatsBand } from "@/components/sections/StatsBand";
 import { OffersPopup } from "@/components/sections/OffersPopup";
@@ -43,6 +44,7 @@ export default async function HomePage({
   const l = locale as Locale;
 
   const t = await getTranslations("home");
+  const tCourses = await getTranslations("courses");
   const tu = await getTranslations("usps");
   const tc = await getTranslations("common");
   const to = await getTranslations("offers");
@@ -91,7 +93,7 @@ export default async function HomePage({
             <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {courses.map((course, i) => (
                 <Reveal key={course.id} delay={i * 0.05}>
-                  <CourseTile course={course} locale={l} ctaLabel={tc("learnMore")} />
+                  <CourseTile course={course} locale={l} ctaLabel={tCourses("tileCta")} />
                 </Reveal>
               ))}
             </div>
@@ -215,10 +217,13 @@ export default async function HomePage({
               <p className="mt-3 text-cream-muted">{t("ctaSubtitle")}</p>
             </div>
             <div className="flex flex-wrap gap-3 lg:justify-end">
-              <Button href={whatsappHref(waMessage.general())} variant="primary">
-                <WhatsAppIcon className="h-4 w-4" />
-                {tc("enquireWhatsApp")}
-              </Button>
+              <div className="flex flex-col items-start lg:items-center">
+                <Button href={whatsappHref(waMessage.general())} variant="primary">
+                  <WhatsAppIcon className="h-4 w-4" />
+                  {tc("enquireWhatsApp")}
+                </Button>
+                <WhatsAppMicrocopy />
+              </div>
               <Button href={`tel:${settings.contact.phonePrimaryE164}`} variant="secondary">
                 {tc("callNow")}
               </Button>

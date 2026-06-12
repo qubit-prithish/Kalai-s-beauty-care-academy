@@ -233,7 +233,7 @@ export default async function CourseDetailPage({
             <h2 className="heading-display text-2xl text-cream sm:text-3xl">{t("related")}</h2>
             <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((c) => (
-                <CourseTile key={c.id} course={c} locale={l} ctaLabel={tc("learnMore")} />
+                <CourseTile key={c.id} course={c} locale={l} ctaLabel={tRoot("tileCta")} />
               ))}
             </div>
           </div>

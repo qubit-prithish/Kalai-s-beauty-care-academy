@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { Button } from "@/components/ui/Button";
+import { Button, WhatsAppMicrocopy } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { TrustBadge } from "@/components/ui/TrustBadge";
 import { WhatsAppIcon, StarIcon } from "@/components/ui/icons";
@@ -42,13 +42,38 @@ export async function HeroHome({ settings }: { settings: Settings }) {
         </Reveal>
         <Reveal delay={0.32}>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-            <Button href={whatsappHref(waMessage.freeDemo())} variant="primary" size="lg">
-              <WhatsAppIcon className="h-5 w-5" />
-              {tc("freeDemo")}
-            </Button>
+            <div className="flex flex-col items-center">
+              <Button href={whatsappHref(waMessage.freeDemo())} variant="primary" size="lg">
+                <WhatsAppIcon className="h-5 w-5" />
+                {tc("freeDemo")}
+              </Button>
+              <WhatsAppMicrocopy />
+            </div>
             <Button href="/courses" variant="secondary" size="lg">
               {tc("exploreCourses")}
             </Button>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.4}>
+          <div className="mt-10 w-full max-w-full overflow-x-auto scrollbar-none">
+            <div className="flex w-max items-center gap-2 px-1 sm:mx-auto">
+              <TrustBadge tone="gold" className="shrink-0">
+                Since 2006
+              </TrustBadge>
+              <TrustBadge tone="default" className="shrink-0">
+                {"4.8\u2605 Google"}
+              </TrustBadge>
+              <TrustBadge tone="default" className="shrink-0">
+                1000+ Trained
+              </TrustBadge>
+              <TrustBadge tone="default" className="shrink-0">
+                Govt-Certified
+              </TrustBadge>
+              <TrustBadge tone="default" className="shrink-0">
+                Placement Support
+              </TrustBadge>
+            </div>
           </div>
         </Reveal>
       </div>

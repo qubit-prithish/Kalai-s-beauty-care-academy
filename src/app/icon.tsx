@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { getSettings } from "@/lib/content";
 
 export const size = {
   width: 512,
@@ -7,7 +8,15 @@ export const size = {
 
 export const contentType = "image/png";
 
-export default function Icon() {
+export default async function Icon() {
+  let logoUrl: string | null = null;
+  try {
+    const settings = await getSettings();
+    if (settings.navbarLogo?.url) {
+      logoUrl = settings.navbarLogo.url;
+    }
+  } catch {}
+
   return new ImageResponse(
     (
       <div
@@ -19,17 +28,26 @@ export default function Icon() {
           justifyContent: "center",
           width: "100%",
           height: "100%",
+          fontFamily: "system-ui, sans-serif",
         }}
       >
-        <span
-          style={{
-            color: "white",
-            fontSize: "200px",
-            fontWeight: "bold",
-          }}
-        >
-          K
-        </span>
+        {logoUrl ? (
+          <img
+            src={logoUrl}
+            alt=""
+            style={{ width: "80%", height: "80%", objectFit: "contain" }}
+          />
+        ) : (
+          <span
+            style={{
+              color: "white",
+              fontSize: "200px",
+              fontWeight: "bold",
+            }}
+          >
+            K
+          </span>
+        )}
       </div>
     ),
     size,
