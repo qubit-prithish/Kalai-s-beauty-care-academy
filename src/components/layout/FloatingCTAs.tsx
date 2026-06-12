@@ -40,7 +40,7 @@ export function FloatingCTAs() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={t("enquireWhatsApp")}
-          className="grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-gold transition hover:scale-105"
+          className="grid h-14 w-14 place-items-center rounded-full bg-whatsapp text-white shadow-soft transition hover:bg-whatsapp-hover hover:scale-105"
         >
           <WhatsAppIcon className="h-7 w-7" />
         </a>

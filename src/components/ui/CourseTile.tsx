@@ -100,7 +100,7 @@ export function CourseTile({
         </div>
       </Link>
       <div className="border-t border-ink-border px-6 pb-6 pt-4">
-        <Button href={courseWhatsappHref} variant="whatsapp" className="w-full">
+        <Button href={courseWhatsappHref} variant="primary" className="w-full">
           <WhatsAppIcon className="h-4 w-4" />
           {t("whatsappCta")}
         </Button>

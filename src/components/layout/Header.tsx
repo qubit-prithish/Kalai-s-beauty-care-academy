@@ -101,7 +101,7 @@ export function Header({ settings }: { settings: Settings }) {
           <LocaleToggle className="hidden sm:inline-flex" />
           <Button
             href={whatsappHref(waMessage.general())}
-            variant="whatsapp"
+            variant="primary"
             className="hidden md:inline-flex"
           >
             <WhatsAppIcon className="h-4 w-4" />
@@ -156,7 +156,7 @@ export function Header({ settings }: { settings: Settings }) {
               <LocaleToggle />
               <Button
                 href={whatsappHref(waMessage.general())}
-                variant="whatsapp"
+                variant="primary"
                 className="flex-1"
               >
                 <WhatsAppIcon className="h-4 w-4" />

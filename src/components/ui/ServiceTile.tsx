@@ -69,7 +69,7 @@ export function ServiceTile({
         </div>
       </Link>
       <div className="border-t border-ink-border px-6 pb-6 pt-4">
-        <Button href={href} variant="whatsapp" className="w-full">
+        <Button href={href} variant="primary" className="w-full">
           <WhatsAppIcon className="h-4 w-4" />
           Book on WhatsApp
         </Button>

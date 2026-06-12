@@ -31,6 +31,11 @@ const config: Config = {
         // Soft tones
         blush: "#F4E7E1",
         sand: "#EAD7C7",
+        // WhatsApp — muted utility green (not neon)
+        whatsapp: {
+          DEFAULT: "#1A9E4C",
+          hover: "#178944",
+        },
         // Text
         cream: {
           DEFAULT: "#F5F2EC",
