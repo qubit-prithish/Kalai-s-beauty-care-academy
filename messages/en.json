@@ -108,11 +108,17 @@
   },
   "usps": {
     "techniques": "Professional & trendy techniques",
+    "techniquesDesc": "Curriculum updated every year. What you learn is exactly what salons are hiring for today.",
     "accessories": "Advanced accessories & tools",
+    "accessoriesDesc": "Train on professional-grade equipment used in top Chennai salons — not entry-level kits.",
     "treatments": "Best skin & hair treatments",
+    "treatmentsDesc": "Science-backed treatments for every skin type. Results you can see, techniques you can replicate.",
     "handsOn": "Individual hands-on training",
+    "handsOnDesc": "Maximum 10 students per batch. Every trainee gets direct, personal time with the instructor.",
     "reputation": "4.8★ Google reputation",
-    "legacy": "20-year proven legacy"
+    "reputationDesc": "63 verified Google reviews from real students and clients across Tamil Nadu.",
+    "legacy": "20-year proven legacy",
+    "legacyDesc": "Founded in 2006. Over 1000 graduates now running their own salons across Tamil Nadu."
   },
   "about": {
     "eyebrow": "About Kalai's",

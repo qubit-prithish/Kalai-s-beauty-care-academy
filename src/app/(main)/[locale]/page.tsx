@@ -17,7 +17,7 @@ import { CourseTile } from "@/components/ui/CourseTile";
 import { ServiceTile } from "@/components/ui/ServiceTile";
 import { TestimonialCarousel } from "@/components/ui/TestimonialCarousel";
 import { OffersBanner } from "@/components/ui/OffersBanner";
-import { WhatsAppIcon } from "@/components/ui/icons";
+import { WhatsAppIcon, ScissorsIcon, WandIcon, LeafIcon, UsersIcon, StarIcon, AwardIcon } from "@/components/ui/icons";
 import { WhatsAppMicrocopy } from "@/components/ui/Button";
 import { HeroHome } from "@/components/sections/HeroHome";
 import { StatsBand } from "@/components/sections/StatsBand";
@@ -25,13 +25,43 @@ import { OffersPopup } from "@/components/sections/OffersPopup";
 import { MissionPinned } from "@/components/sections/MissionPinned";
 import { Parallax } from "@/components/sections/Parallax";
 
-const USP_KEYS = [
-  "techniques",
-  "accessories",
-  "treatments",
-  "handsOn",
-  "reputation",
-  "legacy",
+const USP_CARDS = [
+  {
+    key: "techniques",
+    titleKey: "techniques",
+    descKey: "techniquesDesc",
+    icon: ScissorsIcon,
+  },
+  {
+    key: "accessories",
+    titleKey: "accessories",
+    descKey: "accessoriesDesc",
+    icon: WandIcon,
+  },
+  {
+    key: "treatments",
+    titleKey: "treatments",
+    descKey: "treatmentsDesc",
+    icon: LeafIcon,
+  },
+  {
+    key: "handsOn",
+    titleKey: "handsOn",
+    descKey: "handsOnDesc",
+    icon: UsersIcon,
+  },
+  {
+    key: "reputation",
+    titleKey: "reputation",
+    descKey: "reputationDesc",
+    icon: StarIcon,
+  },
+  {
+    key: "legacy",
+    titleKey: "legacy",
+    descKey: "legacyDesc",
+    icon: AwardIcon,
+  },
 ] as const;
 
 export default async function HomePage({
@@ -67,13 +97,12 @@ export default async function HomePage({
         <div className="container-luxe">
           <SectionHeading title={t("uspTitle")} subtitle={t("uspSubtitle")} />
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {USP_KEYS.map((key, i) => (
-              <Reveal key={key} delay={i * 0.06}>
-                <div className="flex h-full items-start gap-4 rounded-3xl border border-ink-border bg-ink-surface p-6">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-gold-gradient font-display text-lg font-bold text-ink-page">
-                    {i + 1}
-                  </span>
-                  <p className="text-sm leading-relaxed text-cream-muted">{tu(key)}</p>
+            {USP_CARDS.map((card, i) => (
+              <Reveal key={card.key} delay={i * 0.06}>
+                <div className="why-card flex h-full flex-col gap-3 rounded-2xl border border-ink-border bg-ink-surface p-6 transition-colors hover:border-gold-500/30">
+                  <card.icon className="why-card__icon h-6 w-6 text-gold-500" aria-hidden="true" />
+                  <h3 className="why-card__title heading-display text-base font-semibold text-cream m-0">{tu(card.titleKey)}</h3>
+                  <p className="why-card__desc text-sm leading-relaxed text-cream-muted m-0">{tu(card.descKey)}</p>
                 </div>
               </Reveal>
             ))}
