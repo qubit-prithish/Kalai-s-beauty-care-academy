@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { StarIcon } from "./icons";
 import { usePrefersReducedMotion } from "@/lib/motion";
+import { cn, getInitials } from "@/lib/cn";
 
 export type TestimonialItem = {
   id: string;
@@ -14,6 +15,71 @@ export type TestimonialItem = {
   rating: number;
   avatar?: { src: string; alt: string };
 };
+
+function Avatar({
+  src,
+  alt,
+  name,
+  fallbackInitials,
+  className,
+}: {
+  src?: string;
+  alt?: string;
+  name: string;
+  fallbackInitials: string;
+  className?: string;
+}) {
+  const initials = fallbackInitials || getInitials(name);
+
+  if (src) {
+    return (
+      <Image
+        src={src}
+        alt={alt || name}
+        width={48}
+        height={48}
+        loading="lazy"
+        className={cn("rounded-full object-cover", className)}
+        sizes="48px"
+      />
+    );
+  }
+
+  return (
+    <div
+      className={cn(
+        "flex h-12 w-12 items-center justify-center rounded-full bg-gold-500 text-ink-page font-semibold text-[0.875rem] leading-none",
+        className
+      )}
+      aria-label={alt || `${name}'s avatar`}
+      role="img"
+    >
+      {initials}
+    </div>
+  );
+}
+
+function RoleBadge({ children, className }: { children: React.ReactNode; className?: string }) {
+  return (
+    <span className={cn("inline-flex items-center rounded-full bg-gold-500/15 px-3 py-1 text-xs font-medium text-gold-300 ring-1 ring-inset ring-gold-500/30", className)}>
+      {children}
+    </span>
+  );
+}
+
+function StarRating({ rating, className }: { rating: number; className?: string }) {
+  return (
+    <div className={cn("flex justify-center gap-0.5 text-gold-400", className)} aria-label={`${rating} out of 5 stars`}>
+      {Array.from({ length: 5 }).map((_, i) => (
+        <StarIcon
+          key={i}
+          className="h-4 w-4"
+          style={{ opacity: i < rating ? 1 : 0.25 }}
+        />
+      ))}
+    </div>
+  );
+}
 
 export function TestimonialCarousel({
   items,
@@ -43,6 +109,7 @@ export function TestimonialCarousel({
 
   if (count === 0) return null;
   const item = items[index];
+  const initials = getInitials(item.name);
 
   return (
     <div
@@ -52,7 +119,7 @@ export function TestimonialCarousel({
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
     >
-      <div className="relative min-h-[15rem] rounded-3xl border border-ink-border bg-ink-surface p-8 sm:p-10">
+      <div className="relative min-h-[18rem] rounded-3xl border border-ink-border bg-ink-surface p-8 sm:p-10">
         {mounted && (
           <motion.figure
             key={item.id}
@@ -60,28 +127,23 @@ export function TestimonialCarousel({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
           >
-            <div className="flex justify-center gap-1 text-gold-400" aria-label={`${item.rating} out of 5`}>
-              {Array.from({ length: item.rating }).map((_, i) => (
-                <StarIcon key={i} className="h-4 w-4" />
-              ))}
+            <div className="flex flex-col items-center text-center">
+              <Avatar
+                src={item.avatar?.src}
+                alt={item.avatar?.alt}
+                name={item.name}
+                fallbackInitials={initials}
+                className="mb-4"
+              />
+              <div className="font-semibold text-gold-200 text-lg sm:text-xl">
+                {item.name}
+              </div>
+              <RoleBadge className="mt-2">{item.role}</RoleBadge>
+              <StarRating className="mt-4" rating={item.rating} />
+              <blockquote className="mt-6 max-w-xl text-lg leading-relaxed text-cream">
+                &ldquo;{item.quote}&rdquo;
+              </blockquote>
             </div>
-            <blockquote className="mt-5 text-center text-lg leading-relaxed text-cream">
-              &ldquo;{item.quote}&rdquo;
-            </blockquote>
-            <figcaption className="mt-6 text-center">
-              {item.avatar ? (
-                <Image
-                  src={item.avatar.src}
-                  alt={item.avatar.alt}
-                  width={48}
-                  height={48}
-                  loading="lazy"
-                  className="mx-auto rounded-full"
-                />
-              ) : null}
-              <div className="font-semibold text-gold-200">{item.name}</div>
-              <div className="text-sm text-cream-dim">{item.role}</div>
-            </figcaption>
           </motion.figure>
         )}
       </div>
@@ -104,9 +166,10 @@ export function TestimonialCarousel({
                 onClick={() => setIndex(i)}
                 aria-label={`Go to testimonial ${i + 1}`}
                 aria-current={i === index}
-                className={`h-2 rounded-full transition-all ${
+                className={cn(
+                  "h-2 rounded-full transition-all",
                   i === index ? "w-6 bg-gold-400" : "w-2 bg-ink-border"
-                }`}
+                )}
               />
             ))}
           </div>
@@ -123,3 +186,5 @@ export function TestimonialCarousel({
     </div>
   );
 }
+
+export { Avatar, RoleBadge };

@@ -6,8 +6,9 @@ import { pick } from "@/lib/locale";
 import { buildMetadata } from "@/lib/seo";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { TestimonialCarousel } from "@/components/ui/TestimonialCarousel";
+import { TestimonialCarousel, Avatar, RoleBadge } from "@/components/ui/TestimonialCarousel";
 import { StarIcon } from "@/components/ui/icons";
+import { getInitials } from "@/lib/cn";
 
 export async function generateMetadata({
   params,
@@ -80,18 +81,27 @@ export default async function TestimonialsPage({
               {testimonials.map((tm, i) => (
                 <Reveal key={tm.id} delay={(i % 3) * 0.06}>
                   <figure className="flex h-full flex-col rounded-3xl border border-ink-border bg-ink-surface p-6">
-                    <div className="flex gap-1 text-gold-400" aria-label={`${tm.rating} / 5`}>
+                    <div className="flex flex-col items-center text-center">
+                      <Avatar
+                        src={tm.avatar?.src}
+                        alt={tm.avatar?.alt?.[l] ?? tm.avatar?.alt?.en}
+                        name={tm.name}
+                        fallbackInitials={getInitials(tm.name)}
+                        className="mb-3"
+                      />
+                      <div className="font-semibold text-gold-200">{tm.name}</div>
+                      <RoleBadge className="mt-2">
+                        {pick(tm.role, l)}
+                      </RoleBadge>
+                    </div>
+                    <div className="mt-4 flex gap-1 text-gold-400" aria-label={`${tm.rating} / 5`}>
                       {Array.from({ length: tm.rating }).map((_, s) => (
                         <StarIcon key={s} className="h-4 w-4" />
                       ))}
                     </div>
-                    <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-cream-muted">
+                    <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-cream-muted text-center">
                       &ldquo;{pick(tm.quote, l)}&rdquo;
                     </blockquote>
-                    <figcaption className="mt-5">
-                      <div className="font-semibold text-gold-200">{tm.name}</div>
-                      <div className="text-xs text-cream-dim">{pick(tm.role, l)}</div>
-                    </figcaption>
                   </figure>
                 </Reveal>
               ))}
