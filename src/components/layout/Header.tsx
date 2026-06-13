@@ -17,13 +17,10 @@ import { pick } from "@/lib/locale";
 
 const NAV = [
   { href: "/", key: "home" },
-  { href: "/about", key: "about" },
   { href: "/courses", key: "courses" },
   { href: "/services", key: "services" },
+  { href: "/about", key: "about" },
   { href: "/gallery", key: "gallery" },
-  { href: "/testimonials", key: "testimonials" },
-  { href: "/offers", key: "offers" },
-  { href: "/faq", key: "faq" },
   { href: "/contact", key: "contact" },
 ] as const;
 
@@ -69,11 +66,11 @@ export function Header({ settings }: { settings: Settings }) {
             )}
           </span>
           <span className="hidden flex-col leading-tight sm:flex">
-            <span className="heading-display text-sm font-semibold text-cream">
+            <span className="heading-display text-sm font-semibold text-cream leading-snug">
               Kalai&apos;s Beauty Care
             </span>
             <span className="text-[10px] uppercase tracking-luxe text-gold-300">
-              &amp; Academy · Est. 2006
+              &amp; Academy
             </span>
           </span>
         </Link>

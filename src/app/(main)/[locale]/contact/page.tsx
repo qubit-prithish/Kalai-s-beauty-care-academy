@@ -8,6 +8,7 @@ import { buildMetadata } from "@/lib/seo";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { WhatsAppIcon, MapPinIcon } from "@/components/ui/icons";
+import Link from "next/link";
 import { EnquiryForm } from "@/components/sections/EnquiryForm";
 
 export async function generateMetadata({
@@ -151,6 +152,15 @@ export default async function ContactPage({
                   }}
                 />
               </div>
+            </div>
+
+            <div className="mt-6 text-center">
+              <Link
+                href="/faq"
+                className="inline-flex items-center gap-1.5 text-sm text-cream-muted hover:text-gold-200 transition-colors"
+              >
+                {pick({ en: "Have more questions? See our FAQ →", ta: "மேலும் கேள்விகள் உள்ளதா? எங்கள் FAQ காண்க →" }, l)}
+              </Link>
             </div>
           </div>
         </div>

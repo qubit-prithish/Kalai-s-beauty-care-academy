@@ -33,14 +33,14 @@ export function LocaleToggle({ className }: { className?: string }) {
       disabled={isPending}
       aria-label={next === "ta" ? "Switch to Tamil" : "Switch to English"}
       className={cn(
-        "inline-flex items-center gap-1 rounded-full border border-ink-border px-3 py-1.5 text-sm font-semibold text-cream-muted transition hover:border-gold-400 hover:text-gold-200",
+        "inline-flex items-center gap-1.5 text-xs font-medium text-cream-muted transition hover:text-gold-200",
         className,
       )}
     >
-      <span className={current === "en" ? "text-gold-200" : ""}>EN</span>
-      <span className="text-ink-border">|</span>
-      <span className={current === "ta" ? "text-gold-200 font-ta-sans" : "font-ta-sans"}>
-        த
+      <span className={current === "en" ? "text-gold-200" : "text-cream-muted"}>EN</span>
+      <span className="text-ink-border">·</span>
+      <span className={current === "ta" ? "text-gold-200" : "text-cream-muted"} style={{ fontFamily: "var(--font-tamil-sans)" }}>
+        தமிழ்
       </span>
     </button>
   );

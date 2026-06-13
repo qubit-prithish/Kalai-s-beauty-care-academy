@@ -16,7 +16,8 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Placeholder } from "@/components/ui/Placeholder";
 import { TrustBadge } from "@/components/ui/TrustBadge";
-import { WhatsAppIcon } from "@/components/ui/icons";
+import { WhatsAppIcon, StarIcon } from "@/components/ui/icons";
+import Link from "next/link";
 
 export async function generateMetadata({
   params,
@@ -142,6 +143,29 @@ export default async function AboutPage({
                 </div>
               </Reveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials reference */}
+      <section className="py-section">
+        <div className="container-luxe">
+          <div className="rounded-3xl border border-gold-500/25 bg-gold-500/[0.06] p-8 md:p-12 text-center">
+            <StarIcon className="mx-auto h-10 w-10 text-gold-400" aria-hidden="true" />
+            <h2 className="mt-4 heading-display text-2xl text-cream sm:text-3xl">
+              {pick({ en: "Trusted by 1000+ women across Tamil Nadu", ta: "தமிழ்நாடு முழுவதும் 1000+ பெண்கள் நம்பிக்கை" }, l)}
+            </h2>
+            <p className="mt-3 max-w-2xl mx-auto text-cream-muted">
+              {pick({ en: "Read real stories from our students and clients — 4.8★ from 63 verified Google reviews.", ta: "எங்கள் மாணவிகள் மற்றும் வாடிக்கையாளர்களின் உண்மை கதைகளை படிக்கவும் — 63 சரிபார்க்கப்பட்ட கூகுள் விமர்சனങ്ങളിൽ 4.8★.", }, l)}
+            </p>
+            <div className="mt-6">
+              <Link
+                href="/testimonials"
+                className="inline-flex items-center gap-2 text-sm font-medium text-gold-200 hover:text-gold-100 transition-colors"
+              >
+                {pick({ en: "View all testimonials →", ta: "அனைத்து சான்றுகளையும் காண்க →" }, l)}
+              </Link>
+            </div>
           </div>
         </div>
       </section>
