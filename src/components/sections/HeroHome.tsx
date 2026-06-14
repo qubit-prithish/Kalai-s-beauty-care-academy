@@ -26,7 +26,7 @@ export async function HeroHome({ settings }: { settings: Settings }) {
       <HeroWoman />
 
       {/* Hero text content — z-index 5, left side */}
-      <div className="hero__content container-luxe relative z-[5] flex min-h-[88vh] flex-col items-start justify-center py-24 text-left w-full max-w-[50%] px-gutter md:max-w-[55%] lg:max-w-[50%] sm:items-center sm:text-center sm:px-6">
+      <div className="hero__content container-luxe relative z-[5] flex min-h-[88vh] flex-col items-start justify-center py-24 text-left w-full max-w-[45%] px-gutter">
         <Reveal>
           <TrustBadge tone="gold" icon={<StarIcon className="h-3 w-3" />}>
             {settings.googleRating}★ · {settings.googleReviews} Google reviews

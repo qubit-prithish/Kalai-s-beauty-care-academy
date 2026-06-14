@@ -1,15 +1,15 @@
 .womanGlow {
   position: absolute;
-  right: 5%;
-  bottom: 10%;
-  width: 40%;
-  height: 70%;
+  right: -5%;
+  bottom: 5%;
+  width: 30%;
+  height: 60%;
   z-index: 2;
   pointer-events: none;
   background: radial-gradient(
     ellipse at center,
-    rgba(196, 154, 60, 0.18) 0%,
-    rgba(196, 154, 60, 0.06) 50%,
+    rgba(196, 154, 60, 0.12) 0%,
+    rgba(196, 154, 60, 0.04) 40%,
     transparent 70%
   );
   animation: heroFloat 6s ease-in-out infinite;
@@ -18,35 +18,35 @@
 
 .womanWrapper {
   position: absolute;
-  right: 0;
+  right: -8%;
   bottom: 0;
   z-index: 3;
   pointer-events: none;
 }
 
 .woman {
-  height: 92%;
+  height: 85%;
   width: auto;
-  max-width: 50%;
+  max-width: 28%;
   user-select: none;
   mask-image: linear-gradient(
       to top,
       transparent 0%,
-      rgba(0, 0, 0, 0.5) 12%,
-      black 28%
+      rgba(0, 0, 0, 0.4) 15%,
+      black 35%
     ),
-    linear-gradient(to right, transparent 0%, black 20%);
+    linear-gradient(to right, transparent 0%, black 25%);
   -webkit-mask-image: linear-gradient(
       to top,
       transparent 0%,
-      rgba(0, 0, 0, 0.5) 12%,
-      black 28%
+      rgba(0, 0, 0, 0.4) 15%,
+      black 35%
     ),
-    linear-gradient(to right, transparent 0%, black 20%);
+    linear-gradient(to right, transparent 0%, black 25%);
   mask-composite: intersect;
   -webkit-mask-composite: source-in;
-  filter: drop-shadow(0 0 40px rgba(196, 154, 60, 0.35))
-    drop-shadow(0 0 80px rgba(196, 154, 60, 0.15));
+  filter: drop-shadow(0 0 30px rgba(196, 154, 60, 0.25))
+    drop-shadow(0 0 60px rgba(196, 154, 60, 0.1));
   animation: heroFloat 6s ease-in-out infinite;
   will-change: transform;
   transform: translateZ(0);
@@ -74,12 +74,18 @@
 }
 
 @media (max-width: 1023px) and (min-width: 768px) {
+  .womanWrapper {
+    right: -5%;
+  }
   .woman {
-    height: 75%;
-    max-width: 45%;
+    height: 70%;
+    max-width: 35%;
   }
   .womanGlow {
-    opacity: 0.7;
+    right: 0%;
+    width: 35%;
+    height: 55%;
+    opacity: 0.6;
   }
 }
 
