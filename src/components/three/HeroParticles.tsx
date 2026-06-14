@@ -126,7 +126,7 @@ export function HeroParticles() {
   }
 
   return (
-    <div className="pointer-events-none absolute inset-0 -z-10 min-h-[600px]" style={{ willChange: "transform" }}>
+    <div className="pointer-events-none absolute inset-0 z-[2] min-h-[600px]" style={{ willChange: "transform" }}>
       {mode === "three" ? (
         <WebGLErrorBoundary fallback={<StaticHeroBackdrop />}>
           <Suspense fallback={<ParticleCanvasFallback />}>

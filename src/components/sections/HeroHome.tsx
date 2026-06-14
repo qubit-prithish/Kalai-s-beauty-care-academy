@@ -4,6 +4,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { TrustBadge } from "@/components/ui/TrustBadge";
 import { WhatsAppIcon, StarIcon } from "@/components/ui/icons";
 import { HeroParticles } from "@/components/three/HeroParticles";
+import { HeroWoman } from "./HeroWoman";
 import { whatsappHref, waMessage } from "@/lib/whatsapp";
 import type { Settings } from "@/lib/content/types";
 
@@ -21,7 +22,11 @@ export async function HeroHome({ settings }: { settings: Settings }) {
       {/* Golden-particles 3D accent (lazy, mobile/reduced-motion safe) */}
       <HeroParticles />
 
-      <div className="container-luxe flex min-h-[88vh] flex-col items-center justify-center py-24 text-center">
+      {/* Woman image + glow (client component with CSS module) */}
+      <HeroWoman />
+
+      {/* Hero text content — z-index 5, left side */}
+      <div className="hero__content container-luxe relative z-[5] flex min-h-[88vh] flex-col items-start justify-center py-24 text-left w-full max-w-[50%] px-gutter md:max-w-[55%] lg:max-w-[50%] sm:items-center sm:text-center sm:px-6">
         <Reveal>
           <TrustBadge tone="gold" icon={<StarIcon className="h-3 w-3" />}>
             {settings.googleRating}★ · {settings.googleReviews} Google reviews
@@ -41,8 +46,8 @@ export async function HeroHome({ settings }: { settings: Settings }) {
           </p>
         </Reveal>
         <Reveal delay={0.32}>
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-            <div className="flex flex-col items-center">
+          <div className="mt-9 flex flex-wrap items-center gap-3">
+            <div className="flex flex-col items-start">
               <Button href={whatsappHref(waMessage.freeDemo())} variant="primary" size="lg">
                 <WhatsAppIcon className="h-5 w-5" />
                 {tc("freeDemo")}
@@ -57,7 +62,7 @@ export async function HeroHome({ settings }: { settings: Settings }) {
 
         <Reveal delay={0.4}>
           <div className="mt-10 w-full max-w-full overflow-x-auto scrollbar-none">
-            <div className="flex w-max items-center gap-2 px-1 sm:mx-auto">
+            <div className="flex w-max items-center gap-2 px-1">
               <TrustBadge tone="gold" className="shrink-0">
                 Since 2006
               </TrustBadge>
