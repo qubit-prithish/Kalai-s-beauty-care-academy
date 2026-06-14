@@ -4,9 +4,9 @@ import style from "./HeroWoman.module.css";
 
 export function HeroWoman() {
   return (
-    <>
-      <div className={style.womanGlow} aria-hidden="true" />
-      <div className={style.womanWrapper} aria-hidden="true">
+    <div className={style.womanColumn} aria-hidden="true">
+      <div className={style.womanGlow} />
+      <div className={style.womanWrapper}>
         <img
           src="/images/hero-woman.webp"
           alt="Bridal beauty services at Kalai's Beauty Care Academy"
@@ -18,6 +18,6 @@ export function HeroWoman() {
           draggable="false"
         />
       </div>
-    </>
+    </div>
   );
 }
