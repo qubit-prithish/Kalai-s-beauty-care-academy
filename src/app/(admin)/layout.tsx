@@ -6,6 +6,10 @@ export const metadata: Metadata = {
   title: "Admin — Kalai's Beauty Care & Academy",
   description: "Admin dashboard.",
   robots: { index: false, follow: false },
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 // The admin area is outside the [locale] segment, so it provides its own
