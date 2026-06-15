@@ -25,8 +25,8 @@ export async function HeroHome({ settings }: { settings: Settings }) {
       {/* Two-column hero layout */}
       <div className="hero__grid container-luxe relative z-[5] grid min-h-[88vh] grid-cols-1 gap-8 lg:grid-cols-[55%_45%] items-center py-24">
         {/* LEFT COLUMN: Text content */}
-        <div className="hero__content flex flex-col items-start justify-center text-left">
-          <Reveal>
+        <div className="hero__content flex flex-col items-start justify-center text-left min-w-0">
+          <Reveal className="max-w-full">
             <TrustBadge tone="gold" icon={<StarIcon className="h-3 w-3" />}>
               {settings.googleRating}★ Google Rated
             </TrustBadge>
@@ -58,8 +58,12 @@ export async function HeroHome({ settings }: { settings: Settings }) {
             </div>
           </Reveal>
 
-          <Reveal delay={0.4}>
-            <div className="mt-10 w-full max-w-full overflow-x-auto scrollbar-none trust-badge-row">
+          <Reveal delay={0.4} className="w-full max-w-full min-w-0">
+            <style>{`
+              .hide-scrollbar::-webkit-scrollbar { display: none; }
+              .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+            `}</style>
+            <div className="mt-10 w-full overflow-x-auto hide-scrollbar trust-badge-row pb-2 md:pb-0">
               <div className="flex w-max items-center gap-2 px-1">
                 <TrustBadge tone="gold" className="shrink-0">
                   Since 2006
