@@ -2,17 +2,6 @@ import { Link } from "@/i18n/navigation";
 import type { ComponentProps, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
-import { useTranslations } from "next-intl";
-
-export function WhatsAppMicrocopy({ className }: { className?: string }) {
-  const t = useTranslations("common");
-  return (
-    <p className={cn("mt-1 text-xs text-cream-muted", className)}>
-      {t("typicalReply")}
-    </p>
-  );
-}
-
 type Variant = "primary" | "secondary" | "whatsapp" | "ghost";
 type Size = "md" | "lg";
 

@@ -61,7 +61,7 @@ const config: Config = {
         "4xl": "2.25rem",
       },
       spacing: {
-        section: "clamp(4rem, 8vw, 7rem)",
+        section: "clamp(2.5rem, 5vw, 4.5rem)",
         gutter: "clamp(1rem, 4vw, 2rem)",
       },
       maxWidth: {

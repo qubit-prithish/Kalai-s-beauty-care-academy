@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
-import { submitEnquiry } from "@/app/actions/enquiry";
+import { whatsappHref } from "@/lib/whatsapp";
 
 export type EnquiryFormLabels = {
   name: string;
@@ -66,21 +66,18 @@ export function EnquiryForm({ labels }: { labels: EnquiryFormLabels }) {
 
     setStatus("sending");
 
-    // Persist via the server action (Supabase INSERT, RLS-guarded). Includes a
-    // honeypot ("company") to deter spam bots.
-    const res = await submitEnquiry({
-      ...payload,
-      company: String(fd.get("company") ?? ""),
-      pageSource: typeof window !== "undefined" ? window.location.pathname : "contact",
-    });
+    let interestedIn = labels.topicGeneral;
+    if (payload.topic === "course") interestedIn = labels.topicCourse;
+    if (payload.topic === "service") interestedIn = labels.topicService;
 
-    if (res.ok) {
-      setStatus("success");
-      form.reset();
-      localStorage.setItem("lastEnquiryTimestamp", Date.now().toString());
-    } else {
-      setStatus("error");
-    }
+    const waText = `Name: ${payload.name}\nPhone: ${payload.phone}\n\nInterested In:\n${interestedIn}\n\nMessage:\n${payload.message}`;
+
+    const href = whatsappHref(waText);
+    window.open(href, "_blank", "noopener,noreferrer");
+
+    setStatus("success");
+    form.reset();
+    localStorage.setItem("lastEnquiryTimestamp", Date.now().toString());
   }
 
   if (status === "cooldown") {

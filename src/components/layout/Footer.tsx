@@ -153,35 +153,26 @@ export async function Footer({
           <h2 className="mt-6 text-xs font-semibold uppercase tracking-luxe text-gold-300">
             {t("follow")}
           </h2>
-          <div className="mt-3 flex items-center gap-3">
+          <div className="mt-3 flex flex-col items-start gap-3">
             <a
               href={contact.instagram}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="grid h-9 w-9 place-items-center rounded-full border border-ink-border text-cream-muted transition hover:border-gold-400 hover:text-gold-200"
+              className="inline-flex items-center gap-2 rounded-full border border-gold-500/30 bg-gold-500/[0.06] px-3 py-1.5 text-xs font-medium text-gold-200 transition hover:border-gold-400"
             >
-              <InstagramIcon className="h-4 w-4" />
+              <InstagramIcon className="h-3.5 w-3.5" />
+              {t("instagramBadge")}
             </a>
             <a
               href={contact.facebook}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Facebook"
-              className="grid h-9 w-9 place-items-center rounded-full border border-ink-border text-cream-muted transition hover:border-gold-400 hover:text-gold-200"
+              className="inline-flex items-center gap-2 rounded-full border border-gold-500/30 bg-gold-500/[0.06] px-3 py-1.5 text-xs font-medium text-gold-200 transition hover:border-gold-400"
             >
-              <FacebookIcon className="h-4 w-4" />
+              <FacebookIcon className="h-3.5 w-3.5" />
+              {t("facebookBadge")}
             </a>
           </div>
-          <a
-            href={contact.instagram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-2 rounded-full border border-gold-500/30 bg-gold-500/[0.06] px-3 py-1.5 text-xs font-medium text-gold-200 hover:border-gold-400"
-          >
-            <InstagramIcon className="h-3.5 w-3.5" />
-            {t("instagramBadge")}
-          </a>
         </div>
 
         {/* Location */}

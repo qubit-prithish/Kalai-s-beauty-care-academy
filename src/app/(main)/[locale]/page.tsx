@@ -18,7 +18,6 @@ import { ServiceTile } from "@/components/ui/ServiceTile";
 import { TestimonialCarousel } from "@/components/ui/TestimonialCarousel";
 import { OffersBanner } from "@/components/ui/OffersBanner";
 import { WhatsAppIcon } from "@/components/ui/icons";
-import { WhatsAppMicrocopy } from "@/components/ui/Button";
 import { HeroHome } from "@/components/sections/HeroHome";
 import { StatsBand } from "@/components/sections/StatsBand";
 import { OffersPopup } from "@/components/sections/OffersPopup";
@@ -195,7 +194,6 @@ export default async function HomePage({
                   <WhatsAppIcon className="h-4 w-4" />
                   {tc("enquireWhatsApp")}
                 </Button>
-                <WhatsAppMicrocopy />
               </div>
               <Button href={`tel:${settings.contact.phonePrimaryE164}`} variant="secondary">
                 {tc("callNow")}
