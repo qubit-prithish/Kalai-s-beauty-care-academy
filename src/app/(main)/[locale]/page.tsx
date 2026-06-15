@@ -2,7 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import {
   getFeaturedCourses,
-  getFeaturedServices,
+  getServices,
   getOffers,
   getPopupOffer,
   getSettings,
@@ -43,8 +43,9 @@ export default async function HomePage({
   const [settings, courses, services, testimonials, offers, popupOffer] = await Promise.all([
     getSettings(),
     getFeaturedCourses(),
-    getFeaturedServices(),
+    getServices(),
     getTestimonials(),
+
     getOffers(),
     getPopupOffer(),
   ]);
