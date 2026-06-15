@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -32,7 +32,54 @@ export function Header({ settings }: { settings: Settings }) {
   const [open, setOpen] = useState(false);
   const reduce = usePrefersReducedMotion();
   const [mounted, setMounted] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const wasOpen = useRef(false);
+
   useEffect(() => setMounted(true), []);
+
+  useEffect(() => {
+    if (!open) {
+      if (wasOpen.current) {
+        buttonRef.current?.focus();
+        wasOpen.current = false;
+      }
+      return;
+    }
+
+    wasOpen.current = true;
+    const menu = menuRef.current;
+    if (!menu) return;
+
+    const focusable = Array.from(
+      menu.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')
+    );
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (first) {
+      setTimeout(() => first.focus(), 50);
+    }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      if (e.key === "Tab") {
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last?.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first?.focus();
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [open]);
 
   const isActive = (href: string) => {
     if (!pathname) return false;
@@ -107,6 +154,7 @@ export function Header({ settings }: { settings: Settings }) {
 
           {/* Hamburger */}
           <button
+            ref={buttonRef}
             type="button"
             onClick={() => setOpen((s) => !s)}
             aria-expanded={open}
@@ -127,6 +175,10 @@ export function Header({ settings }: { settings: Settings }) {
       {/* Mobile menu */}
       {mounted && open ? (
         <motion.div
+          ref={menuRef}
+          role="dialog"
+          aria-modal="true"
+          aria-label={tc("brandNamePart1")}
           initial={reduce ? false : { height: 0, opacity: 0 }}
           animate={{ height: "auto", opacity: 1 }}
           transition={{ duration: 0.25 }}

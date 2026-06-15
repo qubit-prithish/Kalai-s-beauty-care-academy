@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import style from "./HeroWoman.module.css";
 
 export function HeroWoman() {
@@ -7,14 +8,13 @@ export function HeroWoman() {
     <div className={style.womanColumn} aria-hidden="true">
       <div className={style.womanGlow} />
       <div className={style.womanWrapper}>
-        <img
+        <Image
           src="/images/hero-woman.webp"
           alt="Bridal beauty services at Kalai's Beauty Care Academy"
           className={style.woman}
           width={1200}
           height={1800}
-          loading="eager"
-          fetchPriority="high"
+          priority
           draggable="false"
         />
       </div>

@@ -13,7 +13,21 @@ export async function POST(req: Request) {
   const bucket = String(form.get("bucket") ?? "gallery");
   if (!file) return NextResponse.json({ error: "no file" }, { status: 400 });
 
-  const ext = (file.name.split(".").pop() ?? "bin").toLowerCase();
+  const MAX_SIZE = 5 * 1024 * 1024; // 5MB limit
+  if (file.size > MAX_SIZE) {
+    return NextResponse.json({ error: "file too large (max 5MB)" }, { status: 400 });
+  }
+
+  const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/avif"];
+  if (!allowedTypes.includes(file.type)) {
+    return NextResponse.json({ error: "invalid file type" }, { status: 400 });
+  }
+
+  const allowedExts = ["jpg", "jpeg", "png", "webp", "avif"];
+  const ext = (file.name.split(".").pop() ?? "").toLowerCase();
+  if (!allowedExts.includes(ext)) {
+    return NextResponse.json({ error: "invalid file extension" }, { status: 400 });
+  }
   const path = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
   const db = getServiceRoleClient();
   const { error: uploadError } = await db.storage.from(bucket).upload(path, file, {
