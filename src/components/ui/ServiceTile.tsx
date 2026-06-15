@@ -1,4 +1,4 @@
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 import type { Service } from "@/lib/content/types";
@@ -21,6 +21,7 @@ export function ServiceTile({
   signatureLabel: string;
 }) {
   const currentLocale = useLocale();
+  const t = useTranslations("services");
   const title = currentLocale === "ta" ? service.title.ta : service.title.en;
   const message = encodeURIComponent(`I want to book: ${title}`);
   const href = `https://wa.me/919566229900?text=${message}`;
@@ -71,7 +72,7 @@ export function ServiceTile({
       <div className="border-t border-ink-border px-6 pb-6 pt-4">
         <Button href={href} variant="primary" className="w-full">
           <WhatsAppIcon className="h-4 w-4" />
-          Book on WhatsApp
+          {t("bookOnWhatsApp")}
         </Button>
       </div>
     </Card>
