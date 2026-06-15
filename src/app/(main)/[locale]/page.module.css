@@ -1,0 +1,35 @@
+.coursesGrid {
+  display: grid;
+}
+
+.servicesGrid {
+  display: grid;
+}
+
+/* Desktop: Show first 3 courses only */
+@media (min-width: 768px) {
+  .coursesGrid > :nth-child(n+4) {
+    display: none;
+  }
+}
+
+/* Mobile: Show first 1 course only */
+@media (max-width: 767px) {
+  .coursesGrid > :nth-child(n+2) {
+    display: none;
+  }
+}
+
+/* Desktop: Show first 3 services only */
+@media (min-width: 768px) {
+  .servicesGrid > :nth-child(n+4) {
+    display: none;
+  }
+}
+
+/* Mobile: Show first 1 service only */
+@media (max-width: 767px) {
+  .servicesGrid > :nth-child(n+2) {
+    display: none;
+  }
+}

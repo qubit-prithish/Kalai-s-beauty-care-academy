@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import { Button, WhatsAppMicrocopy } from "@/components/ui/Button";
+import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { TrustBadge } from "@/components/ui/TrustBadge";
 import { WhatsAppIcon, StarIcon } from "@/components/ui/icons";
@@ -28,7 +28,7 @@ export async function HeroHome({ settings }: { settings: Settings }) {
         <div className="hero__content flex flex-col items-start justify-center text-left">
           <Reveal>
             <TrustBadge tone="gold" icon={<StarIcon className="h-3 w-3" />}>
-              {settings.googleRating}★ · {settings.googleReviews} Google reviews
+              {settings.googleRating}★ Google Rated
             </TrustBadge>
           </Reveal>
           <Reveal delay={0.08}>
@@ -51,7 +51,6 @@ export async function HeroHome({ settings }: { settings: Settings }) {
                   <WhatsAppIcon className="h-5 w-5" />
                   {tc("freeDemo")}
                 </Button>
-                <WhatsAppMicrocopy />
               </div>
               <Button href="/courses" variant="secondary" size="lg">
                 {tc("exploreCourses")}
@@ -60,7 +59,7 @@ export async function HeroHome({ settings }: { settings: Settings }) {
           </Reveal>
 
           <Reveal delay={0.4}>
-            <div className="mt-10 w-full max-w-full overflow-x-auto scrollbar-none">
+            <div className="mt-10 w-full max-w-full overflow-x-auto scrollbar-none trust-badge-row">
               <div className="flex w-max items-center gap-2 px-1">
                 <TrustBadge tone="gold" className="shrink-0">
                   Since 2006

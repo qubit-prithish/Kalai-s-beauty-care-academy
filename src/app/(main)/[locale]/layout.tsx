@@ -35,12 +35,18 @@ export async function generateMetadata({
   const { locale } = await params;
   const l = hasLocale(routing.locales, locale) ? (locale as Locale) : routing.defaultLocale;
   const t = await getTranslations({ locale: l, namespace: "seo" });
-  return buildMetadata({
+  const baseMetadata = buildMetadata({
     locale: l,
     path: "/",
     title: t("homeTitle"),
     description: t("homeDescription"),
   });
+  return {
+    ...baseMetadata,
+    icons: {
+      icon: "/favicon.png",
+    },
+  };
 }
 
 export default async function LocaleLayout({

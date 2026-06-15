@@ -134,3 +134,27 @@
     animation: none !important;
   }
 }
+
+@media (max-width: 767px) {
+  .trust-badge-row {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    gap: 8px;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .trust-badge-row::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .trust-badge-row > * {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+  }
+}

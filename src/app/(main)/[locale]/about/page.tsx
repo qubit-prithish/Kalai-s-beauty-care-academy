@@ -6,7 +6,6 @@ import {
   getAboutFacilities,
   getAboutPageData,
   getAboutTrainers,
-  getAboutWhyItems,
 } from "@/lib/content";
 import { pick } from "@/lib/locale";
 import { whatsappHref, waMessage } from "@/lib/whatsapp";
@@ -18,6 +17,7 @@ import { Placeholder } from "@/components/ui/Placeholder";
 import { TrustBadge } from "@/components/ui/TrustBadge";
 import { WhatsAppIcon, StarIcon } from "@/components/ui/icons";
 import Link from "next/link";
+import { WhyKalais } from "@/components/sections/WhyKalais";
 
 export async function generateMetadata({
   params,
@@ -46,9 +46,8 @@ export default async function AboutPage({
 
   const tc = await getTranslations("common");
   
-  const [page, usps, facilities, trainers] = await Promise.all([
+  const [page, facilities, trainers] = await Promise.all([
     getAboutPageData(),
-    getAboutWhyItems(),
     getAboutFacilities(),
     getAboutTrainers(),
   ]);
@@ -127,25 +126,7 @@ export default async function AboutPage({
         </div>
       </section>
 
-      {/* Why choose us */}
-      <section className="border-y border-ink-border bg-ink-surface/40 py-section">
-        <div className="container-luxe">
-          {/* We'll use a hardcoded translation key for section title if not in singleton */}
-          <SectionHeading title={pick({ en: "Why choose us", ta: "ஏன் எங்களை தேர்வு செய்வது" }, l)} />
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {usps.map((item, i) => (
-              <Reveal key={item.id} delay={i * 0.06}>
-                <div className="flex h-full items-start gap-4 rounded-3xl border border-ink-border bg-ink-page p-6">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-gold-gradient font-display text-lg font-bold text-ink-page">
-                    {i + 1}
-                  </span>
-                  <p className="text-sm leading-relaxed text-cream-muted">{pick(item.text, l)}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <WhyKalais />
 
       {/* Testimonials reference */}
       <section className="py-section">
