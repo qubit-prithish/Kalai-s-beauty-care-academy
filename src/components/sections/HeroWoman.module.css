@@ -106,10 +106,10 @@
 
 @media (max-width: 1023px) and (min-width: 768px) {
   .womanGlow {
-    right: -15%;
-    bottom: -5%;
-    width: 85%;
-    height: 85%;
+    right: -5%;
+    bottom: 5%;
+    width: 75%;
+    height: 75%;
     opacity: 0.6;
   }
   .woman {

@@ -129,6 +129,7 @@ export function Header({ settings }: { settings: Settings }) {
               key={item.href}
               href={item.href}
               prefetch={false}
+              aria-current={isActive(item.href) ? "page" : undefined}
               className={cn(
                 "rounded-full px-3 py-2 text-sm font-medium transition-colors",
                 isActive(item.href)
@@ -191,6 +192,7 @@ export function Header({ settings }: { settings: Settings }) {
                 href={item.href}
                 prefetch={false}
                 onClick={() => setOpen(false)}
+                aria-current={isActive(item.href) ? "page" : undefined}
                 className={cn(
                   "rounded-xl px-3 py-2.5 text-sm font-medium transition-colors",
                   isActive(item.href)

@@ -129,16 +129,16 @@ export function EnquiryForm({ labels }: { labels: EnquiryFormLabels }) {
         <label htmlFor="name" className="text-sm font-medium text-cream">
           {labels.name}
         </label>
-        <input id="name" name="name" type="text" autoComplete="name" className={field} aria-invalid={!!errors.name} />
-        {errors.name ? <p className="mt-1 text-xs text-rose-300">{errors.name}</p> : null}
+        <input id="name" name="name" type="text" autoComplete="name" className={field} aria-invalid={!!errors.name} aria-describedby={errors.name ? "name-error" : undefined} />
+        {errors.name ? <p id="name-error" className="mt-1 text-xs text-rose-300">{errors.name}</p> : null}
       </div>
 
       <div>
         <label htmlFor="phone" className="text-sm font-medium text-cream">
           {labels.phone}
         </label>
-        <input id="phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" className={field} aria-invalid={!!errors.phone} />
-        {errors.phone ? <p className="mt-1 text-xs text-rose-300">{errors.phone}</p> : null}
+        <input id="phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" className={field} aria-invalid={!!errors.phone} aria-describedby={errors.phone ? "phone-error" : undefined} />
+        {errors.phone ? <p id="phone-error" className="mt-1 text-xs text-rose-300">{errors.phone}</p> : null}
       </div>
 
       <div>
@@ -156,8 +156,8 @@ export function EnquiryForm({ labels }: { labels: EnquiryFormLabels }) {
         <label htmlFor="message" className="text-sm font-medium text-cream">
           {labels.message}
         </label>
-        <textarea id="message" name="message" rows={4} className={field} aria-invalid={!!errors.message} />
-        {errors.message ? <p className="mt-1 text-xs text-rose-300">{errors.message}</p> : null}
+        <textarea id="message" name="message" rows={4} className={field} aria-invalid={!!errors.message} aria-describedby={errors.message ? "message-error" : undefined} />
+        {errors.message ? <p id="message-error" className="mt-1 text-xs text-rose-300">{errors.message}</p> : null}
       </div>
 
       <Button type="submit" variant="primary" className="w-full" disabled={status === "sending"}>

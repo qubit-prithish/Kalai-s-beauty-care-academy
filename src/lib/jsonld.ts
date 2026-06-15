@@ -61,6 +61,7 @@ export function localBusinessJsonLd(settings: Settings, locale: Locale) {
 
 /** Course schema for a course detail page. */
 export function courseJsonLd(course: Course, settings: Settings, locale: Locale) {
+  const { address } = settings;
   return {
     "@context": "https://schema.org",
     "@type": "Course",
@@ -71,6 +72,28 @@ export function courseJsonLd(course: Course, settings: Settings, locale: Locale)
       "@type": "Organization",
       name: pick(settings.brandName, locale),
       sameAs: SITE_URL,
+    },
+    hasCourseInstance: {
+      "@type": "CourseInstance",
+      courseMode: "Onsite",
+      location: {
+        "@type": "Place",
+        name: pick(settings.brandName, locale),
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: `${address.line1}, ${address.line2}`,
+          addressLocality: address.city,
+          addressRegion: address.state,
+          postalCode: address.pincode,
+          addressCountry: "IN",
+        },
+      },
+    },
+    offers: {
+      "@type": "Offer",
+      category: "Educational",
+      price: course.price ?? 0,
+      priceCurrency: "INR",
     },
     inLanguage: locale === "ta" ? "ta-IN" : "en-IN",
     aggregateRating: {

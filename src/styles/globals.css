@@ -34,6 +34,12 @@
     .pr-safe {
       padding-right: calc(1rem + env(safe-area-inset-right));
     }
+    .pt-safe {
+      padding-top: calc(1rem + env(safe-area-inset-top));
+    }
+    .pl-safe {
+      padding-left: calc(1rem + env(safe-area-inset-left));
+    }
   }
 
   /* Tamil locale: swap default families to Tamil-capable fonts */

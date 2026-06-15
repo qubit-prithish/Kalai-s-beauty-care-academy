@@ -32,7 +32,9 @@ export function absoluteUrl(locale: Locale, path: string): string {
 export function alternates(path: string): Metadata["alternates"] {
   const languages: Record<string, string> = {};
   for (const l of routing.locales) {
-    languages[l === "en" ? "en-IN" : "ta-IN"] = absoluteUrl(l, path);
+    const url = absoluteUrl(l, path);
+    languages[l] = url;
+    languages[l === "en" ? "en-IN" : "ta-IN"] = url;
   }
   // x-default points to the default locale.
   languages["x-default"] = absoluteUrl(routing.defaultLocale, path);
