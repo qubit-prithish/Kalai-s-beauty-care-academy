@@ -33,7 +33,7 @@ export function FloatingCTAs() {
             scrolled ? "max-w-0 translate-x-2 px-0 opacity-0" : "max-w-32 opacity-100",
           )}
         >
-          Chat with us
+          {t("chatWithUs")}
         </span>
         <a
           href={whatsappHref(waMessage.general())}

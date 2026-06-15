@@ -31,7 +31,7 @@ export async function Footer({
     <footer className="mt-section border-t border-ink-border bg-ink-surface">
       <div className="border-b border-ink-border bg-ink-surface py-3 px-4 text-center text-xs text-gold-300">
         <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
-          <span>Established 2006</span>
+          <span>{t("badgeEstablished")}</span>
           <span>·</span>
           <a
             href="https://g.page/r/kalaisbeautyacademy/review"
@@ -39,12 +39,12 @@ export async function Footer({
             rel="noopener noreferrer"
             className="text-gold-200 underline underline-offset-2 hover:text-gold-100"
           >
-            4.8★ on Google
+            {t("badgeRating")}
           </a>
           <span>·</span>
-          <span>1000+ Students Trained</span>
+          <span>{t("badgeStudents")}</span>
           <span>·</span>
-          <span>Govt-Certified Courses</span>
+          <span>{t("badgeCertified")}</span>
         </div>
       </div>
       <div className="container-luxe grid gap-12 py-16 lg:grid-cols-12">

@@ -72,7 +72,7 @@ export default async function HomePage({
             </div>
             <div className="mt-10 text-center">
               <Button href="/courses" variant="secondary">
-                View All Courses →
+                {tc("viewAllCourses")}
               </Button>
             </div>
           </div>
@@ -105,7 +105,7 @@ export default async function HomePage({
             </div>
             <div className="mt-10 text-center">
               <Button href="/services" variant="secondary">
-                View All Services →
+                {tc("viewAllServices")}
               </Button>
             </div>
           </div>

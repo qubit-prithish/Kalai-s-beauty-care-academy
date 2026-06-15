@@ -66,19 +66,19 @@ export async function HeroHome({ settings }: { settings: Settings }) {
             <div className="mt-10 w-full overflow-x-auto hide-scrollbar trust-badge-row pb-2 md:pb-0">
               <div className="flex w-max items-center gap-2 px-1">
                 <TrustBadge tone="gold" className="shrink-0">
-                  Since 2006
+                  {t("badgeSince")}
                 </TrustBadge>
                 <TrustBadge tone="default" className="shrink-0">
-                  {"4.8\u2605 Google"}
+                  {t("badgeRatingShort")}
                 </TrustBadge>
                 <TrustBadge tone="default" className="shrink-0">
-                  1000+ Trained
+                  {t("badgeTrained")}
                 </TrustBadge>
                 <TrustBadge tone="default" className="shrink-0">
-                  Govt-Certified
+                  {t("badgeCertifiedShort")}
                 </TrustBadge>
                 <TrustBadge tone="default" className="shrink-0">
-                  Placement Support
+                  {t("badgePlacement")}
                 </TrustBadge>
               </div>
             </div>

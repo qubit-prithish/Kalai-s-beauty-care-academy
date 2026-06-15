@@ -13,7 +13,7 @@ import { CookieBanner } from "@/components/layout/CookieBanner";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { PlausibleScript } from "@/components/analytics/PlausibleScript";
 import { localBusinessJsonLd } from "@/lib/jsonld";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, SITE_URL } from "@/lib/seo";
 import { getTranslations, getMessages } from "next-intl/server";
 import type { Metadata } from "next";
 import { fontVariables } from "../../fonts";
@@ -42,6 +42,7 @@ export async function generateMetadata({
     description: t("homeDescription"),
   });
   return {
+    metadataBase: new URL(SITE_URL),
     ...baseMetadata,
     icons: {
       icon: "/favicon.png",

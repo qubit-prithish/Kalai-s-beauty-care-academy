@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { fontVariables } from "../fonts";
 import "@/styles/globals.css";
 
+import { SITE_URL } from "@/lib/seo";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Admin — Kalai's Beauty Care & Academy",
   description: "Admin dashboard.",
   robots: { index: false, follow: false },

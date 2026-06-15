@@ -67,10 +67,10 @@ export function Header({ settings }: { settings: Settings }) {
           </span>
           <span className="hidden flex-col leading-tight sm:flex">
             <span className="heading-display text-sm font-semibold text-cream leading-snug">
-              Kalai&apos;s Beauty Care
+              {tc("brandNamePart1")}
             </span>
             <span className="text-[10px] uppercase tracking-luxe text-gold-300">
-              &amp; Academy
+              {tc("brandNamePart2")}
             </span>
           </span>
         </Link>

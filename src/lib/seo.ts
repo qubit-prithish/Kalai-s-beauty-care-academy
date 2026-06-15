@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { routing, type Locale } from "@/i18n/routing";
 
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+  process.env.NEXT_PUBLIC_SITE_URL || "https://kalaisbeautyacademy.com"
 ).replace(/\/$/, "");
 
 const OG_LOCALE: Record<Locale, string> = {
@@ -72,6 +72,7 @@ export function buildMetadata({
     : `${SITE_URL}/og.png`;
 
   return {
+    metadataBase: new URL(SITE_URL),
     title,
     description,
     alternates: alternates(path),
