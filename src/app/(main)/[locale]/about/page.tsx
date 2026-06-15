@@ -45,6 +45,7 @@ export default async function AboutPage({
   const l = locale as Locale;
 
   const tc = await getTranslations("common");
+  const th = await getTranslations("home");
   
   const [page, facilities, trainers] = await Promise.all([
     getAboutPageData(),
@@ -125,8 +126,18 @@ export default async function AboutPage({
           </div>
         </div>
       </section>
-
-      <WhyKalais />
+      {/* Why Kalai's */}
+      <section className="pt-section pb-0">
+        <div className="container-luxe relative z-10">
+          <SectionHeading 
+            title={th("uspTitle")} 
+            subtitle={th("uspSubtitle")} 
+          />
+        </div>
+      </section>
+      <div className="-mt-section">
+        <WhyKalais />
+      </div>
 
       {/* Testimonials reference */}
       <section className="py-section">
