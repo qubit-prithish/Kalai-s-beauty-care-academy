@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { submitEnquiry } from "@/app/actions/enquiry";
 
@@ -25,6 +26,7 @@ export type EnquiryFormLabels = {
 type Errors = Partial<Record<"name" | "phone" | "message", string>>;
 
 export function EnquiryForm({ labels }: { labels: EnquiryFormLabels }) {
+  const t = useTranslations("enquiryForm");
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error" | "cooldown">("idle");
 
@@ -84,9 +86,9 @@ export function EnquiryForm({ labels }: { labels: EnquiryFormLabels }) {
   if (status === "cooldown") {
     return (
       <div role="status" aria-live="polite" aria-atomic="true" className="rounded-3xl border border-rose-500/30 bg-rose-500/[0.08] p-8 text-center">
-        <div className="heading-display text-2xl text-rose-300">Please Wait</div>
+        <div className="heading-display text-2xl text-rose-300">{t("cooldownTitle")}</div>
         <p className="mt-3 text-sm leading-relaxed text-cream-muted">
-          You have already submitted an enquiry recently. Please wait a minute before trying again.
+          {t("cooldownMessage")}
         </p>
         <Button
           variant="secondary"

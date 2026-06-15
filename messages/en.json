@@ -290,5 +290,9 @@
     "title": "Page Not Found",
     "message": "The page you are looking for doesn't exist or has been moved.",
     "backHome": "Back to Home"
+  },
+  "enquiryForm": {
+    "cooldownTitle": "Please Wait",
+    "cooldownMessage": "You have already submitted an enquiry recently. Please try again later."
   }
 }
