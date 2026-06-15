@@ -9,19 +9,18 @@
 
 .womanGlow {
   position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 50%;
-  height: 100%;
+  right: -25%;
+  top: -25%;
+  bottom: -25%;
+  width: 120%;
   z-index: 2;
   pointer-events: none;
 
   background: radial-gradient(
-    ellipse 50% 50% at 50% 50%,
+    ellipse 45% 45% at 55% 50%,
     rgba(196, 154, 60, 0.14) 0%,
-    rgba(196, 154, 60, 0.07) 40%,
-    rgba(196, 154, 60, 0.02) 65%,
+    rgba(196, 154, 60, 0.08) 40%,
+    rgba(196, 154, 60, 0.02) 75%,
     transparent 100%
   );
 
@@ -46,36 +45,54 @@
     linear-gradient(
       to right,
       transparent 0%,
-      rgba(0,0,0,0.3) 12%,
-      rgba(0,0,0,0.7) 20%,
-      black 28%
+      rgba(0,0,0,0.2) 8%,
+      rgba(0,0,0,0.6) 16%,
+      black 26%
     ),
     linear-gradient(
       to top,
       transparent 0%,
-      rgba(0,0,0,0.4) 10%,
-      rgba(0,0,0,0.8) 18%,
-      black 26%
+      rgba(0,0,0,0.15) 5%,
+      rgba(0,0,0,0.5) 12%,
+      rgba(0,0,0,0.85) 20%,
+      black 28%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0,0,0,0.15) 3%,
+      rgba(0,0,0,0.5) 8%,
+      rgba(0,0,0,0.85) 14%,
+      black 20%
     );
   -webkit-mask-image:
     linear-gradient(
       to right,
       transparent 0%,
-      rgba(0,0,0,0.3) 12%,
-      rgba(0,0,0,0.7) 20%,
-      black 28%
+      rgba(0,0,0,0.2) 8%,
+      rgba(0,0,0,0.6) 16%,
+      black 26%
     ),
     linear-gradient(
       to top,
       transparent 0%,
-      rgba(0,0,0,0.4) 10%,
-      rgba(0,0,0,0.8) 18%,
-      black 26%
+      rgba(0,0,0,0.15) 5%,
+      rgba(0,0,0,0.5) 12%,
+      rgba(0,0,0,0.85) 20%,
+      black 28%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0,0,0,0.15) 3%,
+      rgba(0,0,0,0.5) 8%,
+      rgba(0,0,0,0.85) 14%,
+      black 20%
     );
   mask-composite: intersect;
   -webkit-mask-composite: source-in;
-  filter: drop-shadow(0 0 24px rgba(196, 154, 60, 0.18))
-    drop-shadow(0 0 48px rgba(196, 154, 60, 0.08));
+  filter: drop-shadow(0 0 30px rgba(196, 154, 60, 0.12))
+    drop-shadow(0 0 70px rgba(196, 154, 60, 0.08));
   animation: heroFloat 6s ease-in-out infinite;
   will-change: transform;
   transform: translateZ(0);
@@ -107,10 +124,10 @@
 
 @media (max-width: 1023px) and (min-width: 768px) {
   .womanGlow {
-    right: -5%;
-    bottom: 0;
-    width: 75%;
-    height: 100%;
+    right: -25%;
+    top: -25%;
+    bottom: -25%;
+    width: 120%;
     opacity: 0.6;
   }
   .woman {
