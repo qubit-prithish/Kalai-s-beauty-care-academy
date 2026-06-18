@@ -42,52 +42,51 @@
   max-width: 82%;
   user-select: none;
   mask-image:
+    /* Gradient 1: Left edge — she emerges from darkness */
     linear-gradient(
       to right,
       transparent 0%,
-      rgba(0,0,0,0.2) 8%,
-      rgba(0,0,0,0.6) 16%,
-      black 26%
+      rgba(0,0,0,0.3) 12%,
+      rgba(0,0,0,0.7) 20%,
+      black 28%
     ),
+    /* Gradient 2: Bottom edge — body dissolves into dark floor */
     linear-gradient(
       to top,
       transparent 0%,
-      rgba(0,0,0,0.15) 5%,
-      rgba(0,0,0,0.5) 12%,
-      rgba(0,0,0,0.85) 20%,
-      black 28%
+      rgba(0,0,0,0.4) 10%,
+      rgba(0,0,0,0.8) 18%,
+      black 26%
     ),
+    /* Gradient 3: Right edge — dissolves into dark background */
     linear-gradient(
-      to bottom,
+      to left,
       transparent 0%,
-      rgba(0,0,0,0.15) 3%,
-      rgba(0,0,0,0.5) 8%,
-      rgba(0,0,0,0.85) 14%,
-      black 20%
+      rgba(0,0,0,0.2) 4%,
+      rgba(0,0,0,0.6) 10%,
+      black 18%
     );
   -webkit-mask-image:
     linear-gradient(
       to right,
       transparent 0%,
-      rgba(0,0,0,0.2) 8%,
-      rgba(0,0,0,0.6) 16%,
-      black 26%
+      rgba(0,0,0,0.3) 12%,
+      rgba(0,0,0,0.7) 20%,
+      black 28%
     ),
     linear-gradient(
       to top,
       transparent 0%,
-      rgba(0,0,0,0.15) 5%,
-      rgba(0,0,0,0.5) 12%,
-      rgba(0,0,0,0.85) 20%,
-      black 28%
+      rgba(0,0,0,0.4) 10%,
+      rgba(0,0,0,0.8) 18%,
+      black 26%
     ),
     linear-gradient(
-      to bottom,
+      to left,
       transparent 0%,
-      rgba(0,0,0,0.15) 3%,
-      rgba(0,0,0,0.5) 8%,
-      rgba(0,0,0,0.85) 14%,
-      black 20%
+      rgba(0,0,0,0.2) 4%,
+      rgba(0,0,0,0.6) 10%,
+      black 18%
     );
   mask-composite: intersect;
   -webkit-mask-composite: source-in;
