@@ -7,6 +7,7 @@ import Lenis from "lenis";
 import { usePrefersReducedMotion, useIsomorphicLayoutEffect } from "@/lib/motion";
 import { useMounted } from "@/lib/hooks/useMounted";
 
+/**
  * Site-wide smooth scroll via Lenis.
  * Includes defensive protections for route transitions.
  */
