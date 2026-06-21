@@ -59,10 +59,6 @@ export async function HeroHome({ settings }: { settings: Settings }) {
           </Reveal>
 
           <Reveal delay={0.4} className="w-full max-w-full min-w-0">
-            <style>{`
-              .hide-scrollbar::-webkit-scrollbar { display: none; }
-              .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-            `}</style>
             <div className="mt-10 w-full overflow-x-auto hide-scrollbar trust-badge-row pb-2 md:pb-0">
               <div className="flex w-max items-center gap-2 px-1">
                 <TrustBadge tone="gold" className="shrink-0">

@@ -11,11 +11,13 @@ export function FloatingCTAs() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const updateScrolled = () => setScrolled(window.scrollY > 8);
+    const updateScrolled = () => {
+      if ((window.scrollY > 8) !== scrolled) setScrolled(window.scrollY > 8);
+    };
     updateScrolled();
     window.addEventListener("scroll", updateScrolled, { passive: true });
     return () => window.removeEventListener("scroll", updateScrolled);
-  }, []);
+  }, [scrolled]);
 
   return (
     <div className="fixed bottom-4 right-4 z-40 flex flex-col items-end gap-3 pb-safe pr-safe">

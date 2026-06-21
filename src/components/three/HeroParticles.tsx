@@ -71,17 +71,6 @@ function StaticHeroBackdrop() {
           );
         })}
       </div>
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0) scale(1); opacity: 0.6; }
-          50% { transform: translateY(-10px) scale(1.05); opacity: 0.9; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          div[class*="absolute"] {
-            animation: none !important;
-          }
-        }
-      `}</style>
     </div>
   );
 }
