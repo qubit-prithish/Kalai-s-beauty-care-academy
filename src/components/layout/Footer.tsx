@@ -130,6 +130,16 @@ export async function Footer({
                 {t("links.faq")}
               </Link>
             </li>
+            <li className="pt-2">
+              <Link href="/privacy" prefetch={false} className="text-cream-muted hover:text-gold-200 transition-colors">
+                {t("links.privacy")}
+              </Link>
+            </li>
+            <li>
+              <Link href="/terms" prefetch={false} className="text-cream-muted hover:text-gold-200 transition-colors">
+                {t("links.terms")}
+              </Link>
+            </li>
           </ul>
         </div>
 

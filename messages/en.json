@@ -18,7 +18,11 @@
     "faqTitle": "FAQ — Timings, Fees, Certificates & Placement",
     "faqDescription": "Answers about course timings, fees, EMI, government-recognised certificates, placement, batch sizes and our Ambattur location.",
     "contactTitle": "Contact & Visit — Ambattur, Chennai",
-    "contactDescription": "Visit Kalai's Beauty Care & Academy at No:77, Ayyapakkam Main Road, TNHB, KK Nagar, Ambattur, Chennai – 600053. WhatsApp 95662 29900."
+    "contactDescription": "Visit Kalai's Beauty Care & Academy at No:77, Ayyapakkam Main Road, TNHB, KK Nagar, Ambattur, Chennai – 600053. WhatsApp 95662 29900.",
+    "privacyTitle": "Privacy Policy | Kalai's Beauty Care & Academy",
+    "privacyDescription": "Read our privacy policy to understand how we collect, use, and protect your personal information in compliance with Indian IT Act, 2000.",
+    "termsTitle": "Terms of Service | Kalai's Beauty Care & Academy",
+    "termsDescription": "Terms of Service for Kalai's Beauty Care & Academy covering course enrollment, salon bookings, and liability disclaimers."
   },
   "breadcrumb": {
     "home": "Home"
@@ -76,7 +80,9 @@
     "links": {
       "testimonials": "Testimonials",
       "offers": "Special Offers",
-      "faq": "FAQ"
+      "faq": "FAQ",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
     },
     "badgeEstablished": "Established 2006",
     "badgeRating": "4.8\u2605 on Google",
@@ -294,6 +300,60 @@
   },
   "enquiryForm": {
     "cooldownTitle": "Please Wait",
-    "cooldownMessage": "You have already submitted an enquiry recently. Please try again later."
+    "cooldownMessage": "You have already submitted an enquiry recently. Please try again later.",
+    "consent": "By submitting, you agree to our ",
+    "privacyLink": "Privacy Policy"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: June 2026",
+    "sections": {
+      "collection": {
+        "title": "1. Information We Collect",
+        "content": "When you use our enquiry form, we collect your name, phone number, the course or service you are interested in, and any message you provide. We also automatically collect anonymised page view data using Vercel Analytics and Plausible Analytics."
+      },
+      "usage": {
+        "title": "2. How We Use Your Information",
+        "content": "The personal information we collect is used strictly for lead handling, responding to your enquiries, and providing you with course or service details. When you submit an enquiry, the information may be sent directly to our WhatsApp and stored securely in our database to help us manage your request."
+      },
+      "analytics": {
+        "title": "3. Third-Party Analytics",
+        "content": "We use Vercel Analytics and Plausible Analytics to understand how visitors interact with our website. These tools are privacy-friendly and do not track individual users across the web or collect personally identifiable information (PII). They track basic page views, referral sources, and device types."
+      },
+      "itAct": {
+        "title": "4. Indian IT Act, 2000",
+        "content": "In compliance with Section 43A of the Information Technology Act, 2000, and the applicable rules, we treat your phone number and enquiry details as sensitive personal data. We implement reasonable security practices and procedures to protect your information from unauthorized access, disclosure, or misuse."
+      },
+      "deletion": {
+        "title": "5. Data Deletion & Rights",
+        "content": "You have the right to request the deletion of your personal data from our records at any time. To request data deletion or to ask any questions about our privacy practices, please contact us on WhatsApp or email us. We will process your request promptly."
+      }
+    }
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "lastUpdated": "Last updated: June 2026",
+    "sections": {
+      "enrollment": {
+        "title": "1. Course Enrollment",
+        "content": "Enrollment in our beautician courses is subject to availability and payment of required fees. Course schedules, fees, and syllabus are subject to change. Government-recognised certificates are awarded only upon successful completion of the required curriculum and assessments."
+      },
+      "bookings": {
+        "title": "2. Service Bookings",
+        "content": "We recommend booking salon services in advance via WhatsApp. While we welcome walk-ins, prior appointments ensure timely service. We reserve the right to refuse service if an individual is excessively late or violates our salon etiquette."
+      },
+      "content": {
+        "title": "3. Content Ownership",
+        "content": "All content on this website, including text, images, logos, and course materials, is the property of Kalai's Beauty Care & Academy. Unauthorized use, reproduction, or distribution is strictly prohibited."
+      },
+      "liability": {
+        "title": "4. Liability Disclaimer",
+        "content": "While we strive for excellence in all our treatments and training, individual results may vary. Kalai's Beauty Care & Academy shall not be held liable for any adverse reactions to salon treatments or direct/indirect damages resulting from the use of our website or services."
+      },
+      "governing": {
+        "title": "5. Governing Law",
+        "content": "These Terms of Service are governed by and construed in accordance with the laws of India. Any disputes arising out of or relating to these terms or our services shall be subject to the exclusive jurisdiction of the courts in Chennai, Tamil Nadu."
+      }
+    }
   }
 }

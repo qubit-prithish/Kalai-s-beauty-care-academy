@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { whatsappHref } from "@/lib/whatsapp";
+import { Link } from "@/i18n/navigation";
 
 export type EnquiryFormLabels = {
   name: string;
@@ -157,6 +158,13 @@ export function EnquiryForm({ labels }: { labels: EnquiryFormLabels }) {
         </label>
         <textarea id="message" name="message" rows={4} className={field} aria-invalid={!!errors.message} aria-describedby={errors.message ? "message-error" : undefined} />
         {errors.message ? <p id="message-error" className="mt-1 text-xs text-rose-300">{errors.message}</p> : null}
+      </div>
+
+      <div className="text-xs text-cream-muted text-center px-2">
+        {t("consent")}
+        <Link href="/privacy" className="text-gold-200 hover:text-gold-100 hover:underline transition-colors">
+          {t("privacyLink")}
+        </Link>
       </div>
 
       <Button type="submit" variant="primary" className="w-full" disabled={status === "sending"}>
