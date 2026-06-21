@@ -8,6 +8,7 @@ import { Card } from "./Card";
 import { Placeholder } from "./Placeholder";
 import { TrustBadge } from "./TrustBadge";
 import { StarIcon, WhatsAppIcon } from "./icons";
+import { whatsappHref } from "@/lib/whatsapp";
 
 export function ServiceTile({
   service,
@@ -23,8 +24,8 @@ export function ServiceTile({
   const currentLocale = useLocale();
   const t = useTranslations("services");
   const title = currentLocale === "ta" ? service.title.ta : service.title.en;
-  const message = encodeURIComponent(`I want to book: ${title}`);
-  const href = `https://wa.me/919566229900?text=${message}`;
+  const message = `I want to book: ${title}`;
+  const href = whatsappHref(message);
 
   return (
     <Card interactive className="group flex h-full flex-col overflow-hidden">

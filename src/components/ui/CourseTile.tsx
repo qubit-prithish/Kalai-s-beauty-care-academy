@@ -10,6 +10,7 @@ import { Card } from "./Card";
 import { Placeholder } from "./Placeholder";
 import { TrustBadge } from "./TrustBadge";
 import { WhatsAppIcon } from "./icons";
+import { whatsappHref } from "@/lib/whatsapp";
 
 const coursePerkBadges = (course: Course) => {
   const text = [
@@ -49,7 +50,7 @@ export function CourseTile({
   const t = useTranslations("courses");
   const title = currentLocale === "ta" ? course.title.ta : course.title.en;
   const whatsappMessage = `I'm interested in the ${title} course at Kalai's Beauty Academy`;
-  const courseWhatsappHref = `https://wa.me/919566229900?text=${encodeURIComponent(whatsappMessage)}`;
+  const courseWhatsappHref = whatsappHref(whatsappMessage);
   const perkBadges = coursePerkBadges(course);
 
   return (
