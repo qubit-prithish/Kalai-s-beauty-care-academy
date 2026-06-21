@@ -304,6 +304,11 @@
     "consent": "By submitting, you agree to our ",
     "privacyLink": "Privacy Policy"
   },
+  "cookieBanner": {
+    "message": "We use analytics to improve your experience.",
+    "accept": "Accept",
+    "decline": "Decline"
+  },
   "privacy": {
     "title": "Privacy Policy",
     "lastUpdated": "Last updated: June 2026",

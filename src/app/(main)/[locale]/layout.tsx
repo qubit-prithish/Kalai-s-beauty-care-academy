@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
-import { Analytics } from "@vercel/analytics/next";
+
 import { routing, type Locale } from "@/i18n/routing";
 import { getSettings } from "@/lib/content";
 import { Header } from "@/components/layout/Header";
@@ -11,7 +11,7 @@ import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { PageViews } from "@/components/layout/PageViews";
 import { CookieBanner } from "@/components/layout/CookieBanner";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { PlausibleScript } from "@/components/analytics/PlausibleScript";
+import { AnalyticsWrapper } from "@/components/analytics/AnalyticsWrapper";
 import { localBusinessJsonLd } from "@/lib/jsonld";
 import { buildMetadata, SITE_URL } from "@/lib/seo";
 import { getTranslations, getMessages } from "next-intl/server";
@@ -73,7 +73,6 @@ export default async function LocaleLayout({
     <html lang={locale} className={fontVariables}>
       <body>
         <JsonLd data={localBusinessJsonLd(settings, l)} />
-        <PlausibleScript />
         <NextIntlClientProvider messages={messages}>
           <SmoothScroll />
           <PageViews />
@@ -89,9 +88,9 @@ export default async function LocaleLayout({
           </RouteTransition>
           <Footer locale={l} settings={settings} />
           <FloatingCTAs />
+          <CookieBanner />
         </NextIntlClientProvider>
-        {analyticsEnabled ? <Analytics /> : null}
-        <CookieBanner />
+        <AnalyticsWrapper analyticsEnabled={analyticsEnabled} />
       </body>
     </html>
   );
