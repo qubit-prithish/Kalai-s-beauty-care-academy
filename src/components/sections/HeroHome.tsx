@@ -82,7 +82,7 @@ export async function HeroHome({ settings }: { settings: Settings }) {
         </div>
 
         {/* RIGHT COLUMN: Woman image */}
-        <div className="hero__woman-column relative z-[3] lg:block hidden">
+        <div className="hero__woman-column relative z-[3]">
           <HeroWoman />
         </div>
       </div>

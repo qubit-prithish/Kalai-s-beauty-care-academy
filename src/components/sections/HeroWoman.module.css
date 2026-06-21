@@ -126,14 +126,24 @@
 }
 
 @media (max-width: 767px) {
-  .woman {
-    display: none;
+  .womanColumn {
+    min-height: 320px;
+    height: 45vh;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .womanWrapper {
+    justify-content: center;
   }
   .womanGlow {
-    display: none;
+    right: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0.6;
   }
-  .womanColumn {
-    display: none;
+  .woman {
+    height: 100%;
+    max-width: 95%;
   }
 }
 
