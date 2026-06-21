@@ -28,7 +28,7 @@ function ImageField({ field, value, onChange }: { field: Field; value: string; o
         {busy ? <span className="text-xs text-cream-dim">Uploading…</span> : null}
       </div>
       <input value={value} onChange={(e) => onChange(e.target.value)} placeholder="https://…" className={inputCls} />
-      {value ? <img src={value} alt="" className="mt-2 h-20 rounded-lg object-cover" /> : null}
+      {value ? <img src={value} alt={`Preview of uploaded ${field.name} image`} className="mt-2 h-20 rounded-lg object-cover" /> : null}
     </div>
   );
 }

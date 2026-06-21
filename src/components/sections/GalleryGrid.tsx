@@ -44,15 +44,15 @@ export function GalleryGrid({
   return (
     <div>
       {/* Category filter */}
-      <div className="flex flex-wrap justify-center gap-2" role="tablist" aria-label="Gallery categories">
+      <div className="flex flex-wrap justify-center gap-2" role="radiogroup" aria-label="Gallery categories">
         {filters.map((f) => {
           const isActive = active === f.id;
           return (
             <button
               key={f.id}
               type="button"
-              role="tab"
-              aria-selected={isActive}
+              role="radio"
+              aria-checked={isActive}
               onClick={() => setActive(f.id)}
               className={cn(
                 "rounded-full border px-4 py-2 text-sm font-medium transition",

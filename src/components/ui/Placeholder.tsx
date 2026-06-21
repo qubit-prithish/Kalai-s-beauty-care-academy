@@ -22,6 +22,10 @@ export function Placeholder({
   className,
   priority = false,
 }: PlaceholderProps) {
+  if (process.env.NODE_ENV !== "production" && src && !alt) {
+    console.warn("Placeholder: 'src' was provided without descriptive 'alt' text.");
+  }
+
   if (src) {
     return (
       <div className={cn("relative overflow-hidden", ratio, className)}>

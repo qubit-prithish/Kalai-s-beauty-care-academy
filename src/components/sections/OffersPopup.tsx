@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { TrustBadge } from "@/components/ui/TrustBadge";
@@ -26,6 +26,8 @@ export function OffersPopup({ offer }: { offer: PopupOffer }) {
   const [open, setOpen] = useState(false);
   const reduce = usePrefersReducedMotion();
   const [mounted, setMounted] = useState(false);
+  const popupRef = useRef<HTMLDivElement>(null);
+  const closeBtnRef = useRef<HTMLButtonElement>(null);
   useEffect(() => setMounted(true), []);
 
   const storageKey = `kbca_offer_dismissed_${offer.id}`;
@@ -49,11 +51,46 @@ export function OffersPopup({ offer }: { offer: PopupOffer }) {
     } catch {
       /* ignore */
     }
+    const main = document.querySelector('main');
+    if (main) {
+      main.focus();
+    } else {
+      document.body.focus();
+    }
   };
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && dismiss();
-    if (open) window.addEventListener("keydown", onKey);
+    if (!open) return;
+    const popup = popupRef.current;
+    if (!popup) return;
+
+    const focusable = Array.from(
+      popup.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')
+    );
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (closeBtnRef.current) {
+      setTimeout(() => closeBtnRef.current?.focus(), 50);
+    }
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        dismiss();
+        return;
+      }
+      if (e.key === "Tab") {
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last?.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first?.focus();
+        }
+      }
+    };
+    
+    window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
@@ -70,12 +107,14 @@ export function OffersPopup({ offer }: { offer: PopupOffer }) {
       >
         <div className="absolute inset-0 bg-ink-page/70 backdrop-blur-sm" onClick={dismiss} />
         <motion.div
+          ref={popupRef}
           className="relative w-full max-w-md overflow-hidden rounded-3xl border border-gold-500/30 bg-ink-surface p-8 shadow-gold"
           initial={reduce ? false : { y: 20, scale: 0.96, opacity: 0 }}
           animate={{ y: 0, scale: 1, opacity: 1 }}
           transition={{ type: "spring", stiffness: 240, damping: 24 }}
         >
           <button
+            ref={closeBtnRef}
             type="button"
             onClick={dismiss}
             aria-label={offer.closeLabel}

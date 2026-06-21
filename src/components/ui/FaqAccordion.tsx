@@ -22,6 +22,8 @@ export function FaqAccordion({ items }: { items: FaqItem[] }) {
             <h3>
               <button
                 type="button"
+                id={`faq-heading-${item.id}`}
+                aria-controls={`faq-panel-${item.id}`}
                 onClick={() => setOpen(isOpen ? null : item.id)}
                 aria-expanded={isOpen}
                 className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
@@ -40,6 +42,9 @@ export function FaqAccordion({ items }: { items: FaqItem[] }) {
             </h3>
             {mounted && isOpen ? (
               <motion.div
+                id={`faq-panel-${item.id}`}
+                role="region"
+                aria-labelledby={`faq-heading-${item.id}`}
                 initial={reduce ? false : { height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
