@@ -44,6 +44,9 @@ export function EnquiryForm({ labels }: { labels: EnquiryFormLabels }) {
     ev.preventDefault();
     const form = ev.currentTarget;
     const fd = new FormData(form);
+
+    if (fd.get("company")) return;
+
     const payload = {
       name: String(fd.get("name") ?? ""),
       phone: String(fd.get("phone") ?? ""),
