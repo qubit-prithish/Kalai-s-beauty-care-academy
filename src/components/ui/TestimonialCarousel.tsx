@@ -6,6 +6,7 @@ import Image from "next/image";
 import { StarIcon } from "./icons";
 import { usePrefersReducedMotion } from "@/lib/motion";
 import { cn, getInitials } from "@/lib/cn";
+import { useMounted } from "@/lib/hooks/useMounted";
 
 export type TestimonialItem = {
   id: string;
@@ -89,8 +90,7 @@ export function TestimonialCarousel({
   autoPlay?: boolean;
 }) {
   const reduce = usePrefersReducedMotion();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const mounted = useMounted();
   const [paused, setPaused] = useState(false);
 
   const [index, setIndex] = useState(0);

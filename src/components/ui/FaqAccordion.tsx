@@ -4,14 +4,14 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/cn";
 import { usePrefersReducedMotion } from "@/lib/motion";
+import { useMounted } from "@/lib/hooks/useMounted";
 
 export type FaqItem = { id: string; question: string; answer: string };
 
 export function FaqAccordion({ items }: { items: FaqItem[] }) {
   const [open, setOpen] = useState<string | null>(items[0]?.id ?? null);
   const reduce = usePrefersReducedMotion();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const mounted = useMounted();
 
   return (
     <div className="divide-y divide-ink-border border-y border-ink-border">

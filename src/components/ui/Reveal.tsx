@@ -1,8 +1,9 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
-import { useEffect, useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { usePrefersReducedMotion } from "@/lib/motion";
+import { useMounted } from "@/lib/hooks/useMounted";
 
 type RevealProps = {
   children: ReactNode;
@@ -24,8 +25,7 @@ export function Reveal({
   as = "div",
 }: RevealProps) {
   const reduce = usePrefersReducedMotion();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const mounted = useMounted();
 
   const MotionTag = motion[as];
 

@@ -5,6 +5,7 @@ import * as THREE from "three";
 import { Canvas } from "@react-three/fiber";
 import { GoldenParticles } from "./GoldenParticles";
 import { prefersReducedMotion, shouldUseReduced3D } from "@/lib/motion";
+import { useMounted } from "@/lib/hooks/useMounted";
 
 /**
  * The actual R3F canvas. Loaded only via dynamic import (ssr:false) so it never
@@ -18,12 +19,8 @@ export default function ParticleScene() {
   const containerRef = useRef<HTMLDivElement>(null);
   const glRef = useRef<THREE.WebGLRenderer | null>(null);
   const [active, setActive] = useState(true);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const [webglLost, setWebglLost] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const reduced = prefersReducedMotion();
   const reduced3D = shouldUseReduced3D();

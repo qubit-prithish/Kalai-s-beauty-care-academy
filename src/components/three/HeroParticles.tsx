@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState, Suspense, Component, ErrorInfo } from "react";
 import { prefersReducedMotion, shouldUse3D, shouldUseReduced3D, isWebGLAvailable } from "@/lib/motion";
+import { useMounted } from "@/lib/hooks/useMounted";
 
 // Error Boundary for WebGL context loss
 class WebGLErrorBoundary extends Component<{ fallback: React.ReactNode; children?: React.ReactNode }, { hasError: boolean }> {
@@ -85,10 +86,9 @@ function StaticHeroBackdrop() {
  */
 export function HeroParticles() {
   const [mode, setMode] = useState<"static" | "three">("static");
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
 
   useEffect(() => {
-    setMounted(true);
     if (typeof window === "undefined") return;
     
     // Check capabilities

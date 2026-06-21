@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { usePrefersReducedMotion, useIsomorphicLayoutEffect } from "@/lib/motion";
+import { useMounted } from "@/lib/hooks/useMounted";
 
 /**
  * Site-wide smooth scroll via Lenis, integrated with GSAP ScrollTrigger on a
@@ -17,11 +18,7 @@ export function SmoothScroll() {
   const pathname = usePathname();
   const reduce = usePrefersReducedMotion();
   const lenisRef = useRef<Lenis | null>(null);
-  const [mounted, setMounted] = useState(false);
-
-  useIsomorphicLayoutEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useMounted();
 
   useIsomorphicLayoutEffect(() => {
     if (reduce || !mounted) return;

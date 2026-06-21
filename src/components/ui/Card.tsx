@@ -9,6 +9,7 @@ import {
 import { useEffect, useState, type PointerEvent, type ReactNode } from "react";
 import { cn } from "@/lib/cn";
 import { usePrefersReducedMotion } from "@/lib/motion";
+import { useMounted } from "@/lib/hooks/useMounted";
 
 type CardProps = {
   children: ReactNode;
@@ -25,8 +26,7 @@ const MAX_TILT = 6; // degrees — subtle, editorial
  */
 export function Card({ children, className, interactive = false }: CardProps) {
   const reduce = usePrefersReducedMotion();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const mounted = useMounted();
 
   const base = "rounded-3xl border border-ink-border bg-ink-surface shadow-soft";
 

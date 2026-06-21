@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { TrustBadge } from "@/components/ui/TrustBadge";
 import { WhatsAppIcon } from "@/components/ui/icons";
 import { usePrefersReducedMotion } from "@/lib/motion";
+import { useMounted } from "@/lib/hooks/useMounted";
 
 export type PopupOffer = {
   id: string;
@@ -25,10 +26,9 @@ export type PopupOffer = {
 export function OffersPopup({ offer }: { offer: PopupOffer }) {
   const [open, setOpen] = useState(false);
   const reduce = usePrefersReducedMotion();
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const popupRef = useRef<HTMLDivElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
-  useEffect(() => setMounted(true), []);
 
   const storageKey = `kbca_offer_dismissed_${offer.id}`;
 

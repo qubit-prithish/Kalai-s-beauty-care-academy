@@ -2,6 +2,7 @@
 
 import { animate, motion, useInView, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { useMounted } from "@/lib/hooks/useMounted";
 
 type StatCounterProps = {
   /** Final value, e.g. 20, 1000. */
@@ -28,9 +29,7 @@ export function StatCounter({
   // match). The count-up animation only kicks in after mount when in view and
   // motion is allowed — so it never causes a hydration text mismatch.
   const [display, setDisplay] = useState(value);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => setMounted(true), []);
+  const mounted = useMounted();
 
   useEffect(() => {
     if (!mounted) return;

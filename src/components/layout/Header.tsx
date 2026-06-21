@@ -14,6 +14,7 @@ import { cn } from "@/lib/cn";
 import { usePrefersReducedMotion } from "@/lib/motion";
 import type { Settings } from "@/lib/content/types";
 import { pick } from "@/lib/locale";
+import { useMounted } from "@/lib/hooks/useMounted";
 
 const NAV = [
   { href: "/", key: "home" },
@@ -31,12 +32,10 @@ export function Header({ settings }: { settings: Settings }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const reduce = usePrefersReducedMotion();
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const wasOpen = useRef(false);
-
-  useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     if (!open) {
