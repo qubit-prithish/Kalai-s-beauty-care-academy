@@ -14,7 +14,7 @@ export function FaqAccordion({ items }: { items: FaqItem[] }) {
   useEffect(() => setMounted(true), []);
 
   return (
-    <div className="divide-y divide-ink-border overflow-hidden rounded-3xl border border-ink-border bg-ink-surface">
+    <div className="divide-y divide-ink-border border-y border-ink-border">
       {items.map((item) => {
         const isOpen = open === item.id;
         return (

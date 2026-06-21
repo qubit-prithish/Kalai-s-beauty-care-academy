@@ -15,8 +15,8 @@ export async function StatsBand({ settings }: { settings: Settings }) {
   const followers = parseStat(settings.instagramFollowers);
 
   return (
-    <section className="border-y border-ink-border bg-ink-surface/50">
-      <div className="container-luxe grid grid-cols-2 gap-8 py-14 lg:grid-cols-4">
+    <section>
+      <div className="container-luxe grid grid-cols-2 gap-y-12 gap-x-8 py-16 lg:grid-cols-4">
         <StatCounter value={students.value} suffix={students.suffix} label={t("students")} />
         <StatCounter value={settings.yearsExperience} suffix="+" label={t("years")} />
         <StatCounter value={settings.googleRating} decimal suffix="★" label={t("rating")} />
