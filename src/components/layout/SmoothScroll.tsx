@@ -3,16 +3,12 @@
 import { useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Lenis from "lenis";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
+
 import { usePrefersReducedMotion, useIsomorphicLayoutEffect } from "@/lib/motion";
 import { useMounted } from "@/lib/hooks/useMounted";
 
-/**
- * Site-wide smooth scroll via Lenis, integrated with GSAP ScrollTrigger on a
- * single shared loop (Lenis is driven by gsap.ticker, not its own rAF).
- * 
- * Includes defensive protections for route transitions and proper cleanup
- * using gsap.context to prevent client-side crashes and stale triggers.
+ * Site-wide smooth scroll via Lenis.
+ * Includes defensive protections for route transitions.
  */
 export function SmoothScroll() {
   const pathname = usePathname();
@@ -32,38 +28,19 @@ export function SmoothScroll() {
     });
     lenisRef.current = lenis;
 
-    // Use gsap.context for canonical cleanup of all GSAP-related listeners
-    const ctx = gsap.context(() => {
-      // 1) Update ScrollTrigger whenever Lenis scrolls.
-      lenis.on("scroll", () => {
-        ScrollTrigger.update();
-      });
-
-      // 2) Drive Lenis from GSAP's ticker (one shared loop).
-      const tick = (time: number) => {
-        // Defensive check: if lenis was destroyed, don't raf
-        if (lenisRef.current) {
-          lenis.raf(time * 1000);
-        }
-      };
-      
-      gsap.ticker.add(tick);
-      gsap.ticker.lagSmoothing(0);
-
-      // Store tick on the context for manual removal if needed, 
-      // though we handle it in the main cleanup below.
-      return () => {
-        gsap.ticker.remove(tick);
-      };
-    });
+    let rafId: number;
+    const raf = (time: number) => {
+      if (lenisRef.current) {
+        lenis.raf(time);
+        rafId = requestAnimationFrame(raf);
+      }
+    };
+    rafId = requestAnimationFrame(raf);
 
     return () => {
       try {
-        ctx.revert();
+        cancelAnimationFrame(rafId);
         lenis.destroy();
-        ScrollTrigger.getAll().forEach((t) => {
-          t.kill(true); // true = immediately, don't animate out
-        });
       } catch {
         // Ignore errors during cleanup
       } finally {
@@ -84,34 +61,9 @@ export function SmoothScroll() {
     } catch {
       // Ignore scroll reset errors during navigation
     }
+    // No longer need to kill or refresh ScrollTriggers here since we removed GSAP.
     
-    // Kill all current triggers to prevent "removeChild" on old DOM nodes
-    try {
-      ScrollTrigger.getAll().forEach((t) => {
-        t.kill(true); // Immediate kill, don't animate
-      });
-    } catch {
-      // Ignore batch errors
-    }
-
-    // 2) Refresh ScrollTrigger once the new page content has likely settled.
-    // Use a longer delay and a safety check to avoid "removeChild" errors
-    // if the component unmounts before the timer fires.
-    const timer = setTimeout(() => {
-      if (lenisRef.current) {
-        try {
-          ScrollTrigger.refresh();
-        } catch {
-          // Ignore refresh errors during rapid navigation
-        }
-      }
-    }, 250);
-
-    return () => {
-      clearTimeout(timer);
-      // Ensure all pending ScrollTriggers are killed on this pathname change 
-      // if they aren't caught by their local context revert.
-    };
+    return () => {};
   }, [pathname]);
 
   return null;

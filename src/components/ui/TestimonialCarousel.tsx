@@ -114,15 +114,24 @@ export function TestimonialCarousel({
   return (
     <div
       className="mx-auto max-w-3xl"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Testimonials"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
     >
+      <div className="sr-only" aria-live="polite" aria-atomic="true">
+        {mounted ? `Showing slide ${index + 1} of ${count}` : ""}
+      </div>
       <div className="relative min-h-[18rem] rounded-3xl border border-ink-border bg-ink-surface p-8 sm:p-10">
         {mounted && (
           <motion.figure
             key={item.id}
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`Slide ${index + 1} of ${count}`}
             initial={reduce ? false : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}

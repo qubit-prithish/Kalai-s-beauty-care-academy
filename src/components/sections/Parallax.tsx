@@ -1,8 +1,8 @@
 "use client";
 
 import { useRef, type ReactNode } from "react";
-import { gsap } from "@/lib/gsap";
-import { prefersReducedMotion, useIsomorphicLayoutEffect } from "@/lib/motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { usePrefersReducedMotion } from "@/lib/motion";
 
 /**
  * Light background parallax. Moves its content by `amount` px across the
@@ -17,37 +17,23 @@ export function Parallax({
   amount?: number;
   className?: string;
 }) {
+  const reduce = usePrefersReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
 
-  useIsomorphicLayoutEffect(() => {
-    if (prefersReducedMotion()) return;
-    const el = ref.current;
-    if (!el) return;
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
 
-    const ctx = gsap.context(() => {
-      const trigger = el.parentElement ?? el;
-      gsap.fromTo(
-        el,
-        { yPercent: -amount / 10 },
-        {
-          yPercent: amount / 10,
-          ease: "none",
-          scrollTrigger: {
-            trigger,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true,
-          },
-        },
-      );
-    }, el);
+  const y = useTransform(scrollYProgress, [0, 1], [`-${amount / 10}%`, `${amount / 10}%`]);
 
-    return () => ctx.revert();
-  }, [amount]);
+  if (reduce) {
+    return <div className={className}>{children}</div>;
+  }
 
   return (
-    <div ref={ref} className={className}>
+    <motion.div ref={ref} className={className} style={{ y }}>
       {children}
-    </div>
+    </motion.div>
   );
 }

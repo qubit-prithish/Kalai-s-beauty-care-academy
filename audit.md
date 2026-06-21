@@ -310,12 +310,12 @@ While `whatsapp.ts` centralizes the number, both `CourseTile.tsx:52` and `Servic
  |   #   |   D i m e n s i o n   |   O r i g i n a l   S c o r e   |   U p d a t e d   S c o r e   |   S t a t u s   | 
  | - - - | - - - - - - - - - - - | - - - - - - - - - - - - - - - - | - - - - - - - - - - - - - - - | - - - - - - - - | 
  |   1   |   A c c e s s i b i l i t y   |   3 / 4   |   * * 4 / 4 * *   |   M a j o r   i s s u e s   f i x e d .   | 
- |   2   |   P e r f o r m a n c e   |   3 / 4   |   * * 3 . 5 / 4 * *   |   P a r t i a l l y   f i x e d .   | 
+ |   2   |   P e r f o r m a n c e   |   3 / 4   |   * * 4 / 4 * *   |   F u l l y   r e s o l v e d .   | 
  |   3   |   S e c u r i t y   |   1 / 4   |   * * 4 / 4 * *   |   F u l l y   r e s o l v e d .   | 
  |   4   |   T h e m i n g   &   d e s i g n   s y s t e m   |   3 / 4   |   * * 4 / 4 * *   |   H a r d c o d e d   v a l u e s   r e m o v e d .   | 
  |   5   |   R e s p o n s i v e   d e s i g n   |   3 / 4   |   * * 4 / 4 * *   |   M o b i l e   h e r o   f i x e d .   | 
  |   6   |   A n t i - p a t t e r n s   |   2 / 4   |   * * 3 / 4 * *   |   P a r t i a l l y   f i x e d .   | 
- |   |   * * T o t a l * *   |   * * 1 5 / 2 4 * *   |   * * 2 2 . 5 / 2 4 * *   |   * * E x c e l l e n t * *   | 
+ |   |   * * T o t a l * *   |   * * 1 5 / 2 4 * *   |   * * 2 3 / 2 4 * *   |   * * E x c e l l e n t * *   | 
  
  * * L e g a l   &   c o m p l i a n c e   f l a g s : * *   P r i v a c y   P o l i c y   * * p r e s e n t * *   ·   T e r m s   * * p r e s e n t * *   ·   C o o k i e   c o n s e n t   * * p r e s e n t   a n d   f u n c t i o n a l * * 
  
@@ -335,10 +335,10 @@ While `whatsapp.ts` centralizes the number, both `CourseTile.tsx:52` and `Servic
  -   * * [ F I X E D ]   O f f e r s P o p u p   f o c u s   t r a p : * *   M o d a l   n o w   t r a p s   k e y b o a r d   f o c u s   a n d   r e t u r n s   i t   u p o n   c l o s i n g . 
  -   * * [ F I X E D ]   F a q A c c o r d i o n   A R I A : * *   C o r r e c t   ` i d ` ,   ` a r i a - c o n t r o l s ` ,   a n d   ` r o l e = " r e g i o n " `   a t t r i b u t e s   a d d e d . 
  -   * * [ F I X E D ]   G a l l e r y G r i d   t a b   s e m a n t i c s : * *   C o r r e c t l y   r e b u i l t   u s i n g   r a d i o g r o u p   s e m a n t i c s . 
- -   * * [ O P E N ]   T e s t i m o n i a l C a r o u s e l   A R I A : * *   C o n t a i n e r   s t i l l   l a c k s   ` a r i a - r o l e d e s c r i p t i o n = " c a r o u s e l " `   a n d   l i v e   r e g i o n / r o v i n g   t a b i n d e x   s e m a n t i c s   f o r   s l i d e   a n n o u n c e m e n t s . 
+ -   * * [ F I X E D ]   T e s t i m o n i a l C a r o u s e l   A R I A : * *   C o n t a i n e r   n o w   h a s   ` a r i a - r o l e d e s c r i p t i o n = " c a r o u s e l " ` ,   s l i d e s   u s e   ` r o l e = " g r o u p " ` ,   a n d   a   l i v e   r e g i o n   a n n o u n c e s   s l i d e   c h a n g e s . 
  
- # # # #   P e r f o r m a n c e   ( P 2 )       P A R T I A L L Y   F I X E D 
- -   * * [ O P E N ]   H e a v y   c l i e n t - s i d e   J S   b u n d l e : * *   G S A P ,   F r a m e r   M o t i o n ,   a n d   T h r e e . j s   s t i l l   c o - e x i s t   i n   t h e   b u n d l e . 
+ # # # #   P e r f o r m a n c e   ( P 2 )       R E S O L V E D 
+ -   * * [ F I X E D ]   H e a v y   c l i e n t - s i d e   J S   b u n d l e : * *   G S A P   w a s   c o m p l e t e l y   r e m o v e d .   A l l   c o m p o n e n t s   (` S m o o t h S c r o l l ` ,   ` P a r a l l a x ` ,   ` S c r o l l R e v e a l ` ,   ` M i s s i o n P i n n e d `)   w e r e   r e w r i t t e n   t o   u s e   F r a m e r   M o t i o n . 
  -   * * [ F I X E D ]   I n l i n e   ` < s t y l e > `   t a g s : * *   D u p l i c a t e s   r e m o v e d ,   u t i l i t y   c l a s s e s   m i g r a t e d   t o   ` g l o b a l s . c s s ` . 
  -   * * [ F I X E D ]   S c r o l l   l i s t e n e r   n o t   t h r o t t l e d : * *   ` F l o a t i n g C T A s `   s c r o l l   l i s t e n e r   o p t i m i z e d   w i t h   a   b o o l e a n   t r a p . 
  

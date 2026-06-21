@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
-import { gsap } from "@/lib/gsap";
-import { prefersReducedMotion, useIsomorphicLayoutEffect } from "@/lib/motion";
+import React, { type ReactNode } from "react";
+import { motion, type Variants } from "framer-motion";
+import { usePrefersReducedMotion } from "@/lib/motion";
 
 type ScrollRevealProps = {
   children: ReactNode;
@@ -14,8 +14,8 @@ type ScrollRevealProps = {
 };
 
 /**
- * GSAP ScrollTrigger reveal. Disabled (renders children statically) under
- * prefers-reduced-motion. All triggers are cleaned up on unmount.
+ * Framer Motion reveal. Disabled (renders children statically) under
+ * prefers-reduced-motion.
  */
 export function ScrollReveal({
   children,
@@ -23,46 +23,65 @@ export function ScrollReveal({
   variant = "up",
   stagger = false,
 }: ScrollRevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
+  const reduce = usePrefersReducedMotion();
 
-  useIsomorphicLayoutEffect(() => {
-    if (prefersReducedMotion()) return;
-    const el = ref.current;
-    if (!el) return;
+  const containerVariants: Variants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: stagger ? 0.1 : 0,
+      },
+    },
+  };
 
-    const ctx = gsap.context(() => {
-      const children = Array.from(el.children);
-      if (stagger && children.length === 0) return;
+  const itemVariants: Variants = {
+    hidden:
+      variant === "clip"
+        ? { opacity: 0, clipPath: "inset(0 0 100% 0)" }
+        : { opacity: 0, y: 28 },
+    visible:
+      variant === "clip"
+        ? { opacity: 1, clipPath: "inset(0 0 0% 0)", transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] } }
+        : { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] } },
+  };
 
-      const targets = stagger ? children : [el];
-      const from =
-        variant === "clip"
-          ? { opacity: 0, clipPath: "inset(0 0 100% 0)" }
-          : { opacity: 0, y: 28 };
-      const to =
-        variant === "clip"
-          ? { opacity: 1, clipPath: "inset(0 0 0% 0)" }
-          : { opacity: 1, y: 0 };
+  if (reduce) {
+    return <div className={className}>{children}</div>;
+  }
 
-      gsap.fromTo(targets, from, {
-        ...to,
-        duration: 0.8,
-        ease: "power3.out",
-        stagger: stagger ? 0.1 : 0,
-        scrollTrigger: {
-          trigger: el,
-          start: "top 85%",
-          toggleActions: "play none none none",
-        },
-      });
-    }, el);
+  if (stagger) {
+    const staggeredChildren = React.Children.map(children, (child) => {
+      if (React.isValidElement(child)) {
+        return <motion.div variants={itemVariants}>{child}</motion.div>;
+      }
+      return child;
+    });
 
-    return () => ctx.revert();
-  }, [variant, stagger]);
+    return (
+      <motion.div
+        className={className}
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.15 }}
+      >
+        {staggeredChildren}
+      </motion.div>
+    );
+  }
 
   return (
-    <div ref={ref} className={className}>
+    <motion.div
+      className={className}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.15 }}
+      variants={{
+        hidden: itemVariants.hidden,
+        visible: itemVariants.visible,
+      }}
+    >
       {children}
-    </div>
+    </motion.div>
   );
 }
