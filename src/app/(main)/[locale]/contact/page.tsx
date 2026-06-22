@@ -8,6 +8,7 @@ import { buildMetadata } from "@/lib/seo";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
 import { WhatsAppIcon, MapPinIcon } from "@/components/ui/icons";
+import { MapEmbed } from "@/components/ui/MapEmbed";
 import Link from "next/link";
 import { EnquiryForm } from "@/components/sections/EnquiryForm";
 
@@ -40,10 +41,6 @@ export default async function ContactPage({
   const tc = await getTranslations("common");
   const settings = await getSettings();
   const { address, contact, hours } = settings;
-
-  const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(
-    address.mapEmbedQuery,
-  )}&output=embed`;
 
   return (
     <section className="py-section">
@@ -106,27 +103,12 @@ export default async function ContactPage({
 
           {/* Right: map + enquiry form */}
           <div className="lg:col-span-3 space-y-8">
-            <div className="overflow-hidden rounded-3xl border border-ink-border">
-              <iframe
-                title="Google map — Kalai's Beauty Care & Academy"
-                src={mapSrc}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                sandbox="allow-scripts allow-same-origin"
-                className="h-72 w-full border-0"
-              />
-              <div className="flex items-center justify-between gap-3 p-4">
-                <span className="text-sm text-cream-dim">{pick(address.landmark, l)}</span>
-                <a
-                  href={address.mapLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-gold-200 hover:underline"
-                >
-                  {t("directions")} →
-                </a>
-              </div>
-            </div>
+            <MapEmbed
+              mapEmbedQuery={address.mapEmbedQuery}
+              landmark={pick(address.landmark, l)}
+              directionsLink={address.mapLink}
+              directionsLabel={t("directions")}
+            />
 
             <div className="rounded-3xl border border-ink-border bg-ink-surface p-8">
               <h2 className="heading-display text-xl text-cream">{t("formTitle")}</h2>

@@ -6,6 +6,7 @@ import type { Settings } from "@/lib/content/types";
 import { pick } from "@/lib/locale";
 import { telHref } from "@/lib/whatsapp";
 import { InstagramIcon, FacebookIcon, MapPinIcon } from "@/components/ui/icons";
+import { MapEmbed } from "@/components/ui/MapEmbed";
 
 const FOOTER_LINKS = [
   { href: "/courses", key: "courses" },
@@ -187,21 +188,13 @@ export async function Footer({
 
         {/* Location */}
         <div className="lg:col-span-3">
-          <div>
-            <h3 className="heading-display mb-4 text-lg text-cream">{t("location")}</h3>
-            <a
-              href={settings.address.mapLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 text-gold-200 transition-colors hover:text-gold-300"
-            >
-              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              <span className="group-hover:underline">{t("viewMap")}</span>
-            </a>
-          </div>
+          <h3 className="heading-display mb-4 text-lg text-cream">{t("location")}</h3>
+          <MapEmbed
+            mapEmbedQuery={address.mapEmbedQuery}
+            landmark={pick(address.landmark, locale)}
+            directionsLink={address.mapLink}
+            directionsLabel={t("viewMap")}
+          />
         </div>
       </div>
 

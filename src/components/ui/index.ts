@@ -12,3 +12,4 @@ export { OffersBanner, type OfferItem } from "./OffersBanner";
 export { TestimonialCarousel, type TestimonialItem } from "./TestimonialCarousel";
 export { BeforeAfterSlider } from "./BeforeAfterSlider";
 export * from "./icons";
+export { MapEmbed } from "./MapEmbed";
