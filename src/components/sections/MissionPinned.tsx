@@ -143,7 +143,7 @@ function StepItem({
   const offsets = rawOffsets.reduce<number[]>((acc, val) => {
     if (acc.length === 0) return [val];
     const prev = acc[acc.length - 1];
-    acc.push(val <= prev ? prev + EPS : val);
+    acc.push(Math.min(1, val <= prev ? prev + EPS : val));
     return acc;
   }, []);
 
