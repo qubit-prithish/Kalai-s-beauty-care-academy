@@ -56,7 +56,7 @@ function StaticHeroBackdrop() {
           const top = `${10 + Math.random() * 80}%`;
           const duration = 3 + Math.random() * 4;
           const delay = Math.random() * 2;
-          
+
           return (
             <div
               key={i}
@@ -90,18 +90,18 @@ export function HeroParticles() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    
+
     // Check capabilities
     if (prefersReducedMotion()) {
       setMode("static");
       return;
     }
-    
+
     if (!isWebGLAvailable()) {
       setMode("static");
       return;
     }
-    
+
     // Use 3D for capable devices
     if (shouldUse3D()) {
       setMode("three");
