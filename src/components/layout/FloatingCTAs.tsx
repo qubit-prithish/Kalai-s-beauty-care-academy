@@ -31,7 +31,7 @@ export function FloatingCTAs() {
       <div className="flex items-center gap-2">
         <span
           className={cn(
-            "overflow-hidden whitespace-nowrap rounded-full border border-ink-border bg-ink-surface px-3 py-2 text-xs font-semibold text-cream shadow-soft transition-all duration-300",
+            "hidden md:inline-block overflow-hidden whitespace-nowrap rounded-full border border-ink-border bg-ink-surface px-3 py-2 text-xs font-semibold text-cream shadow-soft transition-all duration-300",
             scrolled ? "max-w-0 translate-x-2 px-0 opacity-0" : "max-w-32 opacity-100",
           )}
         >
