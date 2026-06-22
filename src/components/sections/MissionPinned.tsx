@@ -124,14 +124,32 @@ function StepItem({
   numSteps: number;
   progress: MotionValue<number>;
 }) {
-  const startIn = index / numSteps;
-  const endIn = (index + 0.5) / numSteps;
-  const startOut = (index + 1) / numSteps;
-  const endOut = (index + 1.5) / numSteps;
+  // Clamp helper: keep offsets in [0, 1] range.
+  const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
+
+  // Compute raw offsets for this step's fade-in / fade-out window.
+  const rawOffsets = [
+    clamp01(index / numSteps - 0.1),        // pre-fade-in
+    clamp01(index / numSteps),               // start visible
+    clamp01((index + 0.5) / numSteps),       // fully visible
+    clamp01((index + 1) / numSteps),         // start fade-out
+    clamp01(Math.min((index + 1.5) / numSteps, 1)), // fully faded
+  ];
+
+  // Enforce strict monotonicity: each value must be >= the previous.
+  // Add a tiny epsilon when a later value would otherwise equal or be less
+  // than the previous one (can happen for the first/last steps after clamping).
+  const EPS = 1e-4;
+  const offsets = rawOffsets.reduce<number[]>((acc, val) => {
+    if (acc.length === 0) return [val];
+    const prev = acc[acc.length - 1];
+    acc.push(val <= prev ? prev + EPS : val);
+    return acc;
+  }, []);
 
   const opacity = useTransform(
     progress,
-    [startIn - 0.1, startIn, endIn, startOut, endOut],
+    offsets,
     [0.25, 0.25, 1, 1, 0.25]
   );
 

@@ -34,7 +34,16 @@ const config: NextConfig = {
           },
           {
             key: "Content-Security-Policy",
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://plausible.io; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.supabase.co https://images.unsplash.com; connect-src 'self' https://*.supabase.co https://plausible.io https://vitals.vercel-insights.com; frame-src 'self' https://www.google.com;",
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://plausible.io https://vercel.live",
+              "style-src 'self' 'unsafe-inline'",
+              "img-src 'self' data: blob: https://*.supabase.co https://images.unsplash.com https://vercel.live",
+              "font-src 'self' data:",
+              "connect-src 'self' https://*.supabase.co https://plausible.io https://vitals.vercel-insights.com https://vercel.live wss://ws-us3.pusher.com",
+              "frame-src 'self' https://www.google.com https://vercel.live",
+              "worker-src 'self' blob:",
+            ].join("; "),
           },
         ],
       },
