@@ -20,7 +20,7 @@ export function FloatingCTAs() {
   }, [scrolled]);
 
   return (
-    <div className="fixed bottom-4 right-4 z-40 flex flex-col items-end gap-3 pb-safe pr-safe">
+    <div className="fixed bottom-4 right-4 z-40 flex flex-col items-end gap-2 sm:gap-3 pb-safe pr-safe">
       <a
         href={telHref(PHONE_PRIMARY_E164)}
         aria-label={t("callNow")}
@@ -42,9 +42,9 @@ export function FloatingCTAs() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={t("enquireWhatsApp")}
-          className="grid h-14 w-14 place-items-center rounded-full bg-whatsapp text-white shadow-soft transition hover:bg-whatsapp-hover hover:scale-105"
+          className="grid h-12 w-12 sm:h-14 sm:w-14 place-items-center rounded-full bg-whatsapp text-white shadow-soft transition hover:bg-whatsapp-hover hover:scale-105"
         >
-          <WhatsAppIcon className="h-7 w-7" />
+          <WhatsAppIcon className="h-6 w-6 sm:h-7 sm:w-7" />
         </a>
       </div>
     </div>
