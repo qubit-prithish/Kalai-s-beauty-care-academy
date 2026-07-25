@@ -171,16 +171,6 @@ export const ENTITIES: Record<string, EntityConfig> = {
       { name: "sort_order", label: "Sort order", type: "number" },
     ],
   },
-  trainers: {
-    table: "about_trainers", label: "About: Trainers", titleField: "name_en", orderBy: "sort_order",
-    fields: [
-      ...bilingual("name", "Trainer Name").map((f, i) => ({ ...f, list: i === 0 })),
-      ...bilingual("role", "Role"),
-      ...bilingual("bio", "Short Bio", "textarea"),
-      { name: "image_url", label: "Trainer Photo", type: "image", bucket: "about" },
-      { name: "sort_order", label: "Sort order", type: "number" },
-    ],
-  },
   settings: {
     table: "settings", label: "Settings", titleField: "key", orderBy: "key",
     fields: [
@@ -200,5 +190,5 @@ export const ENTITIES: Record<string, EntityConfig> = {
 };
 
 export const ENTITY_ORDER = [
-  "courses", "services", "offers", "gallery", "testimonials", "about_page", "about_why", "about_facilities", "trainers", "faqs", "settings",
+  "courses", "services", "offers", "gallery", "testimonials", "about_page", "about_why", "about_facilities", "faqs", "settings",
 ] as const;

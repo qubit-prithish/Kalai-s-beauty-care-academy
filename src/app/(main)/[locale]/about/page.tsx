@@ -5,7 +5,6 @@ import type { Locale } from "@/i18n/routing";
 import {
   getAboutFacilities,
   getAboutPageData,
-  getAboutTrainers,
 } from "@/lib/content";
 import { pick } from "@/lib/locale";
 import { whatsappHref, waMessage } from "@/lib/whatsapp";
@@ -47,10 +46,9 @@ export default async function AboutPage({
   const tc = await getTranslations("common");
   const th = await getTranslations("home");
   
-  const [page, facilities, trainers] = await Promise.all([
+  const [page, facilities] = await Promise.all([
     getAboutPageData(),
     getAboutFacilities(),
-    getAboutTrainers(),
   ]);
 
   // Fallback defaults for safety (unlikely with seeded DB)
@@ -176,50 +174,7 @@ export default async function AboutPage({
         </div>
       </section>
 
-      {/* Team */}
-      <section className="pb-section">
-        <div className="container-luxe">
-          <SectionHeading
-            title={pick({ en: "Our trainers", ta: "எங்கள் பயிற்சியாளர்கள்" }, l)}
-            subtitle={pick({ en: "A small, dedicated team so every student gets individual attention.", ta: "ஒவ்வொரு மாணவிக்கும் தனிப்பட்ட கவனம் கிடைக்க சிறிய அர்ப்பணிப்பு குழு." }, l)}
-          />
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {trainers.map((t, i) => (
-              <Reveal key={t.id} delay={i * 0.08}>
-                <div className="overflow-hidden rounded-3xl border border-ink-border bg-ink-surface">
-                  {t.image?.url ? (
-                    <div className="relative aspect-square">
-                      <Image
-                        src={t.image.url}
-                        alt={pick(t.image.alt, l)}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                    </div>
-                  ) : (
-                    <Placeholder ratio="aspect-square" label={pick(t.name, l)} />
-                  )}
-                  <div className="p-5 text-center">
-                    <div className="heading-display text-lg text-cream">
-                      {pick(t.name, l)}
-                    </div>
-                    <div className="text-sm text-gold-200">{pick(t.role, l)}</div>
-                    {t.bio && (
-                      <p className="mt-3 text-sm text-cream-dim line-clamp-3">{pick(t.bio, l)}</p>
-                    )}
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-            {trainers.length === 0 && (
-              <p className="col-span-full py-10 text-center text-cream-muted">
-                {pick({ en: "Trainer profiles coming soon", ta: "பயிற்சியாளர் விவரம் விரைவில்" }, l)}
-              </p>
-            )}
-          </div>
-        </div>
-      </section>
+
 
       {/* CTA */}
       <section className="pb-section">
