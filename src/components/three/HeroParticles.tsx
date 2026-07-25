@@ -47,7 +47,7 @@ function StaticHeroBackdrop() {
   return (
     <div aria-hidden="true" className="absolute inset-0">
       <div className="absolute inset-x-0 top-0 h-[80vh] bg-radial-glow" />
-      <div className="absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full bg-gold-500/10 blur-3xl" />
+      <div className="absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full bg-gold-500/20 blur-3xl" />
       {/* Animated CSS particle dots for visual continuity */}
       <div className="absolute inset-0">
         {[...Array(15)].map((_, i) => {
@@ -60,7 +60,7 @@ function StaticHeroBackdrop() {
           return (
             <div
               key={i}
-              className="absolute rounded-full bg-gradient-to-br from-gold-300/70 to-gold-500/50"
+              className="absolute rounded-full bg-gradient-to-br from-gold-400/80 to-gold-600/60"
               style={{
                 width: `${size}px`,
                 height: `${size}px`,

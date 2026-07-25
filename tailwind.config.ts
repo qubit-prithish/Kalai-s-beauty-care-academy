@@ -1,32 +1,43 @@
 import type { Config } from "tailwindcss";
 
+/**
+ * Color helper — wraps a CSS custom property (space-separated RGB channels)
+ * so Tailwind's opacity-modifier syntax (e.g. `bg-gold-500/30`) works.
+ */
+const cv = (name: string) =>
+  `rgb(var(--${name}) / <alpha-value>)` as unknown as string;
+
 const config: Config = {
   content: ["./src/**/*.{ts,tsx}"],
   darkMode: "class",
   theme: {
     extend: {
       colors: {
-        // Base — deep black / charcoal
+        // Base — page background & surfaces
         ink: {
-          DEFAULT: "#0E0E0F",
-          page: "#0E0E0F",
-          surface: "#1A1A1C",
-          raised: "#222225",
-          border: "#2E2E32",
+          DEFAULT: cv("ink"),
+          page: cv("ink-page"),
+          surface: cv("ink-surface"),
+          raised: cv("ink-raised"),
+          border: cv("ink-border"),
         },
-        // Accent — gold + champagne
+        // Primary accent (rose — was gold)
         gold: {
-          DEFAULT: "#C8A24A",
-          50: "#FBF6E9",
-          100: "#F4E8C6",
-          200: "#E6D2A8", // champagne highlight
-          300: "#DBC084",
-          400: "#D0AE64",
-          500: "#C8A24A",
-          600: "#A8853A",
-          700: "#83682D",
-          800: "#5C4920",
-          900: "#352A12",
+          DEFAULT: cv("gold"),
+          50: cv("gold-50"),
+          100: cv("gold-100"),
+          200: cv("gold-200"),
+          300: cv("gold-300"),
+          400: cv("gold-400"),
+          500: cv("gold-500"),
+          600: cv("gold-600"),
+          700: cv("gold-700"),
+          800: cv("gold-800"),
+          900: cv("gold-900"),
+        },
+        // Secondary accent — warm mocha-taupe
+        mocha: {
+          DEFAULT: cv("mocha"),
         },
         // Soft tones
         blush: "#F4E7E1",
@@ -38,12 +49,12 @@ const config: Config = {
         },
         // Text
         cream: {
-          DEFAULT: "#F5F2EC",
-          50: "#FBFAF7",
-          100: "#F5F2EC",
-          200: "#E8E2D6",
-          muted: "#B7B2A8",
-          dim: "#8A857C",
+          DEFAULT: cv("cream"),
+          50: cv("cream-50"),
+          100: cv("cream-100"),
+          200: cv("cream-200"),
+          muted: cv("cream-muted"),
+          dim: cv("cream-dim"),
         },
       },
       fontFamily: {
@@ -68,14 +79,12 @@ const config: Config = {
         content: "80rem",
       },
       boxShadow: {
-        soft: "0 4px 30px rgba(0, 0, 0, 0.25)",
-        gold: "0 10px 40px rgba(200, 162, 74, 0.18)",
+        soft: "var(--shadow-soft)",
+        gold: "var(--shadow-gold)",
       },
       backgroundImage: {
-        "gold-gradient":
-          "linear-gradient(135deg, #E6D2A8 0%, #C8A24A 50%, #A8853A 100%)",
-        "radial-glow":
-          "radial-gradient(60% 60% at 50% 0%, rgba(200,162,74,0.18) 0%, rgba(14,14,15,0) 70%)",
+        "gold-gradient": "var(--gradient-gold)",
+        "radial-glow": "var(--radial-glow)",
       },
       letterSpacing: {
         luxe: "0.22em",
