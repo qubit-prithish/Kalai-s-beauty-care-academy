@@ -24,7 +24,7 @@ export default function AdminLayout({
 }) {
   return (
     <html lang="en" className={fontVariables} suppressHydrationWarning>
-      <body className="min-h-screen bg-ink-page font-sans text-cream antialiased">
+      <body data-admin className="min-h-screen bg-ink-page font-sans text-cream antialiased">
         {children}
       </body>
     </html>

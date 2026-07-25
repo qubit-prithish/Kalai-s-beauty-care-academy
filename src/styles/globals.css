@@ -8,11 +8,102 @@
 
   html, body { overflow-x: clip; max-width: 100vw; }
 
+  /* ──────────────────────────────────────────────────────────────────────
+     DESIGN TOKENS — Dusty Rose & Ivory (public site)
+     Values are space-separated RGB channels so Tailwind's opacity
+     modifier (e.g. bg-gold-500/30) keeps working.
+     ────────────────────────────────────────────────────────────────────── */
   :root {
+    /* Fonts */
     --font-display: "Playfair Display", Georgia, serif;
     --font-sans: "Inter", system-ui, sans-serif;
     --font-tamil-display: "Noto Serif Tamil", "Latha", serif;
     --font-tamil-sans: "Noto Sans Tamil", "Latha", sans-serif;
+
+    /* ── Background / surface tokens ── */
+    --ink:         252 231 236;   /* #FCE7EC  bright soft pink (page bg)  */
+    --ink-page:    252 231 236;   /* #FCE7EC                              */
+    --ink-surface: 255 255 255;   /* #FFFFFF  crisp white cards           */
+    --ink-raised:  255 245 247;   /* #FFF5F7  very light blush-white      */
+    --ink-border:  244 199 209;   /* #F4C7D1  stronger pink border        */
+
+    /* ── Primary accent (bright rose — replaces gold) ── */
+    --gold:     199  62  97;    /* #C73E61 */
+    --gold-50:  253 236 239;    /* #FDECEF */
+    --gold-100: 251 212 220;    /* #FBD4DC */
+    --gold-200: 247 168 184;    /* #F7A8B8 */
+    --gold-300: 237 114 139;    /* #ED728B */
+    --gold-400: 219  75 106;    /* #DB4B6A */
+    --gold-500: 199  62  97;    /* #C73E61 */
+    --gold-600: 173  45  77;    /* #AD2D4D */
+    --gold-700: 145  34  62;    /* #91223E */
+    --gold-800: 120  31  54;    /* #781F36 */
+    --gold-900: 100  28  47;    /* #641C2F */
+
+    /* ── Secondary accent — warm mocha-taupe ── */
+    --mocha: 139 97 82;         /* #8B6152 */
+
+    /* ── Text tokens (dark on light) ── */
+    --cream:       51  28  36;  /* #331C24  heading text     */
+    --cream-50:    74  48  61;  /* #4A303D                   */
+    --cream-100:   51  28  36;  /* #331C24                   */
+    --cream-200:   80  55  66;  /* #503742                   */
+    --cream-muted:107  83  92;  /* #6B535C  body text        */
+    --cream-dim:  161 143 150;  /* #A18F96  faded/dim text   */
+
+    /* ── Shadows ── */
+    --shadow-soft: 0 4px 30px rgba(100, 28, 47, 0.08);
+    --shadow-gold: 0 10px 40px rgba(199, 62, 97, 0.15);
+
+    /* ── Gradients ── */
+    --gradient-gold: linear-gradient(135deg, #F7A8B8 0%, #C73E61 50%, #AD2D4D 100%);
+    --radial-glow:   radial-gradient(60% 60% at 50% 0%, rgba(219,75,106,0.15) 0%, rgba(252,231,236,0) 70%);
+
+    /* ── Selection ── */
+    --selection-bg:    rgba(199, 62, 97, 0.2);
+    --selection-color: #331C24;
+  }
+
+  /* ──────────────────────────────────────────────────────────────────────
+     ADMIN DARK THEME — preserves original gold-on-black design tokens
+     Applied via data-admin attribute on the admin layout <body>.
+     ────────────────────────────────────────────────────────────────────── */
+  [data-admin] {
+    --ink:          14  14  15;   /* #0E0E0F */
+    --ink-page:     14  14  15;   /* #0E0E0F */
+    --ink-surface:  26  26  28;   /* #1A1A1C */
+    --ink-raised:   34  34  37;   /* #222225 */
+    --ink-border:   46  46  50;   /* #2E2E32 */
+
+    --gold:     200 162  74;      /* #C8A24A */
+    --gold-50:  251 246 233;      /* #FBF6E9 */
+    --gold-100: 244 232 198;      /* #F4E8C6 */
+    --gold-200: 230 210 168;      /* #E6D2A8 */
+    --gold-300: 219 192 132;      /* #DBC084 */
+    --gold-400: 208 174 100;      /* #D0AE64 */
+    --gold-500: 200 162  74;      /* #C8A24A */
+    --gold-600: 168 133  58;      /* #A8853A */
+    --gold-700: 131 104  45;      /* #83682D */
+    --gold-800:  92  73  32;      /* #5C4920 */
+    --gold-900:  53  42  18;      /* #352A12 */
+
+    --mocha: 139 97 82;
+
+    --cream:     245 242 236;     /* #F5F2EC */
+    --cream-50:  251 250 247;     /* #FBFAF7 */
+    --cream-100: 245 242 236;     /* #F5F2EC */
+    --cream-200: 232 226 214;     /* #E8E2D6 */
+    --cream-muted: 183 178 168;   /* #B7B2A8 */
+    --cream-dim: 138 133 124;     /* #8A857C */
+
+    --shadow-soft: 0 4px 30px rgba(0, 0, 0, 0.25);
+    --shadow-gold: 0 10px 40px rgba(200, 162, 74, 0.18);
+
+    --gradient-gold: linear-gradient(135deg, #E6D2A8 0%, #C8A24A 50%, #A8853A 100%);
+    --radial-glow:   radial-gradient(60% 60% at 50% 0%, rgba(200,162,74,0.18) 0%, rgba(14,14,15,0) 70%);
+
+    --selection-bg:    rgba(200, 162, 74, 0.3);
+    --selection-color: #f5f2ec;
   }
 
   html {
@@ -68,8 +159,8 @@
   }
 
   ::selection {
-    background: rgba(200, 162, 74, 0.3);
-    color: #f5f2ec;
+    background: var(--selection-bg);
+    color: var(--selection-color);
   }
 }
 
