@@ -21,24 +21,24 @@
     --font-tamil-sans: "Noto Sans Tamil", "Latha", sans-serif;
 
     /* ── Background / surface tokens ── */
-    --ink:         247 244 239;   /* #F7F4EF  warm stone ivory (page bg)   */
-    --ink-page:    247 244 239;   /* #F7F4EF                               */
-    --ink-surface: 240 236 228;   /* #F0ECE4  alt-section deep stone       */
-    --ink-raised:  233 228 219;   /* #E9E4DB  raised panels / cards        */
-    --ink-border:  215 207 194;   /* #D7CFC2  warm stone border            */
+    --ink:         253 251 247;   /* #FDFBF7  clean warm nude (page bg)   */
+    --ink-page:    253 251 247;   /* #FDFBF7                              */
+    --ink-surface: 247 243 237;   /* #F7F3ED  alt-section deep nude       */
+    --ink-raised:  242 236 227;   /* #F2ECE3  raised panels / cards       */
+    --ink-border:  224 214 200;   /* #E0D6C8  warm nude border            */
 
-    /* ── Primary accent (oxblood / wine — replaces gold) ── */
-    --gold:     107  30  50;    /* #6B1E32  full oxblood */
-    --gold-50:  252 243 245;    /* #FCF3F5 */
-    --gold-100: 242 220 225;    /* #F2DCE1 */
-    --gold-200: 214 165 175;    /* #D6A5AF */
-    --gold-300: 175 107 123;    /* #AF6B7B */
-    --gold-400: 137  58  83;    /* #893A53 */
-    --gold-500: 107  30  50;    /* #6B1E32 */
-    --gold-600:  88  22  40;    /* #581628 */
-    --gold-700:  69  15  31;    /* #450F1F */
-    --gold-800:  52  10  22;    /* #340A16 */
-    --gold-900:  38   6  15;    /* #26060F */
+    /* ── Primary accent (Rosewood — beautiful, warm beauty parlor red) ── */
+    --gold:     140  67  67;    /* #8C4343  base rosewood */
+    --gold-50:  252 245 245;    /* #FCF5F5 */
+    --gold-100: 245 224 224;    /* #F5E0E0 */
+    --gold-200: 232 190 190;    /* #E8BEBE */
+    --gold-300: 212 148 148;    /* #D49494 */
+    --gold-400: 184 103 103;    /* #B86767 */
+    --gold-500: 140  67  67;    /* #8C4343 */
+    --gold-600: 115  50  50;    /* #733232 */
+    --gold-700:  92  38  38;    /* #5C2626 */
+    --gold-800:  77  33  33;    /* #4D2121 */
+    --gold-900:  64  30  30;    /* #401E1E */
 
     /* ── Secondary accent — warm taupe ── */
     --mocha: 139 115 85;        /* #8B7355 */
@@ -52,15 +52,15 @@
     --cream-dim:  148 141 132;  /* #948D84  faded/dim text      */
 
     /* ── Shadows ── */
-    --shadow-soft: 0 4px 30px rgba(43, 36, 32, 0.08);
-    --shadow-gold: 0 10px 40px rgba(107, 30, 50, 0.14);
+    --shadow-soft: 0 4px 30px rgba(43, 36, 32, 0.05);
+    --shadow-gold: 0 10px 40px rgba(140, 67, 67, 0.15);
 
     /* ── Gradients ── */
-    --gradient-gold: linear-gradient(135deg, #D6A5AF 0%, #6B1E32 50%, #581628 100%);
-    --radial-glow:   radial-gradient(60% 60% at 50% 0%, rgba(107,30,50,0.10) 0%, rgba(247,244,239,0) 70%);
+    --gradient-gold: linear-gradient(135deg, #B86767 0%, #733232 50%, #4D2121 100%);
+    --radial-glow:   radial-gradient(60% 60% at 50% 0%, rgba(140,67,67,0.08) 0%, rgba(253,251,247,0) 70%);
 
     /* ── Selection ── */
-    --selection-bg:    rgba(107, 30, 50, 0.18);
+    --selection-bg:    rgba(140, 67, 67, 0.15);
     --selection-color: #2B2420;
   }
 
@@ -178,7 +178,7 @@
   }
 
   .eyebrow {
-    @apply text-xs font-semibold uppercase tracking-luxe text-gold-300;
+    @apply text-xs font-semibold uppercase tracking-luxe text-gold-700;
   }
 
   .text-gold-gradient {
