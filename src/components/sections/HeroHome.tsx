@@ -23,15 +23,15 @@ export async function HeroHome({ settings }: { settings: Settings }) {
           alt="Kalai's Beauty Care Mehendi"
           fill
           priority
-          className="object-cover"
+          className="object-cover lg:object-[20%_center]"
           style={{
             filter: "grayscale(1) sepia(0.20) contrast(1.05)",
           }}
         />
         {/* Multiply overlay for the wine/oxblood tone - reduced opacity for natural look */}
         <div className="absolute inset-0 bg-[#6B1E32] mix-blend-multiply opacity-20"></div>
-        {/* Strong solid ivory gradient to ensure perfect text readability on the right side */}
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/80 to-transparent lg:bg-gradient-to-l lg:from-ink lg:from-[30%] lg:via-ink/80 lg:to-transparent"></div>
+        {/* Softened ivory gradient to ensure perfect text readability without hiding the hand */}
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/80 to-transparent lg:bg-gradient-to-l lg:from-ink/95 lg:via-ink/40 lg:to-transparent"></div>
       </div>
 
       {/* Single-column full-width layout */}
