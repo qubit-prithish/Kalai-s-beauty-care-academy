@@ -36,81 +36,97 @@
   justify-content: flex-end;
 }
 
+/* Duotone overlay — maps dark tones to oxblood wine */
+.womanWrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #6B1E32;
+  mix-blend-mode: multiply;
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 4;
+  border-radius: inherit;
+}
+
 .woman {
-  height: 85%;
+  height: 90%;
   width: auto;
-  max-width: 82%;
+  max-width: 92%;
+  object-fit: cover;
   user-select: none;
+  /* Duotone step 1: strip colour, warm the greys */
+  filter:
+    grayscale(1)
+    sepia(0.20)
+    contrast(1.05)
+    drop-shadow(0 0 30px rgba(107, 30, 50, 0.12))
+    drop-shadow(0 0 70px rgba(107, 30, 50, 0.08));
+  /* Soft fade on left + bottom edges only — macro detail, not portrait */
   mask-image:
-    /* Gradient 1: Left edge — she emerges from darkness */
     linear-gradient(
       to right,
       transparent 0%,
-      rgba(0,0,0,0.3) 12%,
-      rgba(0,0,0,0.7) 20%,
-      black 28%
+      rgba(0,0,0,0.4) 6%,
+      rgba(0,0,0,0.8) 14%,
+      black 22%
     ),
-    /* Gradient 2: Bottom edge — body dissolves into dark floor */
     linear-gradient(
       to top,
       transparent 0%,
-      rgba(0,0,0,0.4) 10%,
-      rgba(0,0,0,0.8) 18%,
-      black 26%
+      rgba(0,0,0,0.4) 8%,
+      rgba(0,0,0,0.8) 16%,
+      black 24%
     ),
-    /* Gradient 3: Right edge — dissolves into dark background */
     linear-gradient(
       to left,
-      transparent 0%,
-      rgba(0,0,0,0.2) 4%,
-      rgba(0,0,0,0.6) 10%,
-      black 18%
+      black 0%,
+      black 92%,
+      rgba(0,0,0,0.6) 96%,
+      rgba(0,0,0,0.2) 100%
     ),
-    /* Gradient 4: Top edge — hair dissolves into dark */
-    /* Very shallow — only touches hair, never face */
     linear-gradient(
       to bottom,
-      transparent 0%,
-      rgba(0,0,0,0.3) 4%,
-      rgba(0,0,0,0.7) 8%,
-      black 14%
+      black 0%,
+      black 90%,
+      rgba(0,0,0,0.6) 96%,
+      rgba(0,0,0,0.2) 100%
     );
   -webkit-mask-image:
     linear-gradient(
       to right,
       transparent 0%,
-      rgba(0,0,0,0.3) 12%,
-      rgba(0,0,0,0.7) 20%,
-      black 28%
+      rgba(0,0,0,0.4) 6%,
+      rgba(0,0,0,0.8) 14%,
+      black 22%
     ),
     linear-gradient(
       to top,
       transparent 0%,
-      rgba(0,0,0,0.4) 10%,
-      rgba(0,0,0,0.8) 18%,
-      black 26%
+      rgba(0,0,0,0.4) 8%,
+      rgba(0,0,0,0.8) 16%,
+      black 24%
     ),
     linear-gradient(
       to left,
-      transparent 0%,
-      rgba(0,0,0,0.2) 4%,
-      rgba(0,0,0,0.6) 10%,
-      black 18%
+      black 0%,
+      black 92%,
+      rgba(0,0,0,0.6) 96%,
+      rgba(0,0,0,0.2) 100%
     ),
     linear-gradient(
       to bottom,
-      transparent 0%,
-      rgba(0,0,0,0.3) 4%,
-      rgba(0,0,0,0.7) 8%,
-      black 14%
+      black 0%,
+      black 90%,
+      rgba(0,0,0,0.6) 96%,
+      rgba(0,0,0,0.2) 100%
     );
   mask-composite: intersect;
   -webkit-mask-composite: source-in;
-  filter: drop-shadow(0 0 30px rgba(107, 30, 50, 0.12))
-    drop-shadow(0 0 70px rgba(107, 30, 50, 0.08));
   animation: heroFloat 6s ease-in-out infinite;
   will-change: transform;
   transform: translateZ(0);
+  border-radius: 1.5rem;
 }
 
 @keyframes heroFloat {

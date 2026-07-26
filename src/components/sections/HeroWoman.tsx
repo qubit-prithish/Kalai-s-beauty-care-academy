@@ -10,7 +10,7 @@ export function HeroWoman() {
       <div className={style.womanWrapper}>
         <Image
           src="/images/hero-woman.webp"
-          alt="Bridal beauty services at Kalai's Beauty Care Academy"
+          alt="Intricate mehendi henna detail — Kalai's Beauty Care Academy"
           className={style.woman}
           width={1200}
           height={1800}
