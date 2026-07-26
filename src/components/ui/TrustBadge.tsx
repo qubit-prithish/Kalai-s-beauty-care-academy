@@ -15,8 +15,8 @@ export function TrustBadge({
   className,
 }: TrustBadgeProps) {
   const tones = {
-    default: "bg-ink-raised text-cream-muted border-ink-border",
-    gold: "bg-gold-500/12 text-gold-200 border-gold-500/30",
+    default: "bg-ink-raised text-cream-50 border-ink-border",
+    gold: "bg-gold-500/15 text-gold-700 border-gold-500/40",
     signature: "bg-gold-gradient text-ink-page border-transparent",
   };
   return (

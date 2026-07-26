@@ -56,7 +56,7 @@
     --shadow-gold: 0 10px 40px rgba(140, 67, 67, 0.15);
 
     /* ── Gradients ── */
-    --gradient-gold: linear-gradient(135deg, #D49494 0%, #8C4343 50%, #733232 100%);
+    --gradient-gold: linear-gradient(135deg, #B86767 0%, #733232 50%, #4D2121 100%);
     --radial-glow:   radial-gradient(60% 60% at 50% 0%, rgba(140,67,67,0.08) 0%, rgba(253,251,247,0) 70%);
 
     /* ── Selection ── */
@@ -178,7 +178,7 @@
   }
 
   .eyebrow {
-    @apply text-xs font-semibold uppercase tracking-luxe text-gold-300;
+    @apply text-xs font-semibold uppercase tracking-luxe text-gold-700;
   }
 
   .text-gold-gradient {

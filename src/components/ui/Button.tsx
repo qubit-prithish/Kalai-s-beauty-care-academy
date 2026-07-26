@@ -13,7 +13,7 @@ const variants: Record<Variant, string> = {
   primary: "bg-gold-gradient text-ink-page shadow-gold hover:brightness-105",
   // gold outline
   secondary:
-    "border border-gold-500/60 text-gold-200 hover:bg-gold-500/10 hover:border-gold-400",
+    "border border-gold-500/80 text-gold-700 hover:bg-gold-500/10 hover:border-gold-600",
   // Muted WhatsApp green — utility only (floating widget)
   whatsapp: "bg-whatsapp text-white hover:bg-whatsapp-hover shadow-soft",
   ghost: "text-cream hover:bg-cream/10",

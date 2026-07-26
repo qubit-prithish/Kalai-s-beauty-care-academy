@@ -51,7 +51,7 @@ export async function HeroHome({ settings }: { settings: Settings }) {
           </Reveal>
           
           <Reveal delay={0.24}>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-cream-muted">
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-cream">
               {t("heroSubtitle")}
             </p>
           </Reveal>
