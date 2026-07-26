@@ -18,9 +18,9 @@
 
   background: radial-gradient(
     ellipse 45% 45% at 55% 50%,
-    rgba(227, 58, 107, 0.25) 0%,
-    rgba(227, 58, 107, 0.15) 40%,
-    rgba(227, 58, 107, 0.05) 75%,
+    rgba(107, 30, 50, 0.18) 0%,
+    rgba(107, 30, 50, 0.10) 40%,
+    rgba(107, 30, 50, 0.03) 75%,
     transparent 100%
   );
 
@@ -106,8 +106,8 @@
     );
   mask-composite: intersect;
   -webkit-mask-composite: source-in;
-  filter: drop-shadow(0 0 30px rgba(227, 58, 107, 0.15))
-    drop-shadow(0 0 70px rgba(227, 58, 107, 0.10));
+  filter: drop-shadow(0 0 30px rgba(107, 30, 50, 0.12))
+    drop-shadow(0 0 70px rgba(107, 30, 50, 0.08));
   animation: heroFloat 6s ease-in-out infinite;
   will-change: transform;
   transform: translateZ(0);

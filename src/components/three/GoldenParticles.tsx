@@ -54,11 +54,11 @@ export function GoldenParticles({
       <Points ref={ref} positions={positions} stride={3} frustumCulled>
         <PointMaterial
           transparent
-          color="#E33A6B"
-          size={reduced3D ? 0.035 : 0.045} // Slightly larger for better visibility
+          color="#8B4560"
+          size={reduced3D ? 0.035 : 0.045}
           sizeAttenuation
           depthWrite={false}
-          opacity={reduced3D ? 0.9 : 1.0} // High opacity for maximum pop
+          opacity={reduced3D ? 0.9 : 1.0}
           blending={THREE.AdditiveBlending}
         />
       </Points>
